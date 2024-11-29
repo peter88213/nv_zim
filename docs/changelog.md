@@ -5,8 +5,9 @@
 ## Changelog
 
 
-### Version 5.0.0
+### Version 0.1.0
 
-- Release under the GPLv3 license.
+- Adding a special opener for Zim pages to the novelibre link processor.
 
-Compatibility: novelibre version 5.0 API
+API: 5.0
+Based on novelibre 5.0.13

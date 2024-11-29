@@ -1,7 +1,7 @@
 """Provide global variables and functions.
 
 Copyright (c) 2024 Peter Triesberger
-For further information see https://github.com/peter88213/nv_plugin
+For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 import gettext
@@ -18,14 +18,20 @@ except:
     # Fallback for old Windows versions.
     CURRENT_LANGUAGE = locale.getdefaultlocale()[0][:2]
 try:
-    t = gettext.translation('nv_plugin', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
+    t = gettext.translation('nv_zim', LOCALE_PATH, languages=[CURRENT_LANGUAGE])
     _ = t.gettext
 except:
 
     def _(message):
         return message
 
-HELP_URL = 'https://github.com/peter88213/nv_plugin/tree/main/docs/nv_plugin'
+HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
+
+
+def norm_path(path):
+    if path is None:
+        path = ''
+    return os.path.normpath(path)
 
 
 def open_help(event=None):
