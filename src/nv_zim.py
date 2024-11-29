@@ -54,7 +54,19 @@ class Plugin(PluginBase):
         self._ui.helpMenu.add_command(label=_('nv_zim Online help'), command=open_help)
 
         # Register the link opener.
-        self._ctrl.linkProcessor.add_special_opener(self.open_zim_page)
+        self._ctrl.linkProcessor.add_opener(self.open_zim_page)
+
+    def get_zim_installation(self):
+        self.zimInstallPaths = [
+            'C:/Program Files/Zim Desktop Wiki/zim.exe',
+            'C:/Program Files (x86)/Zim Desktop Wiki/zim.exe',
+            ]
+        for zimPath in self.zimInstallPaths:
+            if os.path.isfile(zimPath):
+                return zimPath
+
+        if not self._ui.ask_ok_cancel(_('Zim installation not found. Select now?')):
+            return
 
     def open_zim_page(self, filePath, extension):
         if extension != self.ZIM_NOTE_EXTENSION:
@@ -69,6 +81,7 @@ class Plugin(PluginBase):
         # this is for the page path in Zim notation
 
         # Search backwards through the file branch.
+        # If the page is a child of a Zim Wiki, start a subprocess to open it.
         while pagePath:
             zimPages.insert(0, pagePath.pop())
             zimPath = '/'.join(pagePath)

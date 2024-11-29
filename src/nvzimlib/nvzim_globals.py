@@ -28,6 +28,10 @@ except:
 HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
 
 
+class StopParsing(Exception):
+    pass
+
+
 def norm_path(path):
     if path is None:
         path = ''
