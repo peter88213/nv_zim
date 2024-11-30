@@ -18,11 +18,15 @@ GNU General Public License for more details.
 import glob
 import os
 import subprocess
+from tkinter import filedialog
 
 from nvlib.controller.plugin.plugin_base import PluginBase
+from nvlib.model.file.doc_open import open_document
 from nvzimlib.nvzim_globals import _
-from nvzimlib.nvzim_globals import open_help
 from nvzimlib.nvzim_globals import norm_path
+from nvzimlib.nvzim_globals import open_help
+from nvzimlib.zim_wiki_page import ZimWikiPage
+from tkinter import ttk
 
 
 class Plugin(PluginBase):
@@ -52,9 +56,48 @@ class Plugin(PluginBase):
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('nv_zim Online help'), command=open_help)
+        self._ui.toolsMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
 
         # Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_zim_page)
+
+        # Add "Open wiki page" Buttons.
+        ttk.Button(
+            self._ui.propertiesView.characterView.linksWindow,
+            text=_('Wiki page'),
+            command=self.open_element_page
+            ).pack(anchor='w')
+
+        self._fileTypes = [('Zim Wiki', '.zim')]
+        self.prjWiki = None
+
+    def create_wiki_page(self, element):
+        """Create a wiki page and open it."""
+        wikiPath = os.path.split(self.prjWiki)[0]
+        filePath = f'{wikiPath}/Home/{element.title}{self.ZIM_NOTE_EXTENSION}'
+        newPage = ZimWikiPage(filePath, element)
+        newPage.write()
+        newPage.create_link()
+        return filePath
+
+    def get_project_wiki(self):
+        if self._mdl.prjFile is None:
+            return
+
+        prjWikiPath = self._mdl.novel.fields.get('zim-wiki', '')
+        if os.path.isfile(prjWikiPath):
+            return prjWikiPath
+
+        prjWikiPath = filedialog.askopenfilename(
+            filetypes=self._fileTypes,
+            defaultextension=self._fileTypes[0][1],
+            initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
+            )
+        if prjWikiPath:
+            fields = self._mdl.novel.fields
+            fields['zim-wiki'] = prjWikiPath
+            self._mdl.novel.fields = fields
+            return prjWikiPath
 
     def get_zim_installation(self):
         self.zimInstallPaths = [
@@ -68,7 +111,38 @@ class Plugin(PluginBase):
         if not self._ui.ask_ok_cancel(_('Zim installation not found. Select now?')):
             return
 
-    def open_zim_page(self, filePath, extension):
+    def on_close(self):
+        self.prjWiki = None
+
+    def open_element_page(self, event=None):
+        element = self._ui.propertiesView.activeView.element
+
+        self.set_project_wiki()
+
+        filePath = element.fields.get('wiki-page', None)
+        if filePath is None:
+            filePath = self.create_wiki_page(element)
+
+        if not os.path.isfile(filePath):
+            # Repair broken link or open file picker.
+            filePath = self.create_wiki_page(element)
+
+        if self.open_zim_page(filePath):
+            return
+
+    def set_project_wiki(self):
+        if self.prjWiki is None:
+            prjWikiPath = self.get_project_wiki()
+            if prjWikiPath is None:
+                raise ValueError
+
+            self.prjWiki = prjWikiPath
+
+    def open_project_wiki(self):
+        open_document(self.prjWiki)
+
+    def open_zim_page(self, filePath):
+        root, extension = os.path.splitext(filePath)
         if extension != self.ZIM_NOTE_EXTENSION:
             return False
 
@@ -76,7 +150,7 @@ class Plugin(PluginBase):
         if not os.path.isfile(launcher):
             return False
 
-        pagePath = filePath.split('/')
+        pagePath = root.split('/')
         zimPages = []
         # this is for the page path in Zim notation
 

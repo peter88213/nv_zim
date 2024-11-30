@@ -11,7 +11,6 @@ class ZimWikiPage:
 
     ZIM_PAGE_HEADER = '''Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
-
 '''
     REPLACEMENTS = {
         '//':'',
@@ -24,6 +23,11 @@ Wiki-Format: zim 0.4
 
     def body(self, text):
         pass
+
+    def create_link(self):
+        fields = self.element.fields
+        fields['wiki-page'] = self.filePath
+        self.element.fields = fields
 
     def fill_page(self, lines):
         pass
