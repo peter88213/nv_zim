@@ -204,6 +204,7 @@ class Plugin(PluginBase):
             return
 
         if answer == 0:
+            # Pick existing notebool.
             prjWikiPath = filedialog.askopenfilename(
                 filetypes=self._ZimNotebookType,
                 defaultextension=self._ZimNotebookType[0][1],
@@ -217,11 +218,12 @@ class Plugin(PluginBase):
             self._mdl.novel.fields = fields
             self.prjWiki = ZimNotebook(self._mdl.novel, filePath=prjWikiPath)
         else:
+            # Create new notebook.
             prjDir, prjFile = os.path.split(self._mdl.prjFile.filePath)
             prjFileBase = os.path.splitext(prjFile)[0]
             prjWikiDir = f'{prjDir}/{prjFileBase}_zim'
             os.makedirs(prjWikiDir, exist_ok=True)
-            self.prjWiki = ZimNotebook(self._mdl.novel, dirPath=prjWikiDir)
+            self.prjWiki = ZimNotebook(self._mdl.novel, dirPath=prjWikiDir, wikiName=self._mdl.novel.title)
             self._ui.set_status(f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"')
 
     def zim_is_installed(self):

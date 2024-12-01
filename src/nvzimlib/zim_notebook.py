@@ -17,11 +17,13 @@ class ZimNotebook:
     NOTEBOOK = 'Notebook'
     HOME = 'Home'
 
-    def __init__(self, novel, dirPath='', filePath=''):
+    def __init__(self, novel, dirPath='', filePath='', wikiName=None):
         # Specify either directory or file path.
+        if wikiName is None:
+            wikiName = self.NOTEBOOK
         self.settings = dict(
             version='0.4',
-            name=self.NOTEBOOK,
+            name=wikiName,
             interwiki='',
             home=self.HOME,
             icon='',
