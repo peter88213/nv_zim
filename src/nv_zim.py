@@ -114,13 +114,14 @@ class Plugin(PluginBase):
             else:
                 filePath = None
             if filePath is None:
+                text = f"{_('Wiki page not found')}\n\n{_('Open an existing page, or create a new one?')}"
                 answer = SimpleDialog(
                     None,
-                    text=_('Open an existing page, or create a new one?'),
+                    text=text,
                     buttons=[_('Browse'), _('Create'), _('Cancel')],
                     default=0,
                     cancel=2,
-                    title=_('Wiki page not found')
+                    title=self.FEATURE
                     ).go()
                 if answer == 2:
                     return
@@ -190,13 +191,14 @@ class Plugin(PluginBase):
             self.prjWiki = ZimNotebook(self._mdl.novel, filePath=prjWikiPath)
             return
 
+        text = f"{_('Project wiki not found')}\n\n{_('Open an existing wiki, or create a new one?')}"
         answer = SimpleDialog(
             None,
-            text=_('Open an existing wiki, or create a new one?'),
+            text=text,
             buttons=[_('Browse'), _('Create'), _('Cancel')],
             default=0,
             cancel=2,
-            title=_('Project wiki not found')
+            title=self.FEATURE
             ).go()
         if answer == 2:
             return
