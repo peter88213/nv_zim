@@ -5,10 +5,10 @@
 ## Changelog
 
 
-### Version 0.2.0
+### Version 0.3.0
 
 - Adding a "Wiki page" button to the character properties view's "Links" title bar.
 - Adding a special opener for Zim pages to the novelibre link processor.
 
 API: 5.0
-Based on novelibre 5.0.15
+Based on novelibre 5.0.16

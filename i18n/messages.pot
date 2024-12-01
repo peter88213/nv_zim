@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2.0\n"
-"POT-Creation-Date: 2024-12-01 14:12:33\n"
+"Project-Id-Version: 0.3.0\n"
+"POT-Creation-Date: 2024-12-01 23:37:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -17,13 +17,67 @@ msgstr ""
 msgid "Broken link fixed"
 msgstr ""
 
+msgid "Browse"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Illegal value"
+msgstr ""
+
+msgid "Not a floating point value."
+msgstr ""
+
+msgid "Not an integer."
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "Open an existing page, or create a new one?"
+msgstr ""
+
+msgid "Open an existing wiki, or create a new one?"
+msgstr ""
+
 msgid "Open project wiki"
 msgstr ""
 
-msgid "Wiki link created"
+msgid "Please try again"
+msgstr ""
+
+msgid "Project wiki not found"
+msgstr ""
+
+msgid "The allowed maximum value is"
+msgstr ""
+
+msgid "The allowed minimum value is"
+msgstr ""
+
+msgid "Too large"
+msgstr ""
+
+msgid "Too small"
+msgstr ""
+
+msgid "Wiki created"
 msgstr ""
 
 msgid "Wiki page"
+msgstr ""
+
+msgid "Wiki page created"
+msgstr ""
+
+msgid "Wiki page not found"
+msgstr ""
+
+msgid "Zim installation not found"
 msgstr ""
 
 msgid "Zim installation not found. Select now?"

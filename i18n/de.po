@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.2.0\n"
-"POT-Creation-Date: 2024-12-01 14:12:33\n"
-"PO-Revision-Date: 2024-12-01 14:12:33\n"
+"Project-Id-Version: 0.3.0\n"
+"POT-Creation-Date: 2024-12-01 23:37:55\n"
+"PO-Revision-Date: 2024-12-01 23:37:55\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,68 @@ msgstr ""
 msgid "Broken link fixed"
 msgstr "Defekten Link korrigiert"
 
+msgid "Browse"
+msgstr "Durchsuchen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Create"
+msgstr "Erzeugen"
+
+msgid "Illegal value"
+msgstr "Unzulässiger Wert"
+
+msgid "Not a floating point value."
+msgstr "Keine Fließkommazahl."
+
+msgid "Not an integer."
+msgstr "Kein ganzzahliger Wert."
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open an existing page, or create a new one?"
+msgstr "Eine bestehende Seite öffnen, oder eine neue erzeugen?"
+
+msgid "Open an existing wiki, or create a new one?"
+msgstr "Ein bestehendes Wiki öffnen, oder ein neues erzeugen?"
+
 msgid "Open project wiki"
 msgstr "Projekt-Wiki öffnen"
 
-msgid "Wiki link created"
-msgstr "Wiki-Link erzeugt"
+msgid "Please try again"
+msgstr "Bitte noch einmal versuchen"
+
+msgid "Project wiki not found"
+msgstr "Projekt-Wiki nicht gefunden"
+
+msgid "The allowed maximum value is"
+msgstr "Der zulässige Höchstwert ist"
+
+msgid "The allowed minimum value is"
+msgstr "Der zulässige Mindestwert ist"
+
+msgid "Too large"
+msgstr "Zu hoch"
+
+msgid "Too small"
+msgstr "Zu niedrig"
+
+msgid "Wiki created"
+msgstr "Wiki erzeugt"
 
 msgid "Wiki page"
 msgstr "Wiki-Seite"
+
+msgid "Wiki page created"
+msgstr "Wiki-Seite erzeugt"
+
+msgid "Wiki page not found"
+msgstr "Wiki-Seite nicht gefunden"
+
+msgid "Zim installation not found"
+msgstr "Zim-Installation nicht gefunden"
 
 msgid "Zim installation not found. Select now?"
 msgstr "Zim-Installation nicht gefunden. Jetzt auswählen?"
