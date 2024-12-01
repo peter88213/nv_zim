@@ -27,6 +27,10 @@ except:
 
 HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
 
+ZIM_NOTEBOOK_TAG = 'zim-notebook'
+ZIM_NOTE_TAG = 'zim-note'
+ZIM_NOTE_EXTENSION = '.txt'
+
 
 class StopParsing(Exception):
     pass
