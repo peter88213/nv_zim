@@ -62,7 +62,7 @@ class ZimNotebook:
     def write(self):
         """Write the notebook, overwriting existing one."""
         notebook = ConfigParser()
-        notebook.add_section()
+        notebook.add_section(self.NOTEBOOK)
         for tag in self.settings:
             notebook.set(self.NOTEBOOK, tag, self.settings[tag])
         with open(self.filePath, 'w', encoding='utf-8') as f:
