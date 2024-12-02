@@ -77,8 +77,17 @@ class Plugin(PluginBase):
         self.launchers = self._ctrl.get_launchers()
         self.zimApp = self.launchers.get('.zim', '')
 
+    def check_home_dir(self):
+        """Chreate the project wiki's home directory, if missing."""
+        if self.prjWiki is None:
+            return
+
+        if not os.path.isdir(self.prjWiki.homeDir):
+            os.makedirs(self.prjWiki.homeDir)
+
     def create_wiki_page(self, element):
         """Create a wiki page and open it."""
+        self.check_home_dir()
         wikiPath = os.path.split(self.prjWiki.filePath)[0]
         filePath = f'{wikiPath}/Home/{element.title}{ZIM_NOTE_EXTENSION}'
         newPage = ZimNote(filePath, element)
@@ -104,11 +113,7 @@ class Plugin(PluginBase):
         self.set_project_wiki()
         filePath = element.fields.get(ZIM_NOTE_TAG, None)
         initialFilePath = filePath
-        if filePath is None:
-            filePath = self.create_wiki_page(element)
-            self._ui.set_status(_('Wiki page created'))
-
-        elif not os.path.isfile(filePath) or not filePath.endswith(ZIM_NOTE_EXTENSION):
+        if filePath is None or os.path.isfile(filePath) or not filePath.endswith(ZIM_NOTE_EXTENSION):
             if self.prjWiki is not None:
                 filePath = self.prjWiki.get_note(element.title)
             else:
@@ -143,8 +148,11 @@ class Plugin(PluginBase):
             fields = element.fields
             fields[ZIM_NOTE_TAG] = filePath
             element.fields = fields
-            if initialFilePath and filePath and filePath != initialFilePath:
-                self._ui.set_status(f"#{_('Broken link fixed')}")
+            if filePath and filePath != initialFilePath:
+                if initialFilePath is None:
+                    self._ui.set_status(f"#{_('Wiki link created')}")
+                else:
+                    self._ui.set_status(f"#{_('Broken link fixed')}")
         self.open_note_file(filePath)
 
     def open_project_wiki(self):
@@ -153,6 +161,7 @@ class Plugin(PluginBase):
             return
 
         self.set_project_wiki()
+        self.check_home_dir()
         if self.prjWiki is not None:
             subprocess.Popen([self.zimApp, self.prjWiki.filePath, 'Home'])
 
