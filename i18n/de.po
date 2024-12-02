@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.3\n"
-"POT-Creation-Date: 2024-12-02 11:50:43\n"
-"PO-Revision-Date: 2024-12-02 11:50:43\n"
+"Project-Id-Version: 0.4.0\n"
+"POT-Creation-Date: 2024-12-02 18:35:37\n"
+"PO-Revision-Date: 2024-12-02 18:35:37\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -84,6 +84,12 @@ msgstr "Zim-Installation nicht gefunden"
 
 msgid "Zim installation not found. Select now?"
 msgstr "Zim-Installation nicht gefunden. Jetzt auswählen?"
+
+msgid "Zim notebook"
+msgstr "Zim-Notizbuch"
+
+msgid "Zim page"
+msgstr "Zim-Seite"
 
 msgid "nv_zim Online help"
 msgstr "nv_zim Online-Hilfe"

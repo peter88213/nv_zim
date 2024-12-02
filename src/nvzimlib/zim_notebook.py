@@ -8,16 +8,19 @@ from configparser import ConfigParser
 import glob
 import os
 
-from nvzimlib.nvzim_globals import ZIM_NOTEBOOK_TAG
-from nvzimlib.nvzim_globals import ZIM_NOTE_EXTENSION
+from nvzimlib.nvzim_globals import _
+from nvzimlib.zim_page import ZimPage
 
 
 class ZimNotebook:
 
+    DESCRIPTION = _('Zim notebook')
+    EXTENSION = '.zim'
+
     NOTEBOOK = 'Notebook'
     HOME = 'Home'
 
-    def __init__(self, novel, dirPath='', filePath='', wikiName=None):
+    def __init__(self, dirPath='', filePath='', wikiName=None):
         # Specify either directory or file path.
         if wikiName is None:
             wikiName = self.NOTEBOOK
@@ -33,7 +36,6 @@ class ZimNotebook:
             disable_trash='False',
             profile='',
         )
-        self._novel = novel
         if os.path.isfile(filePath):
             self.filePath = filePath
             self.dirPath, __ = os.path.split(filePath)
@@ -47,12 +49,6 @@ class ZimNotebook:
             self.write()
         else:
             raise AttributeError
-
-    def create_link(self):
-        """Add or replace the novel's Zim notebook link."""
-        fields = self.novel.fields
-        fields[ZIM_NOTEBOOK_TAG] = self.dirPath
-        self._novel.fields = fields
 
     def read_settings(self):
         """Read the settings, updating the instance variable."""
@@ -74,7 +70,7 @@ class ZimNotebook:
     def get_note(self, title):
         """Return the path of a note specified by title."""
         foundFiles = glob.glob(
-            f'**/{title}{ZIM_NOTE_EXTENSION}',
+            f'**/{title}{ZimPage.EXTENSION}',
             root_dir=self.homeDir,
             recursive=True,
             )

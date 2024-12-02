@@ -5,10 +5,13 @@ For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
 from nvzimlib.nvzim_globals import StopParsing
-from nvzimlib.nvzim_globals import ZIM_NOTE_TAG
+from nvzimlib.nvzim_globals import _
 
 
-class ZimNote:
+class ZimPage:
+
+    DESCRIPTION = _('Zim page')
+    EXTENSION = '.txt'
 
     PAGE_HEADER = '''Content-Type: text/x-zim-wiki
 Wiki-Format: zim 0.4
@@ -25,12 +28,6 @@ Wiki-Format: zim 0.4
     def body(self, text):
         """Parser callback method for a note's body text line."""
         pass
-
-    def create_link(self):
-        """Add or overwrite the element's Zim note link."""
-        fields = self.element.fields
-        fields[ZIM_NOTE_TAG] = self.filePath
-        self.element.fields = fields
 
     def fill_page(self, lines):
         """Add page content to the lines."""

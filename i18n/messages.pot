@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.3.3\n"
-"POT-Creation-Date: 2024-12-02 11:50:43\n"
+"Project-Id-Version: 0.4.0\n"
+"POT-Creation-Date: 2024-12-02 18:35:37\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -84,6 +84,12 @@ msgid "Zim installation not found"
 msgstr ""
 
 msgid "Zim installation not found. Select now?"
+msgstr ""
+
+msgid "Zim notebook"
+msgstr ""
+
+msgid "Zim page"
 msgstr ""
 
 msgid "nv_zim Online help"
