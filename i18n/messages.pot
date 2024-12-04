@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
-"POT-Creation-Date: 2024-12-04 21:25:38\n"
+"POT-Creation-Date: 2024-12-04 22:58:38\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -13,6 +13,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: novxlib pgettext.py 0.3\n"
 
+
+msgid "Bio"
+msgstr ""
 
 msgid "Broken link fixed"
 msgstr ""
@@ -24,6 +27,9 @@ msgid "Cancel"
 msgstr ""
 
 msgid "Create"
+msgstr ""
+
+msgid "Goals"
 msgstr ""
 
 msgid "Illegal value"

@@ -79,6 +79,9 @@ class Plugin(PluginBase):
                 command=self.open_element_page
                 ).pack(side='right')
 
+    def on_close(self):
+        self.wikiManager.on_close()
+
     def open_element_page(self, event=None):
         elemId = self._ui.propertiesView.activeView.elementId
         self.wikiManager.open_element_page(elemId)

@@ -43,15 +43,15 @@ Wiki-Format: zim 0.4
 
     def get_h1(self, text):
         """Return text, formatted as first level heading."""
-        return f'====== {text} ======'
+        return f'====== {text} ======\n'
 
     def get_h2(self, text):
         """Return text, formatted as second level heading."""
-        return f'===== {text} ====='
+        return f'===== {text} =====\n'
 
     def get_h3(self, text):
         """Return text, formatted as third level heading."""
-        return f'==== {text} ===='
+        return f'==== {text} ====\n'
 
     def h1(self, heading):
         """Parser callback method for a note's first level heading."""
@@ -113,7 +113,7 @@ Wiki-Format: zim 0.4
         """
         lines = [
             self.PAGE_HEADER,
-            f'{self.get_h1(self.new_page_name())}\n\n',
+            f'{self.get_h1(self.new_page_name())}',
         ]
         self.fill_page(lines)
         text = '\n'.join(lines)

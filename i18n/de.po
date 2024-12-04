@@ -4,14 +4,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.0\n"
-"POT-Creation-Date: 2024-12-04 21:25:38\n"
-"PO-Revision-Date: 2024-12-04 21:25:38\n"
+"POT-Creation-Date: 2024-12-04 22:58:38\n"
+"PO-Revision-Date: 2024-12-04 22:58:38\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "Bio"
+msgstr "Biographie"
 
 msgid "Broken link fixed"
 msgstr "Defekten Link korrigiert"
@@ -24,6 +27,9 @@ msgstr "Abbrechen"
 
 msgid "Create"
 msgstr "Erzeugen"
+
+msgid "Goals"
+msgstr "Ziele"
 
 msgid "Illegal value"
 msgstr "Unzulässiger Wert"
