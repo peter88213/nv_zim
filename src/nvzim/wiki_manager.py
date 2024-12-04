@@ -11,7 +11,15 @@ from tkinter import filedialog
 
 from mvclib.controller.service_base import ServiceBase
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
+from nvlib.novx_globals import CHARACTER_PREFIX
+from nvlib.novx_globals import CH_ROOT
+from nvlib.novx_globals import ITEM_PREFIX
+from nvlib.novx_globals import LOCATION_PREFIX
 from nvlib.novx_globals import norm_path
+from nvzim.book_page import BookPage
+from nvzim.character_page import CharacterPage
+from nvzim.item_page import ItemPage
+from nvzim.location_page import LocationPage
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
@@ -38,17 +46,38 @@ class WikiManager(ServiceBase):
         if not os.path.isdir(self.prjWiki.homeDir):
             os.makedirs(self.prjWiki.homeDir)
 
-    def create_wiki_page(self, element):
+    def create_wiki_page(self, element, elemId):
         """Create a wiki page and open it."""
         self.check_home_dir()
         wikiPath = os.path.split(self.prjWiki.filePath)[0]
         filePath = f'{wikiPath}/Home/{element.title}{ZimPage.EXTENSION}'
-        newPage = ZimPage(filePath, element)
+        if elemId == CH_ROOT:
+            newPage = BookPage(filePath, element)
+        elif elemId.startswith(CHARACTER_PREFIX):
+            newPage = CharacterPage(filePath, element)
+        elif elemId.startswith(LOCATION_PREFIX):
+            newPage = LocationPage(filePath, element)
+        elif elemId.startswith(ITEM_PREFIX):
+            newPage = ItemPage(filePath, element)
         newPage.write()
 
         # Create link.
         self.set_page_links(element, newPage.filePath)
         return filePath
+
+    def get_element(self, elemId):
+        """Return the element specified by elemId, or the novel reference."""
+        if elemId.startswith(CHARACTER_PREFIX):
+            return self._mdl.novel.characters[elemId]
+
+        if elemId.startswith(LOCATION_PREFIX):
+            return self._mdl.novel.locations[elemId]
+
+        if elemId.startswith(ITEM_PREFIX):
+            return self._mdl.novel.items[elemId]
+
+        if elemId.startswith(CH_ROOT):
+            return self._mdl.novel
 
     def get_project_wiki_path(self):
         """Return the project's wiki path, if any."""
@@ -72,9 +101,9 @@ class WikiManager(ServiceBase):
     def on_close(self):
         self.prjWiki = None
 
-    def open_element_page(self, event=None):
+    def open_element_page(self, elemId):
         self._ui.restore_status()
-        element = self._ui.propertiesView.activeView.element
+        element = self.get_element(elemId)
         self.set_project_wiki()
         filePath = element.fields.get(ZIM_PAGE_ABS_TAG, None)
         if filePath is None or os.path.isfile(filePath) or not filePath.endswith(ZimPage.EXTENSION):
@@ -103,7 +132,7 @@ class WikiManager(ServiceBase):
                         initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
                         )
                 elif not self._ctrl.check_lock():
-                    filePath = self.create_wiki_page(element)
+                    filePath = self.create_wiki_page(element, elemId)
                     pageCreated = True
             if not filePath:
                 return

@@ -61,22 +61,33 @@ class Plugin(PluginBase):
         # Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_page_file)
 
-        # Add "Open wiki page" Buttons.
-        self.wikiPageButton = ttk.Button(
-            self._ui.propertiesView.characterView.linksWindow.titleBar,
-            text=_('Wiki page'),
-            command=self.open_element_page
-            )
-        self.wikiPageButton.pack(side='right')
+        self.add_buttons()
+        self._ui.root.bind('<<RebuildPropertiesView>>', self.add_buttons)
 
-    def open_element_page(self):
-        self.wikiManager.open_element_page()
+    def add_buttons(self, event=None):
+        """Add "Open wiki page" Buttons."""
+        views = [
+            self._ui.propertiesView.characterView,
+            self._ui.propertiesView.locationView,
+            self._ui.propertiesView.itemView,
+            self._ui.propertiesView.projectView,
+        ]
+        for view in views:
+            ttk.Button(
+                view.linksWindow.titleBar,
+                text=_('Wiki page'),
+                command=self.open_element_page
+                ).pack(side='right')
 
-    def open_help_page(self):
+    def open_element_page(self, event=None):
+        elemId = self._ui.propertiesView.activeView.elementId
+        self.wikiManager.open_element_page(elemId)
+
+    def open_help_page(self, event=None):
         webbrowser.open(self.HELP_URL)
 
-    def open_page_file(self):
+    def open_page_file(self, event=None):
         self.wikiManager.open_page_file()
 
-    def open_project_wiki(self):
+    def open_project_wiki(self, event=None):
         self.wikiManager.open_project_wiki()
