@@ -182,8 +182,15 @@ class WikiManager(ServiceBase):
 
         self.set_page_links(element, filePath)
         if pageCreated:
+            # Overwrite the "wiki link" message.
             self._ui.set_status(_('Wiki page created'))
-            # overwriting the "wiki link" message
+
+            # Do a Zim index update.
+            subprocess.Popen([
+                self.zimApp,
+                '--index',
+                filePath,
+                ])
         self.open_page_file(filePath)
 
     def open_project_wiki(self):
