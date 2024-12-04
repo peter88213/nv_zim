@@ -33,3 +33,16 @@ ZIM_PAGE_REL_TAG = 'zim-page-rel'
 class StopParsing(Exception):
     pass
 
+
+def fix_file_name(fileName):
+    """Return a string that can be used as a file name.
+    
+    Caution: Do not use this function on complete paths, 
+    otherwise the dividers will be removed.
+    """
+    FORBIDDEN_CHARACTERS = ('\\', '/', ':', '*', '?', '"', '<', '>', '|')
+    # set of characters that filenames cannot contain
+    for c in FORBIDDEN_CHARACTERS:
+        fileName = fileName.replace(c, '')
+    return fileName.replace(' ', '_')
+

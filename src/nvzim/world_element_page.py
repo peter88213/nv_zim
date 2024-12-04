@@ -7,6 +7,9 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 from nvzim.zim_page import ZimPage
 
 
-class ItemPage(ZimPage):
+class WorldElementPage(ZimPage):
 
-    pass
+    def __init__(self, filePath, element):
+        super().__init__(filePath, element)
+        self.page_names = [self.element.title]
+

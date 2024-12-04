@@ -24,6 +24,7 @@ Wiki-Format: zim 0.4
     def __init__(self, filePath, element):
         self.filePath = filePath
         self.element = element
+        self.page_names = [self.element.title]
 
     def body(self, text):
         """Parser callback method for a note's body text line."""
@@ -65,10 +66,12 @@ Wiki-Format: zim 0.4
         """Parser callback method for a note's third level heading."""
         pass
 
-    def new_title(self):
-        """Return the title for a new note."""
-        # Override this if another title is required.
-        return self.element.title
+    def new_page_name(self):
+        """Return the name for a new page."""
+        # Override this if another name is required.
+        for name in self.page_names:
+            if name is not None:
+                return name
 
     def parse_line(self, line):
         """An event-driven line parser."""
@@ -103,14 +106,14 @@ Wiki-Format: zim 0.4
         
         Page content:
         - The Zim note header 
-        - A first level heading with the note title as specified by the new_title() method.
+        - A first level heading with the note title as specified by the new_page_name() method.
         - Note text as specified by the fill_page() method.
         
         Overwrite existing note.
         """
         lines = [
             self.PAGE_HEADER,
-            f'{self.get_h1(self.new_title())}\n\n',
+            f'{self.get_h1(self.new_page_name())}\n\n',
         ]
         self.fill_page(lines)
         text = '\n'.join(lines)

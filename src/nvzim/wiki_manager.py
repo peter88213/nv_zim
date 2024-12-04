@@ -18,13 +18,13 @@ from nvlib.novx_globals import LOCATION_PREFIX
 from nvlib.novx_globals import norm_path
 from nvzim.book_page import BookPage
 from nvzim.character_page import CharacterPage
-from nvzim.item_page import ItemPage
-from nvzim.location_page import LocationPage
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_REL_TAG
+from nvzim.nvzim_globals import fix_file_name
 from nvzim.nvzim_locale import _
+from nvzim.world_element_page import WorldElementPage
 from nvzim.zim_notebook import ZimNotebook
 from nvzim.zim_page import ZimPage
 
@@ -39,31 +39,26 @@ class WikiManager(ServiceBase):
         self.windowTitle = windowTitle
 
     def check_home_dir(self):
-        """Chreate the project wiki's home directory, if missing."""
+        """Create the project wiki's home directory, if missing."""
         if self.prjWiki is None:
             return
 
         if not os.path.isdir(self.prjWiki.homeDir):
             os.makedirs(self.prjWiki.homeDir)
 
-    def create_wiki_page(self, element, elemId):
-        """Create a wiki page and open it."""
-        self.check_home_dir()
-        wikiPath = os.path.split(self.prjWiki.filePath)[0]
-        filePath = f'{wikiPath}/Home/{element.title}{ZimPage.EXTENSION}'
+    def new_wiki_page(self, element, elemId, filePath):
+        """Return the reference to a new WikiPage subclass instance."""
         if elemId == CH_ROOT:
-            newPage = BookPage(filePath, element)
-        elif elemId.startswith(CHARACTER_PREFIX):
-            newPage = CharacterPage(filePath, element)
-        elif elemId.startswith(LOCATION_PREFIX):
-            newPage = LocationPage(filePath, element)
-        elif elemId.startswith(ITEM_PREFIX):
-            newPage = ItemPage(filePath, element)
-        newPage.write()
+            return BookPage(filePath, element)
 
-        # Create link.
-        self.set_page_links(element, newPage.filePath)
-        return filePath
+        if elemId.startswith(CHARACTER_PREFIX):
+            return CharacterPage(filePath, element)
+
+        if elemId.startswith(LOCATION_PREFIX):
+            return WorldElementPage(filePath, element)
+
+        if elemId.startswith(ITEM_PREFIX):
+            return WorldElementPage(filePath, element)
 
     def get_element(self, elemId):
         """Return the element specified by elemId, or the novel reference."""
@@ -79,7 +74,7 @@ class WikiManager(ServiceBase):
         if elemId.startswith(CH_ROOT):
             return self._mdl.novel
 
-    def get_project_wiki_path(self):
+    def get_project_wiki_link(self):
         """Return the project's wiki path, if any."""
         if self._mdl.prjFile is None:
             return
@@ -98,49 +93,97 @@ class WikiManager(ServiceBase):
         if os.path.isfile(prjWikiPath):
             return prjWikiPath
 
+    def get_wiki_page_link(self, element):
+        """Return the element's wiki page path, if any."""
+        wikiPagePath = element.fields.get(ZIM_PAGE_ABS_TAG, None)
+        if wikiPagePath is None:
+            wikiPagePath = element.fields.get(ZIM_PAGE_REL_TAG, None)
+            if wikiPagePath is None:
+                return
+
+            wikiPagePath = self._ctrl.linkProcessor.expand_path(wikiPagePath)
+
+        if not wikiPagePath.endswith(ZimPage.EXTENSION):
+            return
+
+        if os.path.isfile(wikiPagePath):
+            return wikiPagePath
+
     def on_close(self):
         self.prjWiki = None
 
     def open_element_page(self, elemId):
         self._ui.restore_status()
         element = self.get_element(elemId)
-        self.set_project_wiki()
-        filePath = element.fields.get(ZIM_PAGE_ABS_TAG, None)
-        if filePath is None or os.path.isfile(filePath) or not filePath.endswith(ZimPage.EXTENSION):
-            pageCreated = False
-            if self.prjWiki is not None:
-                filePath = self.prjWiki.get_note(element.title)
-            else:
-                filePath = None
-            if filePath is None:
-                text = f"{_('Wiki page not found')}\n\n{_('Open an existing page, or create a new one?')}"
-                answer = SimpleDialog(
-                    None,
-                    text=text,
-                    buttons=[_('Browse'), _('Create'), _('Cancel')],
-                    default=0,
-                    cancel=2,
-                    title=self.windowTitle
-                    ).go()
-                if answer == 2:
-                    return
 
-                if answer == 0:
-                    filePath = filedialog.askopenfilename(
-                        filetypes=[(ZimPage.DESCRIPTION, ZimPage.EXTENSION)],
-                        defaultextension=ZimPage.EXTENSION,
-                        initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
-                        )
-                elif not self._ctrl.check_lock():
-                    filePath = self.create_wiki_page(element, elemId)
-                    pageCreated = True
-            if not filePath:
+        # First of all, try the element's wiki page link.
+        filePath = self.get_wiki_page_link(element)
+        pageCreated = False
+
+        if filePath is None:
+
+            # Try to find an existing project wiki page.
+            wikiPage = self.new_wiki_page(element, elemId, None)
+            self.set_project_wiki()
+            if self.prjWiki is not None:
+                for pageName in wikiPage.page_names:
+                    if not pageName:
+                        continue
+
+                    filePath = self.prjWiki.get_page_path_by_title(pageName)
+                    if filePath is not None:
+                        break
+
+        if filePath is None:
+
+            # Ask whether to browse or to create.
+            text = f"{_('Wiki page not found')}\n\n{_('Open an existing page, or create a new one?')}"
+            answer = SimpleDialog(
+                None,
+                text=text,
+                buttons=[_('Browse'), _('Create'), _('Cancel')],
+                default=0,
+                cancel=2,
+                title=self.windowTitle
+                ).go()
+
+            if answer == 2:
+                # "Cancel" button clicked
                 return
 
-            self.set_page_links(element, filePath)
-            if pageCreated:
-                self._ui.set_status(_('Wiki page created'))
-                # overwriting the "wiki link" message
+            if answer == 0:
+
+                # Browse the file system for an existing wiki page.
+                filePath = filedialog.askopenfilename(
+                    filetypes=[(ZimPage.DESCRIPTION, ZimPage.EXTENSION)],
+                    defaultextension=ZimPage.EXTENSION,
+                    initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
+                    )
+                if not filePath:
+                    # file picker closed without selection
+                    return
+
+            else:
+                # "Create" button clicked
+                if self._ctrl.check_lock():
+                    # Project is locked, so no link can be written.
+                    return
+
+                # Create a new page in the project wiki.
+                if self.prjWiki is None:
+                    return
+
+                self.check_home_dir()
+                pageName = fix_file_name(wikiPage.new_page_name())
+                filePath = f'{self.prjWiki.homeDir}/{pageName}{wikiPage.EXTENSION}'
+                wikiPage.filePath = filePath
+                wikiPage.write()
+                pageCreated = True
+
+        self.set_page_links(element, filePath)
+        if pageCreated:
+            self._ui.set_status(_('Wiki page created'))
+            # overwriting the "wiki link" message
         self.open_page_file(filePath)
 
     def open_project_wiki(self):
@@ -153,7 +196,11 @@ class WikiManager(ServiceBase):
         self.set_project_wiki()
         self.check_home_dir()
         if self.prjWiki is not None:
-            subprocess.Popen([self.zimApp, self.prjWiki.filePath, 'Home'])
+            subprocess.Popen([
+                self.zimApp,
+                self.prjWiki.filePath,
+                self.prjWiki.settings['home']
+                ])
 
     def open_page_file(self, filePath):
         if not self.zim_is_installed():
@@ -176,7 +223,11 @@ class WikiManager(ServiceBase):
             zimNotebook = glob.glob(norm_path(f'{zimPath}/*{ZimNotebook.EXTENSION}'))
             if zimNotebook:
                 # the link path belongs to a Zim wiki
-                subprocess.Popen([self.zimApp, zimNotebook[0], ":".join(zimPages)])
+                subprocess.Popen([
+                    self.zimApp,
+                    zimNotebook[0],
+                    ":".join(zimPages)
+                    ])
                 return True
 
         return False
@@ -225,7 +276,7 @@ class WikiManager(ServiceBase):
         if self.prjWiki is not None:
             return
 
-        prjWikiPath = self.get_project_wiki_path()
+        prjWikiPath = self.get_project_wiki_link()
         if prjWikiPath is not None and os.path.isfile(prjWikiPath):
 
             # Open existing notebook.

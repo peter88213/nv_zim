@@ -9,6 +9,7 @@ import glob
 import os
 
 from nvzim.nvzim_globals import _
+from nvzim.nvzim_globals import fix_file_name
 from nvzim.zim_page import ZimPage
 
 
@@ -41,7 +42,7 @@ class ZimNotebook:
             self.dirPath, __ = os.path.split(filePath)
             self.filePath = filePath
             self.read_settings()
-            self.homeDir = f'{self.dirPath}/{self.settings["home"]}'
+            self.homeDir = f"{self.dirPath}/{self.settings['home']}"
         elif os.path.isdir(dirPath):
             self.dirPath = dirPath
             self.filePath = f'{dirPath}/{self.NOTEBOOK}.zim'
@@ -67,10 +68,10 @@ class ZimNotebook:
             notebook.write(f)
         os.makedirs(self.homeDir, exist_ok=True)
 
-    def get_note(self, title):
-        """Return the path of a note specified by title."""
+    def get_page_path_by_title(self, title):
+        """Return the path of a note specified by page title."""
         foundFiles = glob.glob(
-            f'**/{title}{ZimPage.EXTENSION}',
+            f'**/{fix_file_name(title)}{ZimPage.EXTENSION}',
             root_dir=self.homeDir,
             recursive=True,
             )
