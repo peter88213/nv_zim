@@ -23,11 +23,12 @@ from nvzim.zim_page import ZimPage
 
 class ZimConnector(ServiceBase):
 
-    def __init__(self, model, view, controller):
+    def __init__(self, model, view, controller, windowTitle):
         super().__init__(model, view, controller)
         self.prjWiki = None
         self.launchers = self._ctrl.get_launchers()
         self.zimApp = self.launchers.get(ZimNotebook.EXTENSION, '')
+        self.windowTitle = windowTitle
 
     def check_home_dir(self):
         """Chreate the project wiki's home directory, if missing."""
@@ -46,10 +47,7 @@ class ZimConnector(ServiceBase):
         newPage.write()
 
         # Create link.
-        fields = element.fields
-        fields[ZIM_PAGE_ABS_TAG] = newPage.filePath
-        fields[ZIM_PAGE_REL_TAG] = self._ctrl.linkProcessor.shorten_path(newPage.filePath)
-        element.fields = fields
+        self.set_page_links(element, newPage.filePath)
         return filePath
 
     def get_project_wiki_path(self):
@@ -74,7 +72,7 @@ class ZimConnector(ServiceBase):
     def on_close(self):
         self.prjWiki = None
 
-    def open_element_note(self, event=None):
+    def open_element_page(self, event=None):
         self._ui.restore_status()
         element = self._ui.propertiesView.activeView.element
         self.set_project_wiki()
@@ -93,7 +91,7 @@ class ZimConnector(ServiceBase):
                     buttons=[_('Browse'), _('Create'), _('Cancel')],
                     default=0,
                     cancel=2,
-                    title=self.FEATURE
+                    title=self.windowTitle
                     ).go()
                 if answer == 2:
                     return
@@ -104,7 +102,7 @@ class ZimConnector(ServiceBase):
                         defaultextension=ZimPage.EXTENSION,
                         initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
                         )
-                else:
+                elif not self._ctrl.check_lock():
                     filePath = self.create_wiki_page(element)
                     pageCreated = True
             if not filePath:
@@ -156,6 +154,9 @@ class ZimConnector(ServiceBase):
 
     def set_notebook_links(self, prjWikiPath):
         self._ui.restore_status()
+        if self._ctrl.isLocked:
+            return
+
         fields = self._mdl.novel.fields
         initialAbsPath = fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
         initialRelPath = fields.get(ZIM_NOTEBOOK_REL_TAG, None)
@@ -173,6 +174,9 @@ class ZimConnector(ServiceBase):
 
     def set_page_links(self, element, wikiPagePath):
         self._ui.restore_status()
+        if self._ctrl.isLocked:
+            return
+
         fields = element.fields
         initialAbsPath = fields.get(ZIM_PAGE_ABS_TAG, None)
         initialRelPath = fields.get(ZIM_PAGE_REL_TAG, None)
@@ -207,7 +211,7 @@ class ZimConnector(ServiceBase):
             buttons=[_('Browse'), _('Create'), _('Cancel')],
             default=0,
             cancel=2,
-            title=self.FEATURE
+            title=self.windowTitle
             ).go()
         if answer == 2:
             return
@@ -224,7 +228,7 @@ class ZimConnector(ServiceBase):
 
             self.prjWiki = ZimNotebook(filePath=prjWikiPath)
             self.set_notebook_links(self.prjWiki.filePath)
-        else:
+        elif not self._ctrl.check_lock():
             # Create new notebook.
             prjDir, prjFile = os.path.split(self._mdl.prjFile.filePath)
             prjFileBase = os.path.splitext(prjFile)[0]
