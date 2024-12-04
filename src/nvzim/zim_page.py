@@ -4,8 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvzimlib.nvzim_globals import StopParsing
-from nvzimlib.nvzim_globals import _
+from nvzim.nvzim_globals import StopParsing
+from nvzim.nvzim_globals import _
 
 
 class ZimPage:

@@ -8,8 +8,8 @@ from configparser import ConfigParser
 import glob
 import os
 
-from nvzimlib.nvzim_globals import _
-from nvzimlib.zim_page import ZimPage
+from nvzim.nvzim_globals import _
+from nvzim.zim_page import ZimPage
 
 
 class ZimNotebook:

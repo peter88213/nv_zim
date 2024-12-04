@@ -1,4 +1,4 @@
-"""Provide global variables and functions.
+"""Locale settings for nv_zim.
 
 Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
@@ -8,7 +8,6 @@ import gettext
 import locale
 import os
 import sys
-import webbrowser
 
 # Initialize localization.
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
@@ -25,24 +24,3 @@ except:
     def _(message):
         return message
 
-HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
-
-ZIM_NOTEBOOK_ABS_TAG = 'zim-notebook-abs'
-ZIM_NOTEBOOK_REL_TAG = 'zim-notebook-rel'
-ZIM_PAGE_ABS_TAG = 'zim-page-abs'
-ZIM_PAGE_REL_TAG = 'zim-page-rel'
-
-
-class StopParsing(Exception):
-    pass
-
-
-def norm_path(path):
-    if path is None:
-        path = ''
-    return os.path.normpath(path)
-
-
-def open_help(event=None):
-    """Show the online help page specified by HELP_URL."""
-    webbrowser.open(HELP_URL)

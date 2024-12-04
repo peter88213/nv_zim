@@ -18,7 +18,7 @@ VERSION = '0.4.0'
 class PluginBuilder(PackageBuilder):
 
     PRJ_NAME = 'nv_zim'
-    LOCAL_LIB = 'nvzimlib'
+    LOCAL_LIB = 'nvzim'
     GERMAN_TRANSLATION = True
 
 
