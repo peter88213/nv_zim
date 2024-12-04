@@ -1,4 +1,4 @@
-"""Zim Desktop Wiki connector plugin for novelibre.
+"""Zim Desktop Wiki connection plugin for novelibre.
 
 Requires Python 3.6+
 Copyright (c) 2024 Peter Triesberger
@@ -20,18 +20,26 @@ import webbrowser
 
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvzim.nvzim_locale import _
-from nvzim.zim_connector import ZimConnector
+from nvzim.wiki_manager import WikiManager
 
 
 class Plugin(PluginBase):
     """Template plugin class."""
     VERSION = '@release'
     API_VERSION = '5.0'
-    DESCRIPTION = 'Zim Desktop Wiki connector'
+    DESCRIPTION = 'Zim Desktop Wiki connection'
     URL = 'https://github.com/peter88213/nv_zim'
 
     FEATURE = 'Zim Desktop Wiki'
     HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
+
+    def disable_menu(self):
+        """Disable UI widgets, e.g. when no project is open."""
+        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='disabled')
+
+    def enable_menu(self):
+        """Enable UI widgets, e.g. when a project is opened."""
+        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='normal')
 
     def install(self, model, view, controller):
         """Install the plugin.
@@ -44,10 +52,10 @@ class Plugin(PluginBase):
         Extends the superclass method.
         """
         super().install(model, view, controller)
-        self.zimConnector = ZimConnector(model, view, controller, self.FEATURE)
+        self.wikiManager = WikiManager(model, view, controller, self.FEATURE)
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('nv_zim Online help'), command=self.open_help_page)
+        self._ui.helpMenu.add_command(label=_('Zim connection Online help'), command=self.open_help_page)
         self._ui.toolsMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
 
         # Register the link opener.
@@ -61,22 +69,14 @@ class Plugin(PluginBase):
             )
         self.wikiPageButton.pack(side='right')
 
-    def disable_menu(self):
-        """Disable UI widgets, e.g. when no project is open."""
-        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='disabled')
-
-    def enable_menu(self):
-        """Enable UI widgets, e.g. when a project is opened."""
-        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='normal')
-
     def open_element_page(self):
-        self.zimConnector.open_element_page()
+        self.wikiManager.open_element_page()
 
     def open_help_page(self):
         webbrowser.open(self.HELP_URL)
 
     def open_page_file(self):
-        self.zimConnector.open_page_file()
+        self.wikiManager.open_page_file()
 
     def open_project_wiki(self):
-        self.zimConnector.open_project_wiki()
+        self.wikiManager.open_project_wiki()

@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.1\n"
-"POT-Creation-Date: 2024-12-04 14:22:18\n"
+"POT-Creation-Date: 2024-12-04 14:35:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -80,6 +80,9 @@ msgstr ""
 msgid "Wiki page not found"
 msgstr ""
 
+msgid "Zim connection Online help"
+msgstr ""
+
 msgid "Zim installation not found"
 msgstr ""
 
@@ -90,7 +93,4 @@ msgid "Zim notebook"
 msgstr ""
 
 msgid "Zim page"
-msgstr ""
-
-msgid "nv_zim Online help"
 msgstr ""
