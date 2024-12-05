@@ -5,8 +5,9 @@
 ## Changelog
 
 
-### Version 0.6.3
+### Version 0.7.0
 
+- Adding a "Zim Desktop Wiki" submenu to the "Tools" menu. 
 - Adding a "Wiki page" button to the book/character/location/item properties views' "Links" title bars.
 - Adding a special opener for Zim pages to the novelibre link processor.
 

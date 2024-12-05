@@ -11,10 +11,6 @@ from nvzim.zim_page import ZimPage
 
 class WorldElementPage(ZimPage):
 
-    def __init__(self, filePath, element):
-        super().__init__(filePath, element)
-        self.page_names = [self.element.title]
-
     def fill_page(self, lines):
         """Add page content to the lines.
         

@@ -28,7 +28,7 @@ Wiki-Format: zim 0.4
     def __init__(self, filePath, element):
         self.filePath = filePath
         self.element = element
-        self.page_names = [self.element.title]
+        self.page_names = [self.element.title, _('Untitled')]
 
     def body(self, text):
         """Parser callback method for a note's body text line."""

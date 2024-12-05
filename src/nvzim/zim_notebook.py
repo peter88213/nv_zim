@@ -50,17 +50,20 @@ class ZimNotebook:
             self.filePath = f'{dirPath}/{self.NOTEBOOK}.zim'
             self.homeDir = f'{self.dirPath}/{self.HOME}'
             self.write()
+            self.update_index()
         else:
             raise AttributeError
 
-    def open(self):
+    def open(self, initialPage=None):
         if not os.path.isfile(self.filePath):
             return
+        if initialPage is None:
+            initialPage = self.settings['home']
 
         subprocess.Popen([
             self.zimApp,
             self.filePath,
-            self.settings['home']
+            initialPage,
             ])
 
     def read_settings(self):

@@ -21,6 +21,7 @@ import webbrowser
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvzim.nvzim_locale import _
 from nvzim.wiki_manager import WikiManager
+import tkinter as tk
 
 
 class Plugin(PluginBase):
@@ -56,7 +57,13 @@ class Plugin(PluginBase):
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(label=_('Zim connection Online help'), command=self.open_help_page)
-        self._ui.toolsMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
+
+        # Create a "Zim wiki" submenu.
+        self.zimMenu = tk.Menu(self._ui.toolsMenu, tearoff=0)
+        self.zimMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
+        self.zimMenu.add_command(label=_('Create project wiki'), command=self.create_project_wiki)
+
+        self._ui.toolsMenu.add_cascade(label=_('Zim Desktop Wiki'), menu=self.zimMenu)
 
         # Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_page_file)
@@ -78,6 +85,9 @@ class Plugin(PluginBase):
                 text=_('Wiki page'),
                 command=self.open_element_page
                 ).pack(side='right')
+
+    def create_project_wiki(self, event=None):
+        self.wikiManager.create_project_wiki()
 
     def on_close(self):
         self.wikiManager.on_close()

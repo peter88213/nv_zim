@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.6.3\n"
-"POT-Creation-Date: 2024-12-05 16:16:49\n"
-"PO-Revision-Date: 2024-12-05 16:16:49\n"
+"Project-Id-Version: 0.7.0\n"
+"POT-Creation-Date: 2024-12-05 20:30:10\n"
+"PO-Revision-Date: 2024-12-05 20:30:10\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -25,14 +25,26 @@ msgstr "Durchsuchen"
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Characters"
+msgstr "Figuren"
+
 msgid "Create"
 msgstr "Erzeugen"
+
+msgid "Create project wiki"
+msgstr "Projekt-Wiki erzeugen"
 
 msgid "Goals"
 msgstr "Ziele"
 
 msgid "Illegal value"
 msgstr "Unzulässiger Wert"
+
+msgid "Items"
+msgstr "Gegenstände"
+
+msgid "Locations"
+msgstr "Schauplätze"
 
 msgid "Not a floating point value."
 msgstr "Keine Fließkommazahl."
@@ -64,11 +76,17 @@ msgstr "Der zulässige Höchstwert ist"
 msgid "The allowed minimum value is"
 msgstr "Der zulässige Mindestwert ist"
 
+msgid "This will back up the existing wiki and create a new one containing all pages."
+msgstr "Das existierende Wiki wird gesichert und es wird ein neues erzeugt das alle Seiten enthält."
+
 msgid "Too large"
 msgstr "Zu hoch"
 
 msgid "Too small"
 msgstr "Zu niedrig"
+
+msgid "Untitled"
+msgstr "Unbenannt"
 
 msgid "Wiki created"
 msgstr "Wiki erzeugt"
@@ -84,6 +102,9 @@ msgstr "Wiki-Seite erzeugt"
 
 msgid "Wiki page not found"
 msgstr "Wiki-Seite nicht gefunden"
+
+msgid "Zim Desktop Wiki"
+msgstr "Zim Desktop Wiki"
 
 msgid "Zim connection Online help"
 msgstr "Zim-Anbindung Online-Hilfe"

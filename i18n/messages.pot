@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.6.3\n"
-"POT-Creation-Date: 2024-12-05 16:16:49\n"
+"Project-Id-Version: 0.7.0\n"
+"POT-Creation-Date: 2024-12-05 20:30:10\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -26,13 +26,25 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
+msgid "Characters"
+msgstr ""
+
 msgid "Create"
+msgstr ""
+
+msgid "Create project wiki"
 msgstr ""
 
 msgid "Goals"
 msgstr ""
 
 msgid "Illegal value"
+msgstr ""
+
+msgid "Items"
+msgstr ""
+
+msgid "Locations"
 msgstr ""
 
 msgid "Not a floating point value."
@@ -65,10 +77,16 @@ msgstr ""
 msgid "The allowed minimum value is"
 msgstr ""
 
+msgid "This will back up the existing wiki and create a new one containing all pages."
+msgstr ""
+
 msgid "Too large"
 msgstr ""
 
 msgid "Too small"
+msgstr ""
+
+msgid "Untitled"
 msgstr ""
 
 msgid "Wiki created"
@@ -84,6 +102,9 @@ msgid "Wiki page created"
 msgstr ""
 
 msgid "Wiki page not found"
+msgstr ""
+
+msgid "Zim Desktop Wiki"
 msgstr ""
 
 msgid "Zim connection Online help"
