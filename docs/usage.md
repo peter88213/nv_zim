@@ -15,6 +15,8 @@ If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup
 
 # Operation
 
+See the [online manual](https://peter88213.github.io/nvhelp-en/nv_zim/)
+
 ---
 
 # License

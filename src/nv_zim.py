@@ -31,7 +31,7 @@ class Plugin(PluginBase):
     URL = 'https://github.com/peter88213/nv_zim'
 
     FEATURE = 'Zim Desktop Wiki'
-    HELP_URL = 'https://github.com/peter88213/nv_zim/tree/main/docs/nv_zim'
+    HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_zim'
 
     def disable_menu(self):
         """Disable UI widgets, e.g. when no project is open."""

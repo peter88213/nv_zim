@@ -9,6 +9,7 @@ import gettext
 import locale
 import os
 import sys
+import re
 
 # Initialize localization.
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
@@ -35,17 +36,13 @@ class StopParsing(Exception):
     pass
 
 
-def fix_file_name(fileName):
-    """Return a string that can be used as a file name.
+def alphanumerics(fileName):
+    """Return a string with non-alphanumeric characters replaced with underscores.
     
     Caution: Do not use this function on complete paths, 
     otherwise the dividers will be removed.
     """
-    FORBIDDEN_CHARACTERS = ('\\', '/', ':', '*', '?', '"', '<', '>', '|')
-    # set of characters that filenames cannot contain
-    for c in FORBIDDEN_CHARACTERS:
-        fileName = fileName.replace(c, '')
-    return fileName.replace(' ', '_')
+    return re.sub(r'\W+', '_', fileName)
 
 
 def locale_date(isoDate):
@@ -55,3 +52,4 @@ def locale_date(isoDate):
 
     except:
         return isoDate
+

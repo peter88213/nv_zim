@@ -9,7 +9,7 @@ import glob
 import os
 
 from nvzim.nvzim_globals import _
-from nvzim.nvzim_globals import fix_file_name
+from nvzim.nvzim_globals import alphanumerics
 from nvzim.zim_page import ZimPage
 
 
@@ -71,7 +71,7 @@ class ZimNotebook:
     def get_page_path_by_title(self, title):
         """Return the path of a note specified by page title."""
         foundFiles = glob.glob(
-            f'**/{fix_file_name(title)}{ZimPage.EXTENSION}',
+            f'**/{alphanumerics(title)}{ZimPage.EXTENSION}',
             root_dir=self.homeDir,
             recursive=True,
             )

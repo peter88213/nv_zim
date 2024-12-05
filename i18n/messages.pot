@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.6.1\n"
-"POT-Creation-Date: 2024-12-04 23:19:35\n"
+"Project-Id-Version: 0.6.2\n"
+"POT-Creation-Date: 2024-12-05 14:06:28\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -99,4 +99,7 @@ msgid "Zim notebook"
 msgstr ""
 
 msgid "Zim page"
+msgstr ""
+
+msgid "https://peter88213.github.io/nvhelp-en"
 msgstr ""

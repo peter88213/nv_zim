@@ -22,7 +22,7 @@ from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_REL_TAG
-from nvzim.nvzim_globals import fix_file_name
+from nvzim.nvzim_globals import alphanumerics
 from nvzim.nvzim_locale import _
 from nvzim.world_element_page import WorldElementPage
 from nvzim.zim_notebook import ZimNotebook
@@ -174,7 +174,7 @@ class WikiManager(ServiceBase):
                     return
 
                 self.check_home_dir()
-                pageName = fix_file_name(wikiPage.new_page_name())
+                pageName = alphanumerics(wikiPage.new_page_name())
                 filePath = f'{self.prjWiki.homeDir}/{pageName}{wikiPage.EXTENSION}'
                 wikiPage.filePath = filePath
                 wikiPage.write()
@@ -285,6 +285,13 @@ class WikiManager(ServiceBase):
 
         prjWikiPath = self.get_project_wiki_link()
         if prjWikiPath is not None and os.path.isfile(prjWikiPath):
+
+            # Do a Zim index update.
+            subprocess.Popen([
+                self.zimApp,
+                '--index',
+                prjWikiPath,
+                ])
 
             # Open existing notebook.
             self.prjWiki = ZimNotebook(filePath=prjWikiPath)
