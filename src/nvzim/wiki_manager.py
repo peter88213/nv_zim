@@ -16,7 +16,6 @@ from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import LOCATION_PREFIX
 from nvlib.novx_globals import norm_path
-from nvzim.book_page import BookPage
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
@@ -229,6 +228,12 @@ class WikiManager(ServiceBase):
         self.open_page_file(filePath)
 
     def open_project_wiki(self):
+        if self._mdl.prjFile is None:
+            return
+
+        if self._ctrl.check_lock():
+            return
+
         self._ui.restore_status()
         self._ui.propertiesView.apply_changes()
         if not self.zim_is_installed():

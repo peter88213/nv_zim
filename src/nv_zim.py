@@ -36,11 +36,11 @@ class Plugin(PluginBase):
 
     def disable_menu(self):
         """Disable UI widgets, e.g. when no project is open."""
-        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='disabled')
+        self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='disabled')
 
     def enable_menu(self):
         """Enable UI widgets, e.g. when a project is opened."""
-        self._ui.toolsMenu.entryconfig(_('Open project wiki'), state='normal')
+        self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='normal')
 
     def install(self, model, view, controller):
         """Install the plugin.

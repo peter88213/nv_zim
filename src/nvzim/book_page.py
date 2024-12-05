@@ -4,6 +4,7 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import os
 from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import LOCATION_PREFIX
@@ -23,31 +24,30 @@ class BookPage(ZimPage):
         if self.element.desc:
             lines.append(self.element.desc)
             lines.append('\n')
+            self._add_links(self.element.characters, _('Characters'), lines)
+            self._add_links(self.element.locations, _('Locations'), lines)
+            self._add_links(self.element.items, _('Items'), lines)
 
-        if self.element.characters:
-            lines.append(self.get_h2(_('Characters')))
-            self._add_links(self.element.characters, lines)
-
-        if self.element.locations:
-            lines.append(self.get_h2(_('Locations')))
-            self._add_links(self.element.locations, lines)
-
-        if self.element.items:
-            lines.append(self.get_h2(_('Items')))
-            self._add_links(self.element.items, lines)
-
-    def _add_links(self, elements, lines):
+    def _add_links(self, elements, heading, lines):
+        """Add links to existent pages to the lines."""
+        linkLines = []
+        homeDir = os.path.split(self.filePath)[0]
         for elemId in elements:
             elemPage = self._new_wiki_page(elements[elemId], elemId)
             pageName = elemPage.new_page_name()
-            lines.append(f'[[{pageName}]]')
-        lines.append('\n')
+            filePath = f"{homeDir}/{pageName.replace(' ', '_')}{elemPage.EXTENSION}"
+            if os.path.isfile(filePath):
+                linkLines.append(f'[[{pageName}]]')
+        if linkLines:
+            lines.append(self.get_h2(heading))
+            lines.extend(sorted(linkLines))
+            lines.append('\n')
 
     def _new_wiki_page(self, element, elemId):
-        """Return the reference to a new WikiPage subclass instance.
-        
-        WikiFactory cannot be used here due to circular import.
-        """
+        """Return the reference to a new WikiPage subclass instance."""
+
+        # WikiFactory cannot be used here due to circular import.
+
         if elemId.startswith(CHARACTER_PREFIX):
             return CharacterPage(None, element)
 
