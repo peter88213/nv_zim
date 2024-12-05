@@ -7,6 +7,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 from configparser import ConfigParser
 import glob
 import os
+import subprocess
 
 from nvzim.nvzim_globals import _
 from nvzim.nvzim_globals import alphanumerics
@@ -21,7 +22,9 @@ class ZimNotebook:
     NOTEBOOK = 'Notebook'
     HOME = 'Home'
 
-    def __init__(self, dirPath='', filePath='', wikiName=None):
+    def __init__(self, zimApp, dirPath='', filePath='', wikiName=None):
+        self.zimApp = zimApp
+
         # Specify either directory or file path.
         if wikiName is None:
             wikiName = self.NOTEBOOK
@@ -51,12 +54,32 @@ class ZimNotebook:
         else:
             raise AttributeError
 
+    def open(self):
+        if not os.path.isfile(self.filePath):
+            return
+
+        subprocess.Popen([
+            self.zimApp,
+            self.filePath,
+            self.settings['home']
+            ])
+
     def read_settings(self):
         """Read the settings, updating the instance variable."""
         notebook = ConfigParser()
         notebook.read(self.filePath, encoding='utf-8')
         for tag in self.settings:
             self.settings[tag] = notebook.get(self.NOTEBOOK, tag)
+
+    def update_index(self):
+        if not os.path.isfile(self.filePath):
+            return
+
+        subprocess.Popen([
+            self.zimApp,
+            '--index',
+            self.filePath,
+            ])
 
     def write(self):
         """Write the notebook, overwriting existing one."""

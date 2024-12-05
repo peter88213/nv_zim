@@ -16,15 +16,13 @@ from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import LOCATION_PREFIX
 from nvlib.novx_globals import norm_path
-from nvzim.book_page import BookPage
-from nvzim.character_page import CharacterPage
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_REL_TAG
 from nvzim.nvzim_globals import alphanumerics
 from nvzim.nvzim_locale import _
-from nvzim.world_element_page import WorldElementPage
+from nvzim.wiki_factory import WikiFactory
 from nvzim.zim_notebook import ZimNotebook
 from nvzim.zim_page import ZimPage
 
@@ -45,20 +43,6 @@ class WikiManager(ServiceBase):
 
         if not os.path.isdir(self.prjWiki.homeDir):
             os.makedirs(self.prjWiki.homeDir)
-
-    def new_wiki_page(self, element, elemId, filePath):
-        """Return the reference to a new WikiPage subclass instance."""
-        if elemId == CH_ROOT:
-            return BookPage(filePath, element)
-
-        if elemId.startswith(CHARACTER_PREFIX):
-            return CharacterPage(filePath, element)
-
-        if elemId.startswith(LOCATION_PREFIX):
-            return WorldElementPage(filePath, element)
-
-        if elemId.startswith(ITEM_PREFIX):
-            return WorldElementPage(filePath, element)
 
     def get_element(self, elemId):
         """Return the element specified by elemId, or the novel reference."""
@@ -123,7 +107,7 @@ class WikiManager(ServiceBase):
         if filePath is None:
 
             # Try to find an existing project wiki page.
-            wikiPage = self.new_wiki_page(element, elemId, None)
+            wikiPage = WikiFactory.new_wiki_page(element, elemId, None)
             self.set_project_wiki()
             if self.prjWiki is not None:
                 for pageName in wikiPage.page_names:
@@ -186,11 +170,7 @@ class WikiManager(ServiceBase):
             self._ui.set_status(_('Wiki page created'))
 
             # Do a Zim index update.
-            subprocess.Popen([
-                self.zimApp,
-                '--index',
-                filePath,
-                ])
+            self.prjWiki.update_index()
         self.open_page_file(filePath)
 
     def open_project_wiki(self):
@@ -203,11 +183,7 @@ class WikiManager(ServiceBase):
         self.set_project_wiki()
         self.check_home_dir()
         if self.prjWiki is not None:
-            subprocess.Popen([
-                self.zimApp,
-                self.prjWiki.filePath,
-                self.prjWiki.settings['home']
-                ])
+            self.prjWiki.open()
 
     def open_page_file(self, filePath):
         if not self.zim_is_installed():
@@ -286,15 +262,9 @@ class WikiManager(ServiceBase):
         prjWikiPath = self.get_project_wiki_link()
         if prjWikiPath is not None and os.path.isfile(prjWikiPath):
 
-            # Do a Zim index update.
-            subprocess.Popen([
-                self.zimApp,
-                '--index',
-                prjWikiPath,
-                ])
-
-            # Open existing notebook.
-            self.prjWiki = ZimNotebook(filePath=prjWikiPath)
+            # Open an existing notebook.
+            self.prjWiki = ZimNotebook(self.zimApp, filePath=prjWikiPath)
+            self.prjWiki.update_index()
             self.set_notebook_links(self.prjWiki.filePath)
             return
 
@@ -311,7 +281,8 @@ class WikiManager(ServiceBase):
             return
 
         if answer == 0:
-            # Select existing notebook.
+
+            # Select an existing notebook.
             prjWikiPath = filedialog.askopenfilename(
                 filetypes=[(ZimNotebook.DESCRIPTION, ZimNotebook.EXTENSION)],
                 defaultextension=ZimNotebook.EXTENSION,
@@ -320,15 +291,16 @@ class WikiManager(ServiceBase):
             if not prjWikiPath:
                 return
 
-            self.prjWiki = ZimNotebook(filePath=prjWikiPath)
+            self.prjWiki = ZimNotebook(self.zimApp, filePath=prjWikiPath)
             self.set_notebook_links(self.prjWiki.filePath)
         elif not self._ctrl.check_lock():
-            # Create new notebook.
+
+            # Create a new notebook.
             prjDir, prjFile = os.path.split(self._mdl.prjFile.filePath)
             prjFileBase = os.path.splitext(prjFile)[0]
             prjWikiDir = f'{prjDir}/{prjFileBase}_zim'
             os.makedirs(prjWikiDir, exist_ok=True)
-            self.prjWiki = ZimNotebook(dirPath=prjWikiDir, wikiName=self._mdl.novel.title)
+            self.prjWiki = ZimNotebook(self.zimApp, dirPath=prjWikiDir, wikiName=self._mdl.novel.title)
             self.set_notebook_links(self.prjWiki.filePath)
             self._ui.set_status(f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"')
 
@@ -358,5 +330,7 @@ class WikiManager(ServiceBase):
 
         self.zimApp = zimPath
         self.launchers[ZimNotebook.EXTENSION] = self.zimApp
+        if self.prjWiki is not None:
+            self.prjWiki.zimApp = self.zimApp
         return True
 
