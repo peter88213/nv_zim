@@ -20,7 +20,6 @@ from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_ABS_TAG
 from nvzim.nvzim_globals import ZIM_PAGE_REL_TAG
-from nvzim.nvzim_globals import alphanumerics
 from nvzim.nvzim_locale import _
 from nvzim.wiki_factory import WikiFactory
 from nvzim.zim_notebook import ZimNotebook
@@ -114,7 +113,7 @@ class WikiManager(ServiceBase):
                     if not pageName:
                         continue
 
-                    filePath = self.prjWiki.get_page_path_by_title(pageName)
+                    filePath = self.prjWiki.get_page_path_by_name(pageName)
                     if filePath is not None:
                         break
 
@@ -158,8 +157,8 @@ class WikiManager(ServiceBase):
                     return
 
                 self.check_home_dir()
-                pageName = alphanumerics(wikiPage.new_page_name())
-                filePath = f'{self.prjWiki.homeDir}/{pageName}{wikiPage.EXTENSION}'
+                fileName = wikiPage.new_page_name().replace(' ', '_')
+                filePath = f'{self.prjWiki.homeDir}/{fileName}{wikiPage.EXTENSION}'
                 wikiPage.filePath = filePath
                 wikiPage.write()
                 pageCreated = True

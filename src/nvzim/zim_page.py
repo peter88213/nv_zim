@@ -4,6 +4,8 @@ Copyright (c) 2024 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
+import re
+
 from nvzim.nvzim_globals import StopParsing
 from nvzim.nvzim_globals import _
 
@@ -20,6 +22,8 @@ Wiki-Format: zim 0.4
         '//':'',
         '**': '',
     }
+    invalidChars = re.compile(r'[\:\?\#\/\\\*\"\<"\>\|\%\t\n\r]')
+    # regex for a set of characters that wiki page filenames must not contain
 
     def __init__(self, filePath, element):
         self.filePath = filePath
@@ -67,11 +71,11 @@ Wiki-Format: zim 0.4
         pass
 
     def new_page_name(self):
-        """Return the name for a new page."""
+        """Return a valid name for a new page."""
         # Override this if another name is required.
-        for name in self.page_names:
-            if name is not None:
-                return name
+        for pageName in self.page_names:
+            if pageName is not None:
+                return self.invalidChars.sub('', pageName)
 
     def parse_line(self, line):
         """An event-driven line parser."""

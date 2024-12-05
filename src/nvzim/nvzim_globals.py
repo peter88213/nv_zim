@@ -9,7 +9,6 @@ import gettext
 import locale
 import os
 import sys
-import re
 
 # Initialize localization.
 LOCALE_PATH = f'{os.path.dirname(sys.argv[0])}/locale/'
@@ -34,15 +33,6 @@ ZIM_PAGE_REL_TAG = 'zim-page-rel'
 
 class StopParsing(Exception):
     pass
-
-
-def alphanumerics(fileName):
-    """Return a string with non-alphanumeric characters replaced with underscores.
-    
-    Caution: Do not use this function on complete paths, 
-    otherwise the dividers will be removed.
-    """
-    return re.sub(r'\W+', '_', fileName)
 
 
 def locale_date(isoDate):

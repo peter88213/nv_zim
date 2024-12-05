@@ -10,7 +10,6 @@ import os
 import subprocess
 
 from nvzim.nvzim_globals import _
-from nvzim.nvzim_globals import alphanumerics
 from nvzim.zim_page import ZimPage
 
 
@@ -91,10 +90,10 @@ class ZimNotebook:
             notebook.write(f)
         os.makedirs(self.homeDir, exist_ok=True)
 
-    def get_page_path_by_title(self, title):
-        """Return the path of a note specified by page title."""
+    def get_page_path_by_name(self, pageName):
+        """Return the path of a note specified by page name."""
         foundFiles = glob.glob(
-            f'**/{alphanumerics(title)}{ZimPage.EXTENSION}',
+            f"**/{pageName.replace(' ', '_')}{ZimPage.EXTENSION}",
             root_dir=self.homeDir,
             recursive=True,
             )

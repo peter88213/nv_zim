@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 0.6.2
+### Version 0.6.3
 
 - Adding a "Wiki page" button to the book/character/location/item properties views' "Links" title bars.
 - Adding a special opener for Zim pages to the novelibre link processor.

@@ -24,11 +24,11 @@ class CharacterPage(WorldElementPage):
 
         if self.element.bio:
             lines.append(self.get_h2(_('Bio')))
-            self._set_birth_date(lines)
+            self._write_life_dates(lines)
             lines.append(self.element.bio)
             lines.append('\n')
         else:
-            self._set_birth_date(lines)
+            self._write_life_dates(lines)
             lines.append('\n')
 
         if self.element.goals:
@@ -36,7 +36,7 @@ class CharacterPage(WorldElementPage):
             lines.append(self.element.goals)
             lines.append('\n')
 
-    def _set_birth_date(self, lines):
+    def _write_life_dates(self, lines):
         showDate = False
         if self.element.birthDate:
             startDate = locale_date(self.element.birthDate)
