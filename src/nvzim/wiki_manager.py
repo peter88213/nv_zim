@@ -194,10 +194,14 @@ class WikiManager(ServiceBase):
             if answer == 0:
 
                 # Browse the file system for an existing wiki page.
+                if self.prjWiki is not None:
+                    initialDir = self.prjWiki.homeDir
+                else:
+                    initialDir = os.path.split(self._mdl.prjFile.filePath)[0]
                 filePath = filedialog.askopenfilename(
                     filetypes=[(ZimPage.DESCRIPTION, ZimPage.EXTENSION)],
                     defaultextension=ZimPage.EXTENSION,
-                    initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
+                    initialdir=initialDir
                     )
                 if not filePath:
                     # file picker closed without selection

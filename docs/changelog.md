@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 0.7.1
+### Version 0.7.2
 
 - Adding a "Zim Desktop Wiki" submenu to the "Tools" menu. 
 - Adding a "Wiki page" button to the book/character/location/item properties views' "Links" title bars.
