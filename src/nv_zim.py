@@ -15,6 +15,7 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
+from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
@@ -68,23 +69,11 @@ class Plugin(PluginBase):
         # Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_page_file)
 
-        self.add_buttons()
-        self._ui.root.bind('<<RebuildPropertiesView>>', self.add_buttons)
+        self._add_buttons()
+        self._ui.root.bind('<<RebuildPropertiesView>>', self._add_buttons)
 
-    def add_buttons(self, event=None):
-        """Add "Open wiki page" Buttons."""
-        views = [
-            self._ui.propertiesView.characterView,
-            self._ui.propertiesView.locationView,
-            self._ui.propertiesView.itemView,
-            self._ui.propertiesView.projectView,
-        ]
-        for view in views:
-            ttk.Button(
-                view.linksWindow.titleBar,
-                text=_('Wiki page'),
-                command=self.open_element_page
-                ).pack(side='right')
+        #--- Configure the toolbar.
+        self._configure_toolbar()
 
     def create_project_wiki(self, event=None):
         self.wikiManager.create_project_wiki()
@@ -104,3 +93,61 @@ class Plugin(PluginBase):
 
     def open_project_wiki(self, event=None):
         self.wikiManager.open_project_wiki()
+
+    def _add_buttons(self, event=None):
+        """Add "Open wiki page" Buttons."""
+        views = [
+            self._ui.propertiesView.characterView,
+            self._ui.propertiesView.locationView,
+            self._ui.propertiesView.itemView,
+            self._ui.propertiesView.projectView,
+        ]
+        for view in views:
+            ttk.Button(
+                view.linksWindow.titleBar,
+                text=_('Wiki page'),
+                command=self.open_element_page
+                ).pack(side='right')
+
+    def _configure_toolbar(self):
+
+        # Get the icons.
+        prefs = self._ctrl.get_preferences()
+        if prefs.get('large_icons', False):
+            size = 24
+        else:
+            size = 16
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            iconPath = f'{homeDir}/.novx/icons/{size}'
+        except:
+            iconPath = None
+        try:
+            tlIcon = tk.PhotoImage(file=f'{iconPath}/zim.png')
+        except:
+            tlIcon = None
+
+        # Put a Separator on the toolbar.
+        tk.Frame(self._ui.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
+
+        # Put a button on the toolbar.
+        self._zimButton = ttk.Button(
+            self._ui.toolbar.buttonBar,
+            text=self.FEATURE,
+            image=tlIcon,
+            command=self.open_project_wiki
+            )
+        self._zimButton.pack(side='left')
+        self._zimButton.image = tlIcon
+
+        # Initialize tooltip.
+        if not prefs['enable_hovertips']:
+            return
+
+        try:
+            from idlelib.tooltip import Hovertip
+        except ModuleNotFoundError:
+            return
+
+        Hovertip(self._zimButton, self._zimButton['text'])
+

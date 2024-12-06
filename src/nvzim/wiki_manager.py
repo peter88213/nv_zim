@@ -57,9 +57,6 @@ class WikiManager(ServiceBase):
         if self._mdl.prjFile is None:
             return
 
-        if self._ctrl.check_lock():
-            return
-
         prjWikiDir = self.get_project_wiki_dir()
         if os.path.isdir(prjWikiDir):
             text = f"{_('This will back up the existing wiki and create a new one containing all pages.')}"
@@ -209,14 +206,10 @@ class WikiManager(ServiceBase):
 
             else:
                 # "Create" button clicked
-                if self._ctrl.check_lock():
-                    # Project is locked, so no link can be written.
-                    return
-
-                # Create a new page in the project wiki.
                 if self.prjWiki is None:
                     return
 
+                # Create a new page in the project wiki.
                 self.check_home_dir()
                 fileName = wikiPage.new_page_name().replace(' ', '_')
                 filePath = f'{self.prjWiki.homeDir}/{fileName}{wikiPage.EXTENSION}'
@@ -233,9 +226,6 @@ class WikiManager(ServiceBase):
 
     def open_project_wiki(self):
         if self._mdl.prjFile is None:
-            return
-
-        if self._ctrl.check_lock():
             return
 
         self._ui.restore_status()
@@ -356,7 +346,7 @@ class WikiManager(ServiceBase):
 
             self.prjWiki = ZimNotebook(self.zimApp, filePath=prjWikiPath)
             self.set_notebook_links(self.prjWiki.filePath)
-        elif not self._ctrl.check_lock():
+        else:
             self.create_blank_prj_notebook(self.get_project_wiki_dir())
 
     def zim_is_installed(self):

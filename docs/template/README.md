@@ -66,6 +66,11 @@ See the [online manual](https://peter88213.github.io/nvhelp-en/nv_zim/)
 
 ---
 
+## Credits
+
+- The Zim icon is from the [Zim Desktop Wiki](https://github.com/zim-desktop-wiki/zim-desktop-wiki) repository, 
+  licensed under [GPLv2](https://www.gnu.org/licenses/gpl-2.0.en.html).
+
 ## License
 
 This is Open Source software, and the *nv_zim* plugin is licensed under GPLv3. See the

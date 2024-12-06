@@ -12,7 +12,7 @@ import sys
 sys.path.insert(0, f'{os.getcwd()}/../../novelibre/tools')
 from package_builder import PackageBuilder
 
-VERSION = '0.7.2'
+VERSION = '0.8.0'
 
 
 class PluginBuilder(PackageBuilder):
@@ -20,6 +20,12 @@ class PluginBuilder(PackageBuilder):
     PRJ_NAME = 'nv_zim'
     LOCAL_LIB = 'nvzim'
     GERMAN_TRANSLATION = True
+
+    def add_extras(self):
+        self.add_icons()
+
+    def add_icons(self):
+        super().add_icons()
 
 
 def main():
