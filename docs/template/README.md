@@ -14,12 +14,12 @@ The [novelibre](https://github.com/peter88213/novelibre/) Python program helps a
 
 ## Features
 
-- Adds an **Open project wiki** entry to the *novelibre* **Tools** menu.
-- Selecting the menu entry opens the corresponding *Zim* project wiki, if existing. 
-  Otherwise, a new project wiki can be created. 
+- Lets you connect an existing Zim notebook as *project wiki* with the *novelibre* project.
+- Lets you create a new project wiki that is either blank, or populated with all
+  characters, locations, and items of the *novelibre* project.
 - Adds **Wiki page** link buttons to the book/characters/locations/items/ properties.
-- Clicking on a link button opens the corresponding *Zim* wiki page, if existing. 
-  Otherwise, a new wiki page can be created. 
+  Clicking on a link button opens the corresponding *Zim* wiki page, if existing. 
+  Otherwise, a new project wiki page can be created. 
 - Newly created wiki pages contain descriptions and other meta data. 
   *novelibre* tags are adopted, so they are a powerful navigation aid in the wiki.
 
