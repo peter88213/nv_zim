@@ -62,7 +62,15 @@ class Plugin(PluginBase):
         # Create a "Zim wiki" submenu.
         self.zimMenu = tk.Menu(self._ui.toolsMenu, tearoff=0)
         self.zimMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
+        self.zimMenu.add_separator()
         self.zimMenu.add_command(label=_('Create project wiki'), command=self.create_project_wiki)
+        self.zimMenu.add_separator()
+
+        # Create a "Remove wiki links" submenu.
+        self.removeLinksMenu = tk.Menu(self.zimMenu, tearoff=0)
+        self.removeLinksMenu.add_command(label=_('Selected pages'), command=self.remove_selected_page_links)
+        self.removeLinksMenu.add_command(label=_('All'), command=self.remove_all_wiki_links)
+        self.zimMenu.add_cascade(label=_('Remove wiki links'), menu=self.removeLinksMenu)
 
         self._ui.toolsMenu.add_cascade(label=_('Zim Desktop Wiki'), menu=self.zimMenu)
 
@@ -93,6 +101,12 @@ class Plugin(PluginBase):
 
     def open_project_wiki(self, event=None):
         self.wikiManager.open_project_wiki()
+
+    def remove_all_wiki_links(self, event=None):
+        self.wikiManager.remove_all_links()
+
+    def remove_selected_page_links(self, event=None):
+        self.wikiManager.remove_selected_page_links()
 
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""

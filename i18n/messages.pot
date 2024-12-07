@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8.0\n"
-"POT-Creation-Date: 2024-12-06 19:13:17\n"
+"Project-Id-Version: 0.9.0\n"
+"POT-Creation-Date: 2024-12-07 09:08:12\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -13,6 +13,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: novxlib pgettext.py 0.3\n"
 
+
+msgid "All"
+msgstr ""
 
 msgid "Bio"
 msgstr ""
@@ -47,6 +50,9 @@ msgstr ""
 msgid "Locations"
 msgstr ""
 
+msgid "No Wiki link found."
+msgstr ""
+
 msgid "Not a floating point value."
 msgstr ""
 
@@ -71,6 +77,12 @@ msgstr ""
 msgid "Project wiki not found"
 msgstr ""
 
+msgid "Remove wiki links"
+msgstr ""
+
+msgid "Selected pages"
+msgstr ""
+
 msgid "The allowed maximum value is"
 msgstr ""
 
@@ -78,6 +90,12 @@ msgid "The allowed minimum value is"
 msgstr ""
 
 msgid "This will back up the existing wiki and create a new one containing all pages."
+msgstr ""
+
+msgid "This will remove all Zim wiki links"
+msgstr ""
+
+msgid "This will remove the Zim wiki links of the selected elements"
 msgstr ""
 
 msgid "Too large"
@@ -93,6 +111,9 @@ msgid "Wiki created"
 msgstr ""
 
 msgid "Wiki link created"
+msgstr ""
+
+msgid "Wiki link(s) removed."
 msgstr ""
 
 msgid "Wiki page"

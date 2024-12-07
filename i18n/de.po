@@ -3,15 +3,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.8.0\n"
-"POT-Creation-Date: 2024-12-06 19:13:17\n"
-"PO-Revision-Date: 2024-12-06 19:13:17\n"
+"Project-Id-Version: 0.9.0\n"
+"POT-Creation-Date: 2024-12-07 09:08:12\n"
+"PO-Revision-Date: 2024-12-07 09:08:12\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "All"
+msgstr "Alle"
 
 msgid "Bio"
 msgstr "Biographie"
@@ -46,6 +49,9 @@ msgstr "Gegenstände"
 msgid "Locations"
 msgstr "Schauplätze"
 
+msgid "No Wiki link found."
+msgstr "Keinen Wiki-Link gefunden"
+
 msgid "Not a floating point value."
 msgstr "Keine Fließkommazahl."
 
@@ -70,6 +76,12 @@ msgstr "Bitte noch einmal versuchen"
 msgid "Project wiki not found"
 msgstr "Projekt-Wiki nicht gefunden"
 
+msgid "Remove wiki links"
+msgstr "Wiki-Links entfernen"
+
+msgid "Selected pages"
+msgstr "Ausgewählte Seiten"
+
 msgid "The allowed maximum value is"
 msgstr "Der zulässige Höchstwert ist"
 
@@ -78,6 +90,12 @@ msgstr "Der zulässige Mindestwert ist"
 
 msgid "This will back up the existing wiki and create a new one containing all pages."
 msgstr "Das existierende Wiki wird gesichert und es wird ein neues erzeugt das alle Seiten enthält."
+
+msgid "This will remove all Zim wiki links"
+msgstr "Damit werden alle Zim Wiki-Links entfernt"
+
+msgid "This will remove the Zim wiki links of the selected elements"
+msgstr "Damit werden die Zim Wiki-Links der ausgewählten Elemente entfernt"
 
 msgid "Too large"
 msgstr "Zu hoch"
@@ -93,6 +111,9 @@ msgstr "Wiki erzeugt"
 
 msgid "Wiki link created"
 msgstr "Wiki-Link erzeugt"
+
+msgid "Wiki link(s) removed."
+msgstr "Wiki-Link(s) entfernt"
 
 msgid "Wiki page"
 msgstr "Wiki-Seite"

@@ -13,7 +13,10 @@ from mvclib.controller.service_base import ServiceBase
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
 from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import CH_ROOT
+from nvlib.novx_globals import CR_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
+from nvlib.novx_globals import IT_ROOT
+from nvlib.novx_globals import LC_ROOT
 from nvlib.novx_globals import LOCATION_PREFIX
 from nvlib.novx_globals import norm_path
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
@@ -103,7 +106,7 @@ class WikiManager(ServiceBase):
         if elemId.startswith(ITEM_PREFIX):
             return self._mdl.novel.items[elemId]
 
-        if elemId.startswith(CH_ROOT):
+        if elemId == CH_ROOT:
             return self._mdl.novel
 
     def get_project_wiki_dir(self):
@@ -268,6 +271,118 @@ class WikiManager(ServiceBase):
                 return True
 
         return False
+
+    def remove_all_links(self):
+        self._ui.restore_status()
+        if self._mdl.prjFile is None:
+            return
+
+        if self._ctrl.check_lock():
+            return
+
+        if not self._ui.ask_ok_cancel(
+            _('This will remove all Zim wiki links'),
+            title=self.windowTitle,
+            ):
+            return
+
+        removed = False
+        if self.remove_notebook_link(self._mdl.novel):
+            removed = True
+        if self.remove_page_links(self._mdl.novel):
+            removed = True
+        for elemId in self._mdl.novel.characters:
+            if self.remove_page_links(self._mdl.novel.characters[elemId]):
+                removed = True
+        for elemId in self._mdl.novel.locations:
+            if self.remove_page_links(self._mdl.novel.locations[elemId]):
+                removed = True
+        for elemId in self._mdl.novel.items:
+            if self.remove_page_links(self._mdl.novel.items[elemId]):
+                removed = True
+        self.set_removal_status(removed)
+
+    def remove_notebook_links(self):
+        fields = self._mdl.novel.fields
+        try:
+            del(fields[ZIM_NOTEBOOK_ABS_TAG])
+            removed = True
+        except KeyError:
+            pass
+        try:
+            del(fields[ZIM_NOTEBOOK_REL_TAG])
+            removed = True
+        except KeyError:
+            pass
+        self._mdl.novel.fields = fields
+        return removed
+
+    def remove_page_links(self, element):
+        removed = False
+        fields = element.fields
+        try:
+            del (fields[ZIM_PAGE_ABS_TAG])
+            removed = True
+        except KeyError:
+            pass
+        try:
+            del (fields[ZIM_PAGE_REL_TAG])
+            removed = True
+        except KeyError:
+            pass
+        element.fields = fields
+        return removed
+
+    def remove_selected_page_links(self):
+        self._ui.restore_status()
+        if self._mdl.prjFile is None:
+            return
+
+        if self._ctrl.check_lock():
+            return
+
+        for elemId in self._ui.selectedNodes:
+            element = self.get_element(elemId)
+            if elemId[:2] in (CHARACTER_PREFIX, LOCATION_PREFIX, ITEM_PREFIX) or elemId in (CH_ROOT, CR_ROOT, LC_ROOT, IT_ROOT):
+                if self._ui.ask_ok_cancel(
+                    _('This will remove the Zim wiki links of the selected elements'),
+                    title=self.windowTitle,
+                    ):
+                    break
+                else:
+                    return
+
+        removed = False
+        for elemId in self._ui.selectedNodes:
+            element = self.get_element(elemId)
+            if element is not None:
+                if self.remove_page_links(element):
+                    removed = True
+            else:
+                if elemId == CR_ROOT:
+                    for elemId in self._mdl.novel.characters:
+                        if self.remove_page_links(self._mdl.novel.characters[elemId]):
+                            removed = True
+                    continue
+
+                if elemId == LC_ROOT:
+                    for elemId in self._mdl.novel.locations:
+                        if self.remove_page_links(self._mdl.novel.locations[elemId]):
+                            removed = True
+                    continue
+
+                if elemId == IT_ROOT:
+                    for elemId in self._mdl.novel.items:
+                        if self.remove_page_links(self._mdl.novel.items[elemId]):
+                            removed = True
+                    continue
+        self.set_removal_status(removed)
+
+    def set_removal_status(self, removed):
+        if removed:
+            self._ui.set_status(f"#{_('Wiki link(s) removed.')}")
+        else:
+            self._ui.set_status(f"#{_('No Wiki link found.')}")
 
     def set_notebook_links(self, prjWikiPath):
         self._ui.restore_status()
