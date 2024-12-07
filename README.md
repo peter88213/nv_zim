@@ -9,7 +9,7 @@
 The [novelibre](https://github.com/peter88213/novelibre/) Python program helps authors organize novels.
 Although it can take up characters, locations and items in order to trace their occurrence in the story,
 *novelibre* is not meant as a tool for extensive story world building. 
-For describing, grouping and organizing the people, places, and things in your story world, a desktop is much better.
+For describing, grouping and organizing the people, places, and things in your story world, a wiki is much better.
 
 *nv_zim* is a plugin that manages the connection with a [Zim Desktop Wiki](https://zim-wiki.org/).
 
