@@ -33,7 +33,7 @@ class BookPage(ZimPage):
         linkLines = []
         homeDir = os.path.split(self.filePath)[0]
         for elemId in elements:
-            elemPage = self._new_wiki_page(elements[elemId], elemId)
+            elemPage = self._new_zim_page(elements[elemId], elemId)
             pageName = elemPage.new_page_name()
             filePath = f"{homeDir}/{pageName.replace(' ', '_')}{elemPage.EXTENSION}"
             if os.path.isfile(filePath):
@@ -43,8 +43,8 @@ class BookPage(ZimPage):
             lines.extend(sorted(linkLines))
             lines.append('\n')
 
-    def _new_wiki_page(self, element, elemId):
-        """Return the reference to a new WikiPage subclass instance."""
+    def _new_zim_page(self, element, elemId):
+        """Return the reference to a new ZimPage subclass instance."""
 
         # WikiFactory cannot be used here due to circular import.
 

@@ -88,7 +88,7 @@ class WikiManager(ServiceBase):
         self.prjWiki.open(initialPage=f'{self.prjWiki.HOME}:{bookPageName}')
 
     def create_wiki_page(self, element, elemId):
-        newPage = WikiFactory._new_wiki_page(element, elemId, None)
+        newPage = WikiFactory.new_wiki_page(element, elemId, None)
         newPageName = newPage.new_page_name()
         newPage.filePath = f"{self.prjWiki.homeDir}/{newPageName.replace(' ', '_')}{newPage.EXTENSION}"
         newPage.write()
@@ -163,7 +163,7 @@ class WikiManager(ServiceBase):
         if filePath is None:
 
             # Try to find an existing project wiki page.
-            wikiPage = WikiFactory._new_wiki_page(element, elemId, None)
+            wikiPage = WikiFactory.new_wiki_page(element, elemId, None)
             self.set_project_wiki()
             if self.prjWiki is not None:
                 for pageName in wikiPage.page_names:

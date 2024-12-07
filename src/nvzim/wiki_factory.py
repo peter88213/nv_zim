@@ -16,8 +16,8 @@ from nvzim.world_element_page import WorldElementPage
 class WikiFactory:
 
     @staticmethod
-    def _new_wiki_page(element, elemId, filePath):
-        """Return the reference to a new WikiPage subclass instance."""
+    def new_wiki_page(element, elemId, filePath):
+        """Return the reference to a new ZimPage subclass instance."""
         if elemId == CH_ROOT:
             return BookPage(filePath, element)
 
