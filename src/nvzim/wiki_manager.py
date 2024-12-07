@@ -477,7 +477,6 @@ class WikiManager(ServiceBase):
             'C:/Program Files/Zim Desktop Wiki/zim.exe',
             'C:/Program Files (x86)/Zim Desktop Wiki/zim.exe',
             ]
-        self.zimInstallPaths.clear()
         for zimPath in self.zimInstallPaths:
             if os.path.isfile(zimPath):
                 self.zimApp = zimPath
