@@ -9,7 +9,7 @@ import glob
 import os
 import subprocess
 
-from nvzim.nvzim_globals import _
+from nvzim.nvzim_locale import _
 from nvzim.zim_page import ZimPage
 
 

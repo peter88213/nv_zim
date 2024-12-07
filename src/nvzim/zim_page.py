@@ -7,7 +7,7 @@ License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 import re
 
 from nvzim.nvzim_globals import StopParsing
-from nvzim.nvzim_globals import _
+from nvzim.nvzim_locale import _
 
 
 class ZimPage:

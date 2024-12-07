@@ -9,7 +9,7 @@ from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import LOCATION_PREFIX
 from nvzim.character_page import CharacterPage
-from nvzim.nvzim_globals import _
+from nvzim.nvzim_locale import _
 from nvzim.world_element_page import WorldElementPage
 from nvzim.zim_page import ZimPage
 
