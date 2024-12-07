@@ -287,7 +287,8 @@ class WikiManager(ServiceBase):
             return
 
         removed = False
-        if self.remove_notebook_link(self._mdl.novel):
+        if self.remove_notebook_links():
+            self.prjWiki = None
             removed = True
         if self.remove_page_links(self._mdl.novel):
             removed = True
@@ -303,6 +304,7 @@ class WikiManager(ServiceBase):
         self.set_removal_status(removed)
 
     def remove_notebook_links(self):
+        removed = False
         fields = self._mdl.novel.fields
         try:
             del(fields[ZIM_NOTEBOOK_ABS_TAG])
@@ -380,7 +382,7 @@ class WikiManager(ServiceBase):
 
     def set_removal_status(self, removed):
         if removed:
-            self._ui.set_status(f"#{_('Wiki link(s) removed.')}")
+            self._ui.set_status(_('Wiki link(s) removed.'))
         else:
             self._ui.set_status(f"#{_('No Wiki link found.')}")
 
