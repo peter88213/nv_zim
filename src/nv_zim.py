@@ -75,7 +75,7 @@ class Plugin(PluginBase):
         self._ui.toolsMenu.add_cascade(label=_('Zim Desktop Wiki'), menu=self.zimMenu)
 
         # Register the link opener.
-        self._ctrl.linkProcessor.add_opener(self.open_page_file)
+        self._ctrl.linkProcessor.add_opener(self.open_link)
 
         self._add_buttons()
         self._ui.root.bind('<<RebuildPropertiesView>>', self._add_buttons)
@@ -95,6 +95,9 @@ class Plugin(PluginBase):
 
     def open_help_page(self, event=None):
         webbrowser.open(self.HELP_URL)
+
+    def open_link(self, filePath):
+        return self.wikiManager.open_page_file(filePath)
 
     def open_page_file(self, event=None):
         self.wikiManager.open_page_file()

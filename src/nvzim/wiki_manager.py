@@ -243,9 +243,10 @@ class WikiManager(ServiceBase):
             self.prjWiki.open()
 
     def open_page_file(self, filePath):
+        """Return True if the file specified by filepath is opened with Zim."""
         if not self.zim_is_installed():
             self._ui.set_status(f'!{_("Zim installation not found")}.')
-            return
+            return False
 
         root, extension = os.path.splitext(filePath)
         if extension != ZimPage.EXTENSION:
