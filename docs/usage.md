@@ -2,7 +2,8 @@
 
 --- 
 
-A [novelibre](https://github.com/peter88213/novelibre/) plugin. 
+A plugin to connect [novelibre](https://github.com/peter88213/novelibre/) 
+with the [Zim Desktop Wiki](https://zim-wiki.org/).
 
 ---
 

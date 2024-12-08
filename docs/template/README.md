@@ -28,7 +28,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 5.0+
+- [novelibre](https://github.com/peter88213/novelibre/) version 5.0+ **(not yet released)**
 - [Zim Desktop Wiki](https://zim-wiki.org/) version 0.69+
 
 ## Download and install
