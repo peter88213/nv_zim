@@ -25,6 +25,7 @@ For describing, grouping, and organizing the people, places, and things in your 
   Otherwise, a new project wiki page can be created. 
 - Newly created wiki pages contain descriptions and other meta data. 
   *novelibre* tags are adopted, so they are a powerful navigation aid in the wiki.
+- Wiki pages among the regular links are recognized and opened with the *Zim* application.
 
 ## Requirements
 
