@@ -162,6 +162,10 @@ class WikiManager(SubController):
 
     def open_page_by_id(self, elemId):
         self._ui.restore_status()
+        if self._mdl.prjFile.filePath is None:
+            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
+            return
+
         element = self.get_element(elemId)
 
         # First of all, try the element's wiki page link.
