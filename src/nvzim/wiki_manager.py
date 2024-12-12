@@ -9,7 +9,7 @@ import os
 import subprocess
 from tkinter import filedialog
 
-from mvclib.controller.service_base import ServiceBase
+from mvclib.controller.sub_controller import SubController
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
 from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import CH_ROOT
@@ -29,10 +29,10 @@ from nvzim.zim_notebook import ZimNotebook
 from nvzim.zim_page import ZimPage
 
 
-class WikiManager(ServiceBase):
+class WikiManager(SubController):
 
     def __init__(self, model, view, controller, windowTitle):
-        super().__init__(model, view, controller)
+        super().initialize_controller(model, view, controller)
         self.prjWiki = None
         self.launchers = self._ctrl.get_launchers()
         self.zimApp = self.launchers.get(ZimNotebook.EXTENSION, '')
