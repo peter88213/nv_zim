@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.9.5\n"
-"POT-Creation-Date: 2024-12-12 13:48:33\n"
-"PO-Revision-Date: 2024-12-12 13:48:33\n"
+"Project-Id-Version: 0.9.6\n"
+"POT-Creation-Date: 2024-12-12 14:10:20\n"
+"PO-Revision-Date: 2024-12-12 14:10:20\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -27,6 +27,9 @@ msgstr "Durchsuchen"
 
 msgid "Cancel"
 msgstr "Abbrechen"
+
+msgid "Cannot define a project wiki without project path"
+msgstr "Kann ohne Projektpfad kein Projekt-Wiki definieren"
 
 msgid "Characters"
 msgstr "Figuren"

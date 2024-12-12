@@ -57,7 +57,12 @@ class WikiManager(SubController):
         self._ui.set_status(f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"')
 
     def create_project_wiki(self):
+        self._ui.restore_status()
         if self._mdl.prjFile is None:
+            return
+
+        if self._mdl.prjFile.filePath is None:
+            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
             return
 
         prjWikiDir = self.get_project_wiki_dir()
@@ -110,6 +115,9 @@ class WikiManager(SubController):
             return self._mdl.novel
 
     def get_project_wiki_dir(self):
+        if self._mdl.prjFile.filePath is None:
+            return
+
         prjDir, prjFile = os.path.split(self._mdl.prjFile.filePath)
         prjFileBase = os.path.splitext(prjFile)[0]
         return f'{prjDir}/{prjFileBase}_zim'
@@ -431,6 +439,11 @@ class WikiManager(SubController):
             self._ui.set_status(message)
 
     def set_project_wiki(self):
+        self._ui.restore_status()
+        if self._mdl.prjFile.filePath is None:
+            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
+            return
+
         if self.prjWiki is not None:
             return
 
