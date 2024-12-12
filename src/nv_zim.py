@@ -38,10 +38,12 @@ class Plugin(PluginBase):
     def disable_menu(self):
         """Disable UI widgets, e.g. when no project is open."""
         self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='disabled')
+        self.zimButton.config(state='disabled')
 
     def enable_menu(self):
         """Enable UI widgets, e.g. when a project is opened."""
         self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='normal')
+        self.zimButton.config(state='normal')
 
     def install(self, model, view, controller):
         """Install the plugin.
@@ -90,8 +92,7 @@ class Plugin(PluginBase):
         self.wikiManager.on_close()
 
     def open_element_page(self, event=None):
-        elemId = self._ui.propertiesView.activeView.elementId
-        self.wikiManager.open_element_page(elemId)
+        self.wikiManager.open_element_page()
 
     def open_help_page(self, event=None):
         webbrowser.open(self.HELP_URL)
@@ -140,22 +141,22 @@ class Plugin(PluginBase):
         except:
             iconPath = None
         try:
-            tlIcon = tk.PhotoImage(file=f'{iconPath}/zim.png')
+            wikiIcon = tk.PhotoImage(file=f'{iconPath}/zim.png')
         except:
-            tlIcon = None
+            wikiIcon = None
 
         # Put a Separator on the toolbar.
         tk.Frame(self._ui.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
 
         # Put a button on the toolbar.
-        self._zimButton = ttk.Button(
+        self.zimButton = ttk.Button(
             self._ui.toolbar.buttonBar,
             text=self.FEATURE,
-            image=tlIcon,
+            image=wikiIcon,
             command=self.open_project_wiki
             )
-        self._zimButton.pack(side='left')
-        self._zimButton.image = tlIcon
+        self.zimButton.pack(side='left')
+        self.zimButton.image = wikiIcon
 
         # Initialize tooltip.
         if not prefs['enable_hovertips']:
@@ -166,5 +167,5 @@ class Plugin(PluginBase):
         except ModuleNotFoundError:
             return
 
-        Hovertip(self._zimButton, self._zimButton['text'])
+        Hovertip(self.zimButton, self.zimButton['text'])
 

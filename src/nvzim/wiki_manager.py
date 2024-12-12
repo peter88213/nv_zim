@@ -152,7 +152,7 @@ class WikiManager(ServiceBase):
     def on_close(self):
         self.prjWiki = None
 
-    def open_element_page(self, elemId):
+    def open_page_by_id(self, elemId):
         self._ui.restore_status()
         element = self.get_element(elemId)
 
@@ -272,6 +272,9 @@ class WikiManager(ServiceBase):
                 return True
 
         return False
+
+    def open_element_page(self):
+        self.open_page_by_id(self._ui.propertiesView.activeView.elementId)
 
     def remove_all_links(self):
         self._ui.restore_status()
