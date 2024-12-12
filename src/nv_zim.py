@@ -59,7 +59,7 @@ class Plugin(PluginBase):
         self.wikiManager = WikiManager(model, view, controller, self.FEATURE)
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Zim connection Online help'), command=self.open_help_page)
+        self._ui.helpMenu.add_command(label=_('Zim connection Online help'), command=self.open_help)
 
         # Create a "Zim wiki" submenu.
         self.zimMenu = tk.Menu(self._ui.toolsMenu, tearoff=0)
@@ -94,7 +94,7 @@ class Plugin(PluginBase):
     def open_element_page(self, event=None):
         self.wikiManager.open_element_page()
 
-    def open_help_page(self, event=None):
+    def open_help(self, event=None):
         webbrowser.open(self.HELP_URL)
 
     def open_link(self, filePath):
