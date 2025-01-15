@@ -41,7 +41,7 @@ class ZimNotebook:
         )
         if os.path.isfile(filePath):
             self.filePath = filePath
-            self.dirPath, __ = os.path.split(filePath)
+            self.dirPath = os.path.dirname(filePath)
             self.filePath = filePath
             self.read_settings()
             self.homeDir = f"{self.dirPath}/{self.settings['home']}"

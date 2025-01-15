@@ -31,7 +31,7 @@ class BookPage(ZimPage):
     def _add_links(self, elements, heading, lines):
         """Add links to existent pages to the lines."""
         linkLines = []
-        homeDir = os.path.split(self.filePath)[0]
+        homeDir = os.path.dirname(self.filePath)
         for elemId in elements:
             elemPage = self._new_zim_page(elements[elemId], elemId)
             pageName = elemPage.new_page_name()

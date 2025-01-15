@@ -209,7 +209,7 @@ class WikiManager(SubController):
                 if self.prjWiki is not None:
                     initialDir = self.prjWiki.homeDir
                 else:
-                    initialDir = os.path.split(self._mdl.prjFile.filePath)[0]
+                    initialDir = os.path.dirname(self._mdl.prjFile.filePath)
                 filePath = filedialog.askopenfilename(
                     filetypes=[(ZimPage.DESCRIPTION, ZimPage.EXTENSION)],
                     defaultextension=ZimPage.EXTENSION,
@@ -477,7 +477,7 @@ class WikiManager(SubController):
             prjWikiPath = filedialog.askopenfilename(
                 filetypes=[(ZimNotebook.DESCRIPTION, ZimNotebook.EXTENSION)],
                 defaultextension=ZimNotebook.EXTENSION,
-                initialdir=os.path.split(self._mdl.prjFile.filePath)[0]
+                initialdir=os.path.dirname(self._mdl.prjFile.filePath)
                 )
             if not prjWikiPath:
                 return
