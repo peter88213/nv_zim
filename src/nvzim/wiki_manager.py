@@ -9,7 +9,7 @@ import os
 import subprocess
 from tkinter import filedialog
 
-from mvclib.controller.sub_controller import SubController
+from nvlib.controller.sub_controller import SubController
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
 from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import CH_ROOT
