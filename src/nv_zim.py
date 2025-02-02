@@ -19,8 +19,8 @@ from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
-from nvlib.controller.plugin.plugin_base import PluginBase
 from nvzim.nvzim_locale import _
+from nvlib.controller.plugin.plugin_base import PluginBase
 from nvzim.wiki_manager import WikiManager
 import tkinter as tk
 
