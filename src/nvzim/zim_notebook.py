@@ -95,11 +95,14 @@ class ZimNotebook:
 
     def get_page_path_by_name(self, pageName):
         """Return the path of a note specified by page name."""
+        workdir = os.getcwd()
+        os.chdir(self.homeDir)
+        # setting the root directory for glob in Python prior to version 3.10
         foundFiles = glob.glob(
             f"**/{pageName.replace(' ', '_')}{ZimPage.EXTENSION}",
-            root_dir=self.homeDir,
             recursive=True,
             )
+        os.chdir(workdir)
         if foundFiles:
             foundFile = foundFiles[0].replace('\\', '/')
             return f'{self.homeDir}/{foundFile}'

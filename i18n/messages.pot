@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.0\n"
-"POT-Creation-Date: 2024-12-17 12:42:28\n"
+"Project-Id-Version: 5.0.1\n"
+"POT-Creation-Date: 2025-02-02 20:22:55\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -51,6 +51,12 @@ msgid "Items"
 msgstr ""
 
 msgid "Locations"
+msgstr ""
+
+msgid "Major Character"
+msgstr ""
+
+msgid "Minor Character"
 msgstr ""
 
 msgid "No Wiki link found."

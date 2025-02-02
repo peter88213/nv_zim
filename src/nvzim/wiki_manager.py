@@ -496,6 +496,7 @@ class WikiManager(SubController):
         self.zimInstallPaths = [
             'C:/Program Files/Zim Desktop Wiki/zim.exe',
             'C:/Program Files (x86)/Zim Desktop Wiki/zim.exe',
+            '/usr/bin/zim',
             ]
         for zimPath in self.zimInstallPaths:
             if os.path.isfile(zimPath):

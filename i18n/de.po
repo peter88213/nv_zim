@@ -1,11 +1,11 @@
 # nv_zim Dictionary (English-German)
-# Copyright (C) 2022 Peter Triesberger
+# Copyright (C) 2025 Peter Triesberger
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.0\n"
-"POT-Creation-Date: 2024-12-17 12:42:28\n"
-"PO-Revision-Date: 2024-12-17 12:42:28\n"
+"Project-Id-Version: 5.0.1\n"
+"POT-Creation-Date: 2025-02-02 20:22:55\n"
+"PO-Revision-Date: 2025-02-02 20:22:55\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -51,6 +51,12 @@ msgstr "Gegenstände"
 
 msgid "Locations"
 msgstr "Schauplätze"
+
+msgid "Major Character"
+msgstr "Hauptfigur"
+
+msgid "Minor Character"
+msgstr "Nebenfigur"
 
 msgid "No Wiki link found."
 msgstr "Keinen Wiki-Link gefunden"

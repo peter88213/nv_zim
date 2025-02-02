@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.0.1
+
+- Fixed a bug where an exception is raised with Python versions prior to 3.10.
+- Added a Linux Zim installation path to the list of default paths.
+
+API: 5.0
+Based on novelibre 5.12.3
+
+
 ### Version 5.0.0
 
 - Adding a "Zim Desktop Wiki" submenu to the "Tools" menu. 
