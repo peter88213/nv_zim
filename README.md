@@ -30,8 +30,9 @@ For describing, grouping, and organizing the people, places, and things in your 
 ## Requirements
 
 - [novelibre](https://github.com/peter88213/novelibre/) version 5.0+
-- [Zim Desktop Wiki](https://zim-wiki.org/) 
-  I recommend version 0.69.1, which is mature, fast and proven. 
+- [Zim Desktop Wiki](https://zim-wiki.org/)
+
+  I recommend Zim version 0.69.1, which is mature, fast and proven. 
   The Windows version of this release is no longer available from the official download site, 
   but can be found [here](https://zim.glump.net/windows/). 
 
