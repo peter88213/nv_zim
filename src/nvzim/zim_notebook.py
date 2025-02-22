@@ -57,6 +57,7 @@ class ZimNotebook:
     def open(self, initialPage=None):
         if not os.path.isfile(self.filePath):
             return
+
         if initialPage is None:
             initialPage = self.settings['home']
 
