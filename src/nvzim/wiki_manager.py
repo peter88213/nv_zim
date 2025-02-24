@@ -177,11 +177,11 @@ class WikiManager(SubController):
             # Try to find an existing project wiki page.
             wikiPage = WikiFactory.new_wiki_page(element, elemId, None)
             self.set_project_wiki()
-            if self.prjWiki is not None:
-                for pageName in wikiPage.page_names:
-                    if not pageName:
-                        continue
+            if self.prjWiki is None:
+                return
 
+            for pageName in wikiPage.page_names:
+                if pageName:
                     filePath = self.prjWiki.get_page_path_by_name(pageName)
                     if filePath is not None:
                         break
@@ -381,19 +381,14 @@ class WikiManager(SubController):
                     for elemId in self._mdl.novel.characters:
                         if self.remove_page_links(self._mdl.novel.characters[elemId]):
                             removed = True
-                    continue
-
-                if elemId == LC_ROOT:
+                elif elemId == LC_ROOT:
                     for elemId in self._mdl.novel.locations:
                         if self.remove_page_links(self._mdl.novel.locations[elemId]):
                             removed = True
-                    continue
-
-                if elemId == IT_ROOT:
+                elif elemId == IT_ROOT:
                     for elemId in self._mdl.novel.items:
                         if self.remove_page_links(self._mdl.novel.items[elemId]):
                             removed = True
-                    continue
         self.set_removal_status(removed)
 
     def set_removal_status(self, removed):

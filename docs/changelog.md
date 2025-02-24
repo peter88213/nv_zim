@@ -4,6 +4,13 @@
 
 ## Changelog
 
+### Version 5.0.2
+
+- No longer asking for page creation if wiki creation is cancelled.
+
+API: 5.0
+Based on novelibre 5.16.0
+
 
 ### Version 5.0.1
 
