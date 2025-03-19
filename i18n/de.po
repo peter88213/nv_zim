@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.2\n"
-"POT-Creation-Date: 2025-02-24 17:51:43\n"
-"PO-Revision-Date: 2025-02-24 17:51:43\n"
+"Project-Id-Version: 5.1.0\n"
+"POT-Creation-Date: 2025-03-19 22:26:39\n"
+"PO-Revision-Date: 2025-03-19 22:26:39\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -15,6 +15,9 @@ msgstr ""
 
 msgid "All"
 msgstr "Alle"
+
+msgid "Back up the existing wiki and create a new one containing all pages?"
+msgstr "Das existierende Wiki sichern und ein neues erzeugen, das alle Seiten enthält?"
 
 msgid "Bio"
 msgstr "Biographie"
@@ -85,6 +88,12 @@ msgstr "Bitte noch einmal versuchen"
 msgid "Project wiki not found"
 msgstr "Projekt-Wiki nicht gefunden"
 
+msgid "Remove all Zim wiki links?"
+msgstr "Alle Zim Wiki-Links entfernen?"
+
+msgid "Remove the Zim wiki links of the selected elements?"
+msgstr "Die Zim Wiki-Links der ausgewählten Elemente entfernen?"
+
 msgid "Remove wiki links"
 msgstr "Wiki-Links entfernen"
 
@@ -96,15 +105,6 @@ msgstr "Der zulässige Höchstwert ist"
 
 msgid "The allowed minimum value is"
 msgstr "Der zulässige Mindestwert ist"
-
-msgid "This will back up the existing wiki and create a new one containing all pages."
-msgstr "Das existierende Wiki wird gesichert und es wird ein neues erzeugt das alle Seiten enthält."
-
-msgid "This will remove all Zim wiki links"
-msgstr "Damit werden alle Zim Wiki-Links entfernt"
-
-msgid "This will remove the Zim wiki links of the selected elements"
-msgstr "Damit werden die Zim Wiki-Links der ausgewählten Elemente entfernt"
 
 msgid "Too large"
 msgstr "Zu hoch"

@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.0.2\n"
-"POT-Creation-Date: 2025-02-24 17:51:43\n"
+"Project-Id-Version: 5.1.0\n"
+"POT-Creation-Date: 2025-03-19 22:26:39\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -15,6 +15,9 @@ msgstr ""
 
 
 msgid "All"
+msgstr ""
+
+msgid "Back up the existing wiki and create a new one containing all pages?"
 msgstr ""
 
 msgid "Bio"
@@ -86,6 +89,12 @@ msgstr ""
 msgid "Project wiki not found"
 msgstr ""
 
+msgid "Remove all Zim wiki links?"
+msgstr ""
+
+msgid "Remove the Zim wiki links of the selected elements?"
+msgstr ""
+
 msgid "Remove wiki links"
 msgstr ""
 
@@ -96,15 +105,6 @@ msgid "The allowed maximum value is"
 msgstr ""
 
 msgid "The allowed minimum value is"
-msgstr ""
-
-msgid "This will back up the existing wiki and create a new one containing all pages."
-msgstr ""
-
-msgid "This will remove all Zim wiki links"
-msgstr ""
-
-msgid "This will remove the Zim wiki links of the selected elements"
 msgstr ""
 
 msgid "Too large"

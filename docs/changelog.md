@@ -4,6 +4,15 @@
 
 ## Changelog
 
+
+### Version 5.1.0
+
+- Updated the messaging.
+
+API: 5.17
+Based on novelibre 5.17.0
+
+
 ### Version 5.0.2
 
 - No longer asking for page creation if wiki creation is cancelled.

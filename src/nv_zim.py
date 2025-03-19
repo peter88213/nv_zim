@@ -28,7 +28,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """Plugin class for the Zim connector."""
     VERSION = '@release'
-    API_VERSION = '5.0'
+    API_VERSION = '5.17'
     DESCRIPTION = 'Zim Desktop Wiki connection'
     URL = 'https://github.com/peter88213/nv_zim'
 

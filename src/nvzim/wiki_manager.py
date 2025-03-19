@@ -67,8 +67,10 @@ class WikiManager(SubController):
 
         prjWikiDir = self.get_project_wiki_dir()
         if os.path.isdir(prjWikiDir):
-            text = f"{_('This will back up the existing wiki and create a new one containing all pages.')}"
-            if not self._ui.ask_ok_cancel(text, title=self.windowTitle):
+            if not self._ui.ask_yes_no(
+                _('Back up the existing wiki and create a new one containing all pages?'),
+                title=self.windowTitle
+                ):
                 return
 
             # Back up the existing wiki.
@@ -296,9 +298,9 @@ class WikiManager(SubController):
         if self._ctrl.check_lock():
             return
 
-        if not self._ui.ask_ok_cancel(
-            _('This will remove all Zim wiki links'),
-            title=self.windowTitle,
+        if not self._ui.ask_yes_no(
+            _('Remove all Zim wiki links?'),
+            title=self.windowTitle
             ):
             return
 
@@ -362,9 +364,9 @@ class WikiManager(SubController):
         for elemId in self._ui.selectedNodes:
             element = self.get_element(elemId)
             if elemId[:2] in (CHARACTER_PREFIX, LOCATION_PREFIX, ITEM_PREFIX) or elemId in (CH_ROOT, CR_ROOT, LC_ROOT, IT_ROOT):
-                if self._ui.ask_ok_cancel(
-                    _('This will remove the Zim wiki links of the selected elements'),
-                    title=self.windowTitle,
+                if self._ui.ask_yes_no(
+                    _('Remove the Zim wiki links of the selected elements?'),
+                    title=self.windowTitle
                     ):
                     break
                 else:
@@ -499,7 +501,10 @@ class WikiManager(SubController):
                 self.launchers[ZimNotebook.EXTENSION] = self.zimApp
                 return True
 
-        if not self._ui.ask_yes_no(_('Zim installation not found. Select now?')):
+        if not self._ui.ask_yes_no(
+            _('Zim installation not found. Select now?'),
+            title=self.windowTitle
+            ):
             return
 
         zimPath = filedialog.askopenfilename()
