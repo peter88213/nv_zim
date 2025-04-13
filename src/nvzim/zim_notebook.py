@@ -58,14 +58,13 @@ class ZimNotebook:
         if not os.path.isfile(self.filePath):
             return
 
-        if initialPage is None:
-            initialPage = self.settings['home']
-
-        subprocess.Popen([
+        wikiStart = [
             self.zimApp,
-            self.filePath,
-            initialPage,
-            ])
+            self.dirPath
+            ]
+        if initialPage is not None:
+            wikiStart.append(initialPage)
+        subprocess.Popen(wikiStart)
 
     def read_settings(self):
         """Read the settings, updating the instance variable."""

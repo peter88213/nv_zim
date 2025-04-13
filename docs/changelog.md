@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.1.1
+
+- "Open project wiki" now reopens the last active page.
+
+API: 5.17
+Based on novelibre 5.19.0
+
+
 ### Version 5.1.0
 
 - Updated the messaging.
