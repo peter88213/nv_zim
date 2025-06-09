@@ -88,6 +88,10 @@ class Plugin(PluginBase):
     def create_project_wiki(self, event=None):
         self.wikiManager.create_project_wiki()
 
+    def lock(self):
+        self.zimMenu.entryconfig(_('Create project wiki'), state='disabled')
+        self.zimMenu.entryconfig(_('Remove wiki links'), state='disabled')
+
     def on_close(self):
         self.wikiManager.on_close()
 
@@ -111,6 +115,10 @@ class Plugin(PluginBase):
 
     def remove_selected_page_links(self, event=None):
         self.wikiManager.remove_selected_page_links()
+
+    def unlock(self):
+        self.zimMenu.entryconfig(_('Create project wiki'), state='normal')
+        self.zimMenu.entryconfig(_('Remove wiki links'), state='normal')
 
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""

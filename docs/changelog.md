@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.2.0
+
+- Disabling the "Create project wiki" and "Remove wiki links" menu entries when the project
+is locked.
+
+API: 5.17
+Based on novelibre 5.25.2
+
+
 ### Version 5.1.1
 
 - "Open project wiki" now reopens the last active page.
