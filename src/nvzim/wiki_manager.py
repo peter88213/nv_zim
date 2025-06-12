@@ -56,7 +56,9 @@ class WikiManager(SubController):
             wikiName=self._mdl.novel.title
             )
         self.set_notebook_links(self.prjWiki.filePath)
-        self._ui.set_status(f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"')
+        self._ui.set_status(
+            f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"'
+        )
 
     def create_project_wiki(self):
         self._ui.restore_status()
@@ -64,7 +66,9 @@ class WikiManager(SubController):
             return
 
         if self._mdl.prjFile.filePath is None:
-            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
+            self._ui.set_status(
+                f"!{_('Cannot define a project wiki without project path')}."
+            )
             return
 
         prjWikiDir = self.get_project_wiki_dir()
@@ -167,7 +171,9 @@ class WikiManager(SubController):
     def open_page_by_id(self, elemId):
         self._ui.restore_status()
         if self._mdl.prjFile.filePath is None:
-            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
+            self._ui.set_status(
+                f"!{_('Cannot define a project wiki without project path')}."
+            )
             return
 
         element = self.get_element(elemId)
@@ -218,7 +224,7 @@ class WikiManager(SubController):
                     filetypes=[(ZimPage.DESCRIPTION, ZimPage.EXTENSION)],
                     defaultextension=ZimPage.EXTENSION,
                     initialdir=initialDir
-                    )
+                )
                 if not filePath:
                     # file picker closed without selection
                     return
@@ -284,7 +290,7 @@ class WikiManager(SubController):
                     self.zimApp,
                     zimNotebook[0],
                     ":".join(zimPages)
-                    ])
+                ])
                 return True
 
         return False
@@ -303,7 +309,7 @@ class WikiManager(SubController):
         if not self._ui.ask_yes_no(
             _('Remove all Zim wiki links?'),
             title=self.windowTitle
-            ):
+        ):
             return
 
         removed = False
@@ -365,11 +371,19 @@ class WikiManager(SubController):
 
         for elemId in self._ui.selectedNodes:
             element = self.get_element(elemId)
-            if elemId[:2] in (CHARACTER_PREFIX, LOCATION_PREFIX, ITEM_PREFIX) or elemId in (CH_ROOT, CR_ROOT, LC_ROOT, IT_ROOT):
+            if elemId[:2] in (
+                CHARACTER_PREFIX,
+                LOCATION_PREFIX,
+                ITEM_PREFIX) or elemId in (
+                    CH_ROOT,
+                    CR_ROOT,
+                    LC_ROOT,
+                    IT_ROOT
+            ):
                 if self._ui.ask_yes_no(
                     _('Remove the Zim wiki links of the selected elements?'),
                     title=self.windowTitle
-                    ):
+                ):
                     break
                 else:
                     return
@@ -476,8 +490,8 @@ class WikiManager(SubController):
             prjWikiPath = filedialog.askopenfilename(
                 filetypes=[(ZimNotebook.DESCRIPTION, ZimNotebook.EXTENSION)],
                 defaultextension=ZimNotebook.EXTENSION,
-                initialdir=os.path.dirname(self._mdl.prjFile.filePath)
-                )
+                initialdir=os.path.dirname(self._mdl.prjFile.filePath),
+            )
             if not prjWikiPath:
                 return
 
@@ -496,7 +510,7 @@ class WikiManager(SubController):
             'C:/Program Files/Zim Desktop Wiki/zim.exe',
             'C:/Program Files (x86)/Zim Desktop Wiki/zim.exe',
             '/usr/bin/zim',
-            ]
+        ]
         for zimPath in self.zimInstallPaths:
             if os.path.isfile(zimPath):
                 self.zimApp = zimPath
@@ -505,8 +519,8 @@ class WikiManager(SubController):
 
         if not self._ui.ask_yes_no(
             _('Zim installation not found. Select now?'),
-            title=self.windowTitle
-            ):
+            title=self.windowTitle,
+        ):
             return
 
         zimPath = filedialog.askopenfilename()
