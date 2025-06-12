@@ -56,25 +56,51 @@ class Plugin(PluginBase):
         Extends the superclass method.
         """
         super().install(model, view, controller)
-        self.wikiManager = WikiManager(model, view, controller, self.FEATURE)
+        self.wikiManager = WikiManager(
+            model,
+            view,
+            controller,
+            self.FEATURE
+        )
 
         # Add an entry to the Help menu.
-        self._ui.helpMenu.add_command(label=_('Zim connection Online help'), command=self.open_help)
+        self._ui.helpMenu.add_command(
+            label=_('Zim connection Online help'),
+            command=self.open_help,
+        )
 
         # Create a "Zim wiki" submenu.
         self.zimMenu = tk.Menu(self._ui.toolsMenu, tearoff=0)
-        self.zimMenu.add_command(label=_('Open project wiki'), command=self.open_project_wiki)
+        self.zimMenu.add_command(
+            label=_('Open project wiki'),
+            command=self.open_project_wiki,
+        )
         self.zimMenu.add_separator()
-        self.zimMenu.add_command(label=_('Create project wiki'), command=self.create_project_wiki)
+        self.zimMenu.add_command(
+            label=_('Create project wiki'),
+            command=self.create_project_wiki,
+        )
         self.zimMenu.add_separator()
 
         # Create a "Remove wiki links" submenu.
         self.removeLinksMenu = tk.Menu(self.zimMenu, tearoff=0)
-        self.removeLinksMenu.add_command(label=_('Selected pages'), command=self.remove_selected_page_links)
-        self.removeLinksMenu.add_command(label=_('All'), command=self.remove_all_wiki_links)
-        self.zimMenu.add_cascade(label=_('Remove wiki links'), menu=self.removeLinksMenu)
+        self.removeLinksMenu.add_command(
+            label=_('Selected pages'),
+            command=self.remove_selected_page_links,
+        )
+        self.removeLinksMenu.add_command(
+            label=_('All'),
+            command=self.remove_all_wiki_links,
+        )
+        self.zimMenu.add_cascade(
+            label=_('Remove wiki links'),
+            menu=self.removeLinksMenu,
+        )
 
-        self._ui.toolsMenu.add_cascade(label=_('Zim Desktop Wiki'), menu=self.zimMenu)
+        self._ui.toolsMenu.add_cascade(
+            label=_('Zim Desktop Wiki'),
+            menu=self.zimMenu,
+        )
 
         # Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_link)
@@ -89,8 +115,14 @@ class Plugin(PluginBase):
         self.wikiManager.create_project_wiki()
 
     def lock(self):
-        self.zimMenu.entryconfig(_('Create project wiki'), state='disabled')
-        self.zimMenu.entryconfig(_('Remove wiki links'), state='disabled')
+        self.zimMenu.entryconfig(
+            _('Create project wiki'),
+            state='disabled',
+        )
+        self.zimMenu.entryconfig(
+            _('Remove wiki links'),
+            state='disabled',
+        )
 
     def on_close(self):
         self.wikiManager.on_close()
@@ -132,8 +164,8 @@ class Plugin(PluginBase):
             ttk.Button(
                 view.linksWindow.titleBar,
                 text=_('Wiki page'),
-                command=self.open_element_page
-                ).pack(side='right')
+                command=self.open_element_page,
+            ).pack(side='right')
 
     def _configure_toolbar(self):
 
@@ -161,8 +193,8 @@ class Plugin(PluginBase):
             self._ui.toolbar.buttonBar,
             text=self.FEATURE,
             image=wikiIcon,
-            command=self.open_project_wiki
-            )
+            command=self.open_project_wiki,
+        )
         self.zimButton.pack(side='left')
         self.zimButton.image = wikiIcon
 
