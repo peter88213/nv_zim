@@ -32,7 +32,9 @@ from nvzim.zim_page import ZimPage
 class WikiManager(SubController):
 
     def __init__(self, model, view, controller, windowTitle):
-        super().initialize_controller(model, view, controller)
+        self._mdl = model
+        self._ui = view
+        self._ctrl = controller
         self.prjWiki = None
         self.launchers = self._ctrl.get_launchers()
         self.zimApp = self.launchers.get(ZimNotebook.EXTENSION, '')
