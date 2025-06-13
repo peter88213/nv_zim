@@ -49,9 +49,9 @@ class Plugin(PluginBase):
         """Install the plugin.
         
         Positional arguments:
-            model -- reference to the main model instance of the application.
-            view -- reference to the main view instance of the application.
-            controller -- reference to the main controller instance of the application.
+            model -- reference to the novelibre main model instance.
+            view -- reference to the novelibre main view instance.
+            controller -- reference to the novelibre main controller instance.
 
         Extends the superclass method.
         """
@@ -186,7 +186,10 @@ class Plugin(PluginBase):
             wikiIcon = None
 
         # Put a Separator on the toolbar.
-        tk.Frame(self._ui.toolbar.buttonBar, bg='light gray', width=1).pack(side='left', fill='y', padx=4)
+        tk.Frame(
+            self._ui.toolbar.buttonBar,
+            bg='light gray', width=1,
+        ).pack(side='left', fill='y', padx=4)
 
         # Put a button on the toolbar.
         self.zimButton = ttk.Button(
