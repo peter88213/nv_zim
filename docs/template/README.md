@@ -32,7 +32,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 - [novelibre](https://github.com/peter88213/novelibre/) version 5.17+
 - [Zim Desktop Wiki](https://zim-wiki.org/)
 
-  For Windows, I recommend the most recent 32-bit Zim version 0.69.1, which is fast and proven. 
+  For Windows, I strongly recommend the most recent 32-bit Zim version 0.69.1, which is fast and proven. 
   The Windows installer for this release is no longer available from the official download site, 
   but can be found [on the former maintainer's web site](https://zim.glump.net/windows/). 
 
