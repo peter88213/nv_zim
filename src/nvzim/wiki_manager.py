@@ -97,13 +97,21 @@ class WikiManager(SubController):
             bookPageName = self.create_wiki_page(self._mdl.novel, CH_ROOT)
 
         self.prjWiki.update_index()
-        self._ui.set_status(f'{_("Wiki created")}: "{norm_path(self.prjWiki.filePath)}"')
+        self._ui.set_status(
+            (
+                f'{_("Wiki created")}: '
+                f'"{norm_path(self.prjWiki.filePath)}"'
+             )
+        )
         self.prjWiki.open(initialPage=f'{self.prjWiki.HOME}:{bookPageName}')
 
     def create_wiki_page(self, element, elemId):
         newPage = WikiFactory.new_wiki_page(element, elemId, None)
         newPageName = newPage.new_page_name()
-        newPage.filePath = f"{self.prjWiki.homeDir}/{newPageName.replace(' ', '_')}{newPage.EXTENSION}"
+        newPage.filePath = (
+            f"{self.prjWiki.homeDir}/{newPageName.replace(' ', '_')}"
+            f"{newPage.EXTENSION}"
+        )
         newPage.write()
         self.set_page_links(element, newPage.filePath)
         return newPageName
@@ -135,9 +143,15 @@ class WikiManager(SubController):
         if self._mdl.prjFile is None:
             return
 
-        prjWikiPath = self._mdl.novel.fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
+        prjWikiPath = self._mdl.novel.fields.get(
+            ZIM_NOTEBOOK_ABS_TAG,
+            None
+        )
         if prjWikiPath is None:
-            prjWikiPath = self._mdl.novel.fields.get(ZIM_NOTEBOOK_REL_TAG, None)
+            prjWikiPath = self._mdl.novel.fields.get(
+                ZIM_NOTEBOOK_REL_TAG,
+                None
+            )
             if prjWikiPath is None:
                 return
 
@@ -199,7 +213,10 @@ class WikiManager(SubController):
         if filePath is None:
 
             # Ask whether to browse or to create.
-            text = f"{_('Wiki page not found')}\n\n{_('Open an existing page, or create a new one?')}"
+            text = (
+                f"{_('Wiki page not found')}\n\n"
+                f"{_('Open an existing page, or create a new one?')}"
+            )
             answer = SimpleDialog(
                 None,
                 text=text,
@@ -237,7 +254,9 @@ class WikiManager(SubController):
                 # Create a new page in the project wiki.
                 self.check_home_dir()
                 fileName = wikiPage.new_page_name().replace(' ', '_')
-                filePath = f'{self.prjWiki.homeDir}/{fileName}{wikiPage.EXTENSION}'
+                filePath = (
+                    f'{self.prjWiki.homeDir}/{fileName}{wikiPage.EXTENSION}'
+                )
                 wikiPage.filePath = filePath
                 wikiPage.write()
                 pageCreated = True
@@ -283,7 +302,9 @@ class WikiManager(SubController):
         while pagePath:
             zimPages.insert(0, pagePath.pop())
             zimPath = '/'.join(pagePath)
-            zimNotebook = glob.glob(norm_path(f'{zimPath}/*{ZimNotebook.EXTENSION}'))
+            zimNotebook = glob.glob(
+                norm_path(f'{zimPath}/*{ZimNotebook.EXTENSION}')
+            )
             if zimNotebook:
                 # the link path belongs to a Zim wiki
                 subprocess.Popen([
@@ -397,15 +418,21 @@ class WikiManager(SubController):
             else:
                 if elemId == CR_ROOT:
                     for elemId in self._mdl.novel.characters:
-                        if self.remove_page_links(self._mdl.novel.characters[elemId]):
+                        if self.remove_page_links(
+                            self._mdl.novel.characters[elemId]
+                        ):
                             removed = True
                 elif elemId == LC_ROOT:
                     for elemId in self._mdl.novel.locations:
-                        if self.remove_page_links(self._mdl.novel.locations[elemId]):
+                        if self.remove_page_links(
+                            self._mdl.novel.locations[elemId]
+                        ):
                             removed = True
                 elif elemId == IT_ROOT:
                     for elemId in self._mdl.novel.items:
-                        if self.remove_page_links(self._mdl.novel.items[elemId]):
+                        if self.remove_page_links(
+                            self._mdl.novel.items[elemId]
+                        ):
                             removed = True
         self.set_removal_status(removed)
 
@@ -458,7 +485,9 @@ class WikiManager(SubController):
     def set_project_wiki(self):
         self._ui.restore_status()
         if self._mdl.prjFile.filePath is None:
-            self._ui.set_status(f"!{_('Cannot define a project wiki without project path')}.")
+            self._ui.set_status(
+                f"!{_('Cannot define a project wiki without project path')}."
+            )
             return
 
         if self.prjWiki is not None:
@@ -472,7 +501,10 @@ class WikiManager(SubController):
             self.set_notebook_links(self.prjWiki.filePath)
             return
 
-        text = f"{_('Project wiki not found')}\n\n{_('Open an existing wiki, or create a new one?')}"
+        text = (
+            f"{_('Project wiki not found')}\n\n"
+            f"{_('Open an existing wiki, or create a new one?')}"
+        )
         answer = SimpleDialog(
             None,
             text=text,

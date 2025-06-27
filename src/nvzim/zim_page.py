@@ -15,9 +15,10 @@ class ZimPage:
     DESCRIPTION = _('Zim page')
     EXTENSION = '.txt'
 
-    PAGE_HEADER = '''Content-Type: text/x-zim-wiki
-Wiki-Format: zim 0.4
-'''
+    PAGE_HEADER = (
+        'Content-Type: text/x-zim-wiki\n'
+        'Wiki-Format: zim 0.4\n'
+    )
     REPLACEMENTS = {
         '//':'',
         '**': '',
@@ -110,7 +111,8 @@ Wiki-Format: zim 0.4
         
         Page content:
         - The Zim note header 
-        - A first level heading with the note title as specified by the new_page_name() method.
+        - A first level heading with the note title 
+          as specified by the new_page_name() method.
         - Note text as specified by the fill_page() method.
         
         Overwrite existing note.

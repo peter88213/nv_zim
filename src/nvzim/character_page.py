@@ -13,7 +13,11 @@ class CharacterPage(WorldElementPage):
 
     def __init__(self, filePath, element):
         super().__init__(filePath, element)
-        self.page_names = [self.element.fullName, self.element.title, self.element.aka]
+        self.page_names = [
+            self.element.fullName,
+            self.element.title,
+            self.element.aka,
+        ]
 
     def fill_page(self, lines):
         """Add page content to the lines.

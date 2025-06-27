@@ -35,7 +35,10 @@ class BookPage(ZimPage):
         for elemId in elements:
             elemPage = self._new_zim_page(elements[elemId], elemId)
             pageName = elemPage.new_page_name()
-            filePath = f"{homeDir}/{pageName.replace(' ', '_')}{elemPage.EXTENSION}"
+            filePath = (
+                f"{homeDir}/{pageName.replace(' ', '_')}"
+                f"{elemPage.EXTENSION}"
+            )
             if os.path.isfile(filePath):
                 linkLines.append(f'[[{pageName}]]')
         if linkLines:
