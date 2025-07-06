@@ -62,10 +62,13 @@ class Plugin(PluginBase):
             controller,
             self.FEATURE
         )
+        self._icon = self._get_icon('zim.png')
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(
             label=_('Zim connection Online help'),
+            image=self._icon,
+            compound='left',
             command=self.open_help,
         )
 
@@ -99,6 +102,8 @@ class Plugin(PluginBase):
 
         self._ui.toolsMenu.add_cascade(
             label=_('Zim Desktop Wiki'),
+            image=self._icon,
+            compound='left',
             menu=self.zimMenu,
         )
 
@@ -169,22 +174,6 @@ class Plugin(PluginBase):
 
     def _configure_toolbar(self):
 
-        # Get the icons.
-        prefs = self._ctrl.get_preferences()
-        if prefs.get('large_icons', False):
-            size = 24
-        else:
-            size = 16
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            iconPath = f'{homeDir}/.novx/icons/{size}'
-        except:
-            iconPath = None
-        try:
-            wikiIcon = tk.PhotoImage(file=f'{iconPath}/zim.png')
-        except:
-            wikiIcon = None
-
         # Put a Separator on the toolbar.
         tk.Frame(
             self._ui.toolbar.buttonBar,
@@ -195,14 +184,14 @@ class Plugin(PluginBase):
         self.zimButton = ttk.Button(
             self._ui.toolbar.buttonBar,
             text=self.FEATURE,
-            image=wikiIcon,
+            image=self._icon,
             command=self.open_project_wiki,
         )
         self.zimButton.pack(side='left')
-        self.zimButton.image = wikiIcon
+        self.zimButton.image = self._icon
 
         # Initialize tooltip.
-        if not prefs['enable_hovertips']:
+        if not self._ctrl.get_preferences()['enable_hovertips']:
             return
 
         try:
@@ -212,3 +201,16 @@ class Plugin(PluginBase):
 
         Hovertip(self.zimButton, self.zimButton['text'])
 
+    def _get_icon(self, fileName):
+        # Return the icon for the main view.
+        if self._ctrl.get_preferences().get('large_icons', False):
+            size = 24
+        else:
+            size = 16
+        try:
+            homeDir = str(Path.home()).replace('\\', '/')
+            iconPath = f'{homeDir}/.novx/icons/{size}'
+            icon = tk.PhotoImage(file=f'{iconPath}/{fileName}')
+        except:
+            icon = None
+        return icon

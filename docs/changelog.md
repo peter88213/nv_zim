@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.3.0
+
+- Added icon to menu entries.
+- Reformatted the code according to PEP-8.
+
+API: 5.17
+Based on novelibre 5.29.2
+
+
 ### Version 5.2.2
 
 - Refactored the code for better maintainability.

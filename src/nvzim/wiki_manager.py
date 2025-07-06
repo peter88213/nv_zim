@@ -307,11 +307,13 @@ class WikiManager(SubController):
             )
             if zimNotebook:
                 # the link path belongs to a Zim wiki
-                subprocess.Popen([
-                    self.zimApp,
-                    zimNotebook[0],
-                    ":".join(zimPages)
-                ])
+                subprocess.Popen(
+                    [
+                        self.zimApp,
+                        zimNotebook[0],
+                        ":".join(zimPages)
+                    ]
+                )
                 return True
 
         return False

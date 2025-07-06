@@ -61,7 +61,7 @@ class ZimNotebook:
         wikiStart = [
             self.zimApp,
             self.dirPath
-            ]
+        ]
         if initialPage is not None:
             wikiStart.append(initialPage)
         subprocess.Popen(wikiStart)
@@ -77,11 +77,13 @@ class ZimNotebook:
         if not os.path.isfile(self.filePath):
             return
 
-        subprocess.Popen([
-            self.zimApp,
-            '--index',
-            self.filePath,
-            ])
+        subprocess.Popen(
+            [
+                self.zimApp,
+                '--index',
+                self.filePath,
+            ]
+        )
 
     def write(self):
         """Write the notebook, overwriting existing one."""
@@ -101,7 +103,7 @@ class ZimNotebook:
         foundFiles = glob.glob(
             f"**/{pageName.replace(' ', '_')}{ZimPage.EXTENSION}",
             recursive=True,
-            )
+        )
         os.chdir(workdir)
         if foundFiles:
             foundFile = foundFiles[0].replace('\\', '/')
