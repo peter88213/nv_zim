@@ -64,6 +64,13 @@ class Plugin(PluginBase):
         )
         self._icon = self._get_icon('zim.png')
 
+        try:
+            from idlelib.tooltip import Hovertip
+        except ModuleNotFoundError:
+            self._hovertip = None
+        else:
+            self._hovertip = Hovertip
+
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(
             label=_('Zim connection Online help'),
@@ -166,11 +173,16 @@ class Plugin(PluginBase):
             self._ui.propertiesView.projectView,
         ]
         for view in views:
-            ttk.Button(
+            zimButton = ttk.Button(
                 view.linksWindow.titleBar,
                 text=_('Wiki page'),
+                image=self._icon,
                 command=self.open_element_page,
-            ).pack(side='right')
+            )
+            zimButton.pack(side='right')
+
+            if self._hovertip is not None:
+                self._hovertip(zimButton, zimButton['text'])
 
     def _configure_toolbar(self):
 
@@ -194,12 +206,8 @@ class Plugin(PluginBase):
         if not self._ctrl.get_preferences()['enable_hovertips']:
             return
 
-        try:
-            from idlelib.tooltip import Hovertip
-        except ModuleNotFoundError:
-            return
-
-        Hovertip(self.zimButton, self.zimButton['text'])
+        if self._hovertip is not None:
+            self._hovertip(self.zimButton, self.zimButton['text'])
 
     def _get_icon(self, fileName):
         # Return the icon for the main view.

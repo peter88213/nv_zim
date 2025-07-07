@@ -5,13 +5,14 @@
 ## Changelog
 
 
-### Version 5.3.0
+### Version 5.3.1
 
-- Added icon to menu entries.
+- Added icon to the menu entries.
+- Assigned icon to the element buttons.
 - Reformatted the code according to PEP-8.
 
 API: 5.17
-Based on novelibre 5.29.2
+Based on novelibre 5.29.3
 
 
 ### Version 5.2.2
