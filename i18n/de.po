@@ -3,15 +3,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.3.1\n"
-"POT-Creation-Date: 2025-07-07 12:29:00\n"
-"PO-Revision-Date: 2025-07-07 12:29:00\n"
+"Project-Id-Version: 5.4.0\n"
+"POT-Creation-Date: 2025-08-07 13:36:42\n"
+"PO-Revision-Date: 2025-08-07 13:36:42\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+
+msgid "1st Edit"
+msgstr "1. Überarbeitung"
+
+msgid "2nd Edit"
+msgstr "2. Überarbeitung"
 
 msgid "All"
 msgstr "Alle"
@@ -42,6 +48,12 @@ msgstr "Erzeugen"
 
 msgid "Create project wiki"
 msgstr "Projekt-Wiki erzeugen"
+
+msgid "Done"
+msgstr "Fertiggestellt"
+
+msgid "Draft"
+msgstr "Entwurf"
 
 msgid "Goals"
 msgstr "Ziele"
@@ -81,6 +93,9 @@ msgstr "Ein bestehendes Wiki öffnen, oder ein neues erzeugen?"
 
 msgid "Open project wiki"
 msgstr "Projekt-Wiki öffnen"
+
+msgid "Outline"
+msgstr "Gliederung"
 
 msgid "Please try again"
 msgstr "Bitte noch einmal versuchen"

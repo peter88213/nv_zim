@@ -11,13 +11,14 @@ from tkinter import filedialog
 
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
-from nvlib.novx_globals import CHARACTER_PREFIX
+from nvlib.novx_globals import CHARACTER_PREFIX, PLOT_LINE_PREFIX
 from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import CR_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import IT_ROOT
 from nvlib.novx_globals import LC_ROOT
 from nvlib.novx_globals import LOCATION_PREFIX
+from nvlib.novx_globals import PL_ROOT
 from nvlib.novx_globals import norm_path
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_REL_TAG
@@ -90,6 +91,7 @@ class WikiManager(SubController):
             self._mdl.novel.characters,
             self._mdl.novel.locations,
             self._mdl.novel.items,
+            self._mdl.novel.plotLines,
         ]
         for source in sources:
             for elemId in source:
@@ -118,6 +120,9 @@ class WikiManager(SubController):
 
     def get_element(self, elemId):
         """Return the element specified by elemId, or the novel reference."""
+        if elemId.startswith(PLOT_LINE_PREFIX):
+            return self._mdl.novel.plotLines[elemId]
+
         if elemId.startswith(CHARACTER_PREFIX):
             return self._mdl.novel.characters[elemId]
 
@@ -211,6 +216,9 @@ class WikiManager(SubController):
                         break
 
         if filePath is None:
+
+            if self._ctrl.check_lock():
+                return
 
             # Ask whether to browse or to create.
             text = (
@@ -341,6 +349,9 @@ class WikiManager(SubController):
             removed = True
         if self.remove_page_links(self._mdl.novel):
             removed = True
+        for elemId in self._mdl.novel.plotLines:
+            if self.remove_page_links(self._mdl.novel.plotLines[elemId]):
+                removed = True
         for elemId in self._mdl.novel.characters:
             if self.remove_page_links(self._mdl.novel.characters[elemId]):
                 removed = True
@@ -395,13 +406,15 @@ class WikiManager(SubController):
         for elemId in self._ui.selectedNodes:
             element = self.get_element(elemId)
             if elemId[:2] in (
+                PLOT_LINE_PREFIX,
                 CHARACTER_PREFIX,
                 LOCATION_PREFIX,
                 ITEM_PREFIX) or elemId in (
                     CH_ROOT,
                     CR_ROOT,
                     LC_ROOT,
-                    IT_ROOT
+                    IT_ROOT,
+                    PL_ROOT,
             ):
                 if self._ui.ask_yes_no(
                     _('Remove the Zim wiki links of the selected elements?'),
@@ -418,7 +431,13 @@ class WikiManager(SubController):
                 if self.remove_page_links(element):
                     removed = True
             else:
-                if elemId == CR_ROOT:
+                if elemId == PL_ROOT:
+                    for elemId in self._mdl.novel.plotLines:
+                        if self.remove_page_links(
+                            self._mdl.novel.plotLines[elemId]
+                        ):
+                            removed = True
+                elif elemId == CR_ROOT:
                     for elemId in self._mdl.novel.characters:
                         if self.remove_page_links(
                             self._mdl.novel.characters[elemId]

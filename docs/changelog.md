@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.4.0
+
+- Assigning wiki pages to the plot lines.
+
+API: 5.17
+Based on novelibre 5.29.8
+
+
 ### Version 5.3.1
 
 - Added icon to the menu entries.

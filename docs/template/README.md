@@ -20,7 +20,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 - Lets you connect an existing Zim notebook as a *project wiki* with the *novelibre* project.
 - Lets you create a new project wiki that is either blank, or populated with all
   characters, locations, and items of the *novelibre* project.
-- Adds **Wiki page** link buttons to the book/characters/locations/items/ properties.
+- Adds **Wiki page** link buttons to the book/characters/locations/items/plot lines properties.
   Clicking on a link button opens the corresponding *Zim* wiki page, if existing. 
   Otherwise, a new project wiki page can be created. 
 - Newly created wiki pages contain descriptions and other meta data. 

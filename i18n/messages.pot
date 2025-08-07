@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.3.1\n"
-"POT-Creation-Date: 2025-07-07 12:29:00\n"
+"Project-Id-Version: 5.4.0\n"
+"POT-Creation-Date: 2025-08-07 13:36:42\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -13,6 +13,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: novxlib pgettext.py 0.3\n"
 
+
+msgid "1st Edit"
+msgstr ""
+
+msgid "2nd Edit"
+msgstr ""
 
 msgid "All"
 msgstr ""
@@ -42,6 +48,12 @@ msgid "Create"
 msgstr ""
 
 msgid "Create project wiki"
+msgstr ""
+
+msgid "Done"
+msgstr ""
+
+msgid "Draft"
 msgstr ""
 
 msgid "Goals"
@@ -81,6 +93,9 @@ msgid "Open an existing wiki, or create a new one?"
 msgstr ""
 
 msgid "Open project wiki"
+msgstr ""
+
+msgid "Outline"
 msgstr ""
 
 msgid "Please try again"
