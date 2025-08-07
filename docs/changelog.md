@@ -5,9 +5,18 @@
 ## Changelog
 
 
+### Version 5.4.1
+
+- Re-enabling the creation of new wiki pages when the project is locked.
+
+API: 5.17
+Based on novelibre 5.29.8
+
+
 ### Version 5.4.0
 
 - Assigning wiki pages to the plot lines.
+- No longer creating new wiki page links when the project is locked.
 
 API: 5.17
 Based on novelibre 5.29.8

@@ -217,9 +217,6 @@ class WikiManager(SubController):
 
         if filePath is None:
 
-            if self._ctrl.check_lock():
-                return
-
             # Ask whether to browse or to create.
             text = (
                 f"{_('Wiki page not found')}\n\n"
