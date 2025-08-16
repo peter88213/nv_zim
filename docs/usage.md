@@ -9,7 +9,7 @@ with the [Zim Desktop Wiki](https://zim-wiki.org/).
 
 # Installation
 
-If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup script *setup.pyw* installs the *nv_zim* plugin in the *novelibre* plugin directory.
+If [novelibre](https://github.com/peter88213/novelibre/) is installed, the setup script *setup.py* installs the *nv_zim* plugin in the *novelibre* plugin directory.
 
 
 ---

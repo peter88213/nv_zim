@@ -10,7 +10,7 @@
 - Re-enabling the creation of new wiki pages when the project is locked.
 
 API: 5.17
-Based on novelibre 5.29.8
+Based on novelibre 5.29.8 (5.30.0)
 
 
 ### Version 5.4.0
