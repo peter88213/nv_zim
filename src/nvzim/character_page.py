@@ -28,6 +28,7 @@ class CharacterPage(WorldElementPage):
 
         if self.element.bio:
             lines.append(self.get_h2(_('Bio')))
+            # TODO: Use the character's "Field 1" name
             self._write_life_dates(lines)
             lines.append(self.element.bio)
             lines.append('\n')
@@ -37,6 +38,7 @@ class CharacterPage(WorldElementPage):
 
         if self.element.goals:
             lines.append(self.get_h2(_('Goals')))
+            # TODO: Use the character's "Field 2" name
             lines.append(self.element.goals)
             lines.append('\n')
 
