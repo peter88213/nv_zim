@@ -4,15 +4,24 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvzim.nvzim_locale import _
+from nvlib.novx_globals import CR_FIELD_1_DEFAULT
+from nvlib.novx_globals import CR_FIELD_2_DEFAULT
 from nvzim.nvzim_globals import locale_date
 from nvzim.world_element_page import WorldElementPage
 
 
 class CharacterPage(WorldElementPage):
 
-    def __init__(self, filePath, element):
+    def __init__(
+        self,
+        filePath,
+        element,
+        field1Name=CR_FIELD_1_DEFAULT,
+        field2Name=CR_FIELD_2_DEFAULT,
+    ):
         super().__init__(filePath, element)
+        self.field1Name = field1Name
+        self.field2Name = field2Name
         self.page_names = [
             self.element.fullName,
             self.element.title,
@@ -27,8 +36,7 @@ class CharacterPage(WorldElementPage):
         super().fill_page(lines)
 
         if self.element.bio:
-            lines.append(self.get_h2(_('Bio')))
-            # TODO: Use the character's "Field 1" name
+            lines.append(self.get_h2(self.field1Name))
             self._write_life_dates(lines)
             lines.append(self.element.bio)
             lines.append('\n')
@@ -37,8 +45,7 @@ class CharacterPage(WorldElementPage):
             lines.append('\n')
 
         if self.element.goals:
-            lines.append(self.get_h2(_('Goals')))
-            # TODO: Use the character's "Field 2" name
+            lines.append(self.get_h2(self.field2Name))
             lines.append(self.element.goals)
             lines.append('\n')
 

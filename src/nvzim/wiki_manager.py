@@ -11,13 +11,14 @@ from tkinter import filedialog
 
 from nvlib.controller.sub_controller import SubController
 from nvlib.gui.widgets.nv_simpledialog import SimpleDialog
-from nvlib.novx_globals import CHARACTER_PREFIX, PLOT_LINE_PREFIX
+from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import CR_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import IT_ROOT
 from nvlib.novx_globals import LC_ROOT
 from nvlib.novx_globals import LOCATION_PREFIX
+from nvlib.novx_globals import PLOT_LINE_PREFIX
 from nvlib.novx_globals import PL_ROOT
 from nvlib.novx_globals import norm_path
 from nvzim.nvzim_globals import ZIM_NOTEBOOK_ABS_TAG
@@ -40,6 +41,7 @@ class WikiManager(SubController):
         self.launchers = self._ctrl.get_launchers()
         self.zimApp = self.launchers.get(ZimNotebook.EXTENSION, '')
         self.windowTitle = windowTitle
+        self.wikiFactory = WikiFactory(self._mdl)
 
     def check_home_dir(self):
         """Create the project wiki's home directory, if missing."""
@@ -108,7 +110,7 @@ class WikiManager(SubController):
         self.prjWiki.open(initialPage=f'{self.prjWiki.HOME}:{bookPageName}')
 
     def create_wiki_page(self, element, elemId):
-        newPage = WikiFactory.new_wiki_page(element, elemId, None)
+        newPage = self.wikiFactory.new_wiki_page(element, elemId, None)
         newPageName = newPage.new_page_name()
         newPage.filePath = (
             f"{self.prjWiki.homeDir}/{newPageName.replace(' ', '_')}"
@@ -204,7 +206,7 @@ class WikiManager(SubController):
         if filePath is None:
 
             # Try to find an existing project wiki page.
-            wikiPage = WikiFactory.new_wiki_page(element, elemId, None)
+            wikiPage = self.wikiFactory.new_wiki_page(element, elemId, None)
             self.set_project_wiki()
             if self.prjWiki is None:
                 return

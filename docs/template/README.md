@@ -29,7 +29,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 
 ## Requirements
 
-- [novelibre](https://github.com/peter88213/novelibre/) version 5.17+
+- [novelibre](https://github.com/peter88213/novelibre/) version 5.34+
 - [Zim Desktop Wiki](https://zim-wiki.org/)
 
   Under **Linux**, you can use the latest Zim version available for your distribution.

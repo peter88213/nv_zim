@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.5.0
+
+- When creating a character page, use the custom field names. Closes #7.
+
+API: 5.34
+Based on novelibre 5.34.1
+
+
 ### Version 5.4.1
 
 - Re-enabling the creation of new wiki pages when the project is locked.

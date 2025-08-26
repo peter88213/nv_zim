@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.4.1\n"
-"POT-Creation-Date: 2025-08-16 15:29:23\n"
-"PO-Revision-Date: 2025-08-16 15:29:23\n"
+"Project-Id-Version: 5.5.0\n"
+"POT-Creation-Date: 2025-08-26 12:01:02\n"
+"PO-Revision-Date: 2025-08-26 12:01:02\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -40,6 +40,9 @@ msgstr "Abbrechen"
 msgid "Cannot define a project wiki without project path"
 msgstr "Kann ohne Projektpfad kein Projekt-Wiki definieren"
 
+msgid "Characterization"
+msgstr "Charakterisierung"
+
 msgid "Characters"
 msgstr "Figuren"
 
@@ -54,6 +57,9 @@ msgstr "Fertiggestellt"
 
 msgid "Draft"
 msgstr "Entwurf"
+
+msgid "Ending"
+msgstr "Ende"
 
 msgid "Goals"
 msgstr "Ziele"
@@ -94,11 +100,20 @@ msgstr "Ein bestehendes Wiki öffnen, oder ein neues erzeugen?"
 msgid "Open project wiki"
 msgstr "Projekt-Wiki öffnen"
 
+msgid "Opening"
+msgstr "Eröffnung"
+
 msgid "Outline"
 msgstr "Gliederung"
 
+msgid "Peak emotional moment"
+msgstr "Emotionaler Höhepunkt"
+
 msgid "Please try again"
 msgstr "Bitte noch einmal versuchen"
+
+msgid "Plot progress"
+msgstr "Handlungsfortschritt"
 
 msgid "Project wiki not found"
 msgstr "Projekt-Wiki nicht gefunden"
@@ -147,6 +162,9 @@ msgstr "Wiki-Seite erzeugt"
 
 msgid "Wiki page not found"
 msgstr "Wiki-Seite nicht gefunden"
+
+msgid "World building"
+msgstr "Weltenbau"
 
 msgid "Zim Desktop Wiki"
 msgstr "Zim Desktop Wiki"

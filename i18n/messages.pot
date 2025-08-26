@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.4.1\n"
-"POT-Creation-Date: 2025-08-16 15:29:23\n"
+"Project-Id-Version: 5.5.0\n"
+"POT-Creation-Date: 2025-08-26 12:01:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -41,6 +41,9 @@ msgstr ""
 msgid "Cannot define a project wiki without project path"
 msgstr ""
 
+msgid "Characterization"
+msgstr ""
+
 msgid "Characters"
 msgstr ""
 
@@ -54,6 +57,9 @@ msgid "Done"
 msgstr ""
 
 msgid "Draft"
+msgstr ""
+
+msgid "Ending"
 msgstr ""
 
 msgid "Goals"
@@ -95,10 +101,19 @@ msgstr ""
 msgid "Open project wiki"
 msgstr ""
 
+msgid "Opening"
+msgstr ""
+
 msgid "Outline"
 msgstr ""
 
+msgid "Peak emotional moment"
+msgstr ""
+
 msgid "Please try again"
+msgstr ""
+
+msgid "Plot progress"
 msgstr ""
 
 msgid "Project wiki not found"
@@ -147,6 +162,9 @@ msgid "Wiki page created"
 msgstr ""
 
 msgid "Wiki page not found"
+msgstr ""
+
+msgid "World building"
 msgstr ""
 
 msgid "Zim Desktop Wiki"

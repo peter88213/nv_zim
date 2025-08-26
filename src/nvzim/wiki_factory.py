@@ -17,14 +17,21 @@ from nvzim.world_element_page import WorldElementPage
 
 class WikiFactory:
 
-    @staticmethod
-    def new_wiki_page(element, elemId, filePath):
+    def __init__(self, model):
+        self._mdl = model
+
+    def new_wiki_page(self, element, elemId, filePath):
         """Return the reference to a new ZimPage subclass instance."""
         if elemId == CH_ROOT:
             return BookPage(filePath, element)
 
         if elemId.startswith(CHARACTER_PREFIX):
-            return CharacterPage(filePath, element)
+            return CharacterPage(
+                filePath,
+                element,
+                field1Name=self._mdl.novel.crField1,
+                field2Name=self._mdl.novel.crField2,
+            )
 
         if elemId.startswith(LOCATION_PREFIX):
             return WorldElementPage(filePath, element)
