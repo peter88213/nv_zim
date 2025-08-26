@@ -14,8 +14,8 @@
 **Note** 
 
 If you already have assigned wiki pages to plot lines, 
-you may want to add them to the regular links. 
-Then remove the plot line's wiki lins via the 
+you may want to add the corresponding *.txt* files to the regular links. 
+Then remove the plot line's wiki links via the 
 **Tools > Zim Desktop Wiki > Remove wiki links** command.
 
 --- 
