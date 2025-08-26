@@ -184,8 +184,7 @@ class Plugin(PluginBase):
                 command=self.open_element_page,
             )
             zimButton.pack(side='right')
-            zimButton.bind("<Button-2>", self.remove_page_link)
-            zimButton.bind("<Button-3>", self.remove_page_link)
+            zimButton.bind("<Alt-Button-1>", self.remove_page_link)
 
             if self._hovertip is not None:
                 self._hovertip(zimButton, zimButton['text'])

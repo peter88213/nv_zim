@@ -5,10 +5,11 @@
 ## Changelog
 
 
-### Version 5.6.0
+### Version 5.6.1
 
 - Linking matching wiki pages is optional.
-- Right-clicking on a "Wiki page" button removes the link after confirmation.
+- Clicking on the Wiki page button while holding down the `Alt` key
+removes the link after confirmation.
 
 API: 5.34
 Based on novelibre 5.34.1
