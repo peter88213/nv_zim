@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.5.0\n"
-"POT-Creation-Date: 2025-08-26 12:01:02\n"
-"PO-Revision-Date: 2025-08-26 12:01:02\n"
+"Project-Id-Version: 5.6.0\n"
+"POT-Creation-Date: 2025-08-26 16:38:48\n"
+"PO-Revision-Date: 2025-08-26 16:38:48\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +61,9 @@ msgstr "Entwurf"
 msgid "Ending"
 msgstr "Ende"
 
+msgid "Field"
+msgstr "Feld"
+
 msgid "Goals"
 msgstr "Ziele"
 
@@ -76,10 +79,13 @@ msgstr "Schauplätze"
 msgid "Major Character"
 msgstr "Hauptfigur"
 
+msgid "Matching page found"
+msgstr "Passende Seite gefunden"
+
 msgid "Minor Character"
 msgstr "Nebenfigur"
 
-msgid "No Wiki link found."
+msgid "No Wiki link found"
 msgstr "Keinen Wiki-Link gefunden"
 
 msgid "Not a floating point value."
@@ -99,6 +105,9 @@ msgstr "Ein bestehendes Wiki öffnen, oder ein neues erzeugen?"
 
 msgid "Open project wiki"
 msgstr "Projekt-Wiki öffnen"
+
+msgid "Open this page and create a link?"
+msgstr "Diese Seite öffnen und einen Link erzeugen?"
 
 msgid "Opening"
 msgstr "Eröffnung"
@@ -123,6 +132,9 @@ msgstr "Alle Zim Wiki-Links entfernen?"
 
 msgid "Remove the Zim wiki links of the selected elements?"
 msgstr "Die Zim Wiki-Links der ausgewählten Elemente entfernen?"
+
+msgid "Remove wiki link?"
+msgstr "Wiki-Link entfernen?"
 
 msgid "Remove wiki links"
 msgstr "Wiki-Links entfernen"
@@ -151,7 +163,10 @@ msgstr "Wiki erzeugt"
 msgid "Wiki link created"
 msgstr "Wiki-Link erzeugt"
 
-msgid "Wiki link(s) removed."
+msgid "Wiki link removed"
+msgstr "Wiki-Link entfernt"
+
+msgid "Wiki link(s) removed"
 msgstr "Wiki-Link(s) entfernt"
 
 msgid "Wiki page"

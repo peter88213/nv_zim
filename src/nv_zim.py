@@ -157,6 +157,9 @@ class Plugin(PluginBase):
     def remove_all_wiki_links(self, event=None):
         self.wikiManager.remove_all_links()
 
+    def remove_page_link(self, event=None):
+        self.wikiManager.remove_page_link_after_asking()
+
     def remove_selected_page_links(self, event=None):
         self.wikiManager.remove_selected_page_links()
 
@@ -181,6 +184,8 @@ class Plugin(PluginBase):
                 command=self.open_element_page,
             )
             zimButton.pack(side='right')
+            zimButton.bind("<Button-2>", self.remove_page_link)
+            zimButton.bind("<Button-3>", self.remove_page_link)
 
             if self._hovertip is not None:
                 self._hovertip(zimButton, zimButton['text'])

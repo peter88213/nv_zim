@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.5.0\n"
-"POT-Creation-Date: 2025-08-26 12:01:02\n"
+"Project-Id-Version: 5.6.0\n"
+"POT-Creation-Date: 2025-08-26 16:38:48\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -62,6 +62,9 @@ msgstr ""
 msgid "Ending"
 msgstr ""
 
+msgid "Field"
+msgstr ""
+
 msgid "Goals"
 msgstr ""
 
@@ -77,10 +80,13 @@ msgstr ""
 msgid "Major Character"
 msgstr ""
 
+msgid "Matching page found"
+msgstr ""
+
 msgid "Minor Character"
 msgstr ""
 
-msgid "No Wiki link found."
+msgid "No Wiki link found"
 msgstr ""
 
 msgid "Not a floating point value."
@@ -99,6 +105,9 @@ msgid "Open an existing wiki, or create a new one?"
 msgstr ""
 
 msgid "Open project wiki"
+msgstr ""
+
+msgid "Open this page and create a link?"
 msgstr ""
 
 msgid "Opening"
@@ -123,6 +132,9 @@ msgid "Remove all Zim wiki links?"
 msgstr ""
 
 msgid "Remove the Zim wiki links of the selected elements?"
+msgstr ""
+
+msgid "Remove wiki link?"
 msgstr ""
 
 msgid "Remove wiki links"
@@ -152,7 +164,10 @@ msgstr ""
 msgid "Wiki link created"
 msgstr ""
 
-msgid "Wiki link(s) removed."
+msgid "Wiki link removed"
+msgstr ""
+
+msgid "Wiki link(s) removed"
 msgstr ""
 
 msgid "Wiki page"

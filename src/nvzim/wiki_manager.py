@@ -189,6 +189,9 @@ class WikiManager(SubController):
     def on_close(self):
         self.prjWiki = None
 
+    def open_element_page(self):
+        self.open_page_by_id(self._ui.propertiesView.activeView.elementId)
+
     def open_page_by_id(self, elemId):
         self._ui.restore_status()
         if self._mdl.prjFile.filePath is None:
@@ -215,7 +218,14 @@ class WikiManager(SubController):
                 if pageName:
                     filePath = self.prjWiki.get_page_path_by_name(pageName)
                     if filePath is not None:
-                        break
+                        if self._ui.ask_yes_no(
+                            title=_('Matching page found'),
+                            message=_('Open this page and create a link?'),
+                            detail=os.path.normpath(filePath)
+                        ):
+                            break
+                        else:
+                            filePath = None
 
         if filePath is None:
 
@@ -270,25 +280,10 @@ class WikiManager(SubController):
 
         self.set_page_links(element, filePath)
         if pageCreated:
-            self._ui.set_status(_('Wiki page created'))
+            self._ui.set_status(f"{_('Wiki page created')}.")
             # overwriting the "wiki link" message.
             self.prjWiki.update_index()
         self.open_page_file(filePath)
-
-    def open_project_wiki(self):
-        if self._mdl.prjFile is None:
-            return
-
-        self._ui.restore_status()
-        self._ui.propertiesView.apply_changes()
-        if not self.zim_is_installed():
-            self._ui.set_status(f'!{_("Zim installation not found")}.')
-            return
-
-        self.set_project_wiki()
-        self.check_home_dir()
-        if self.prjWiki is not None:
-            self.prjWiki.open()
 
     def open_page_file(self, filePath):
         """Return True if the file specified by filepath is opened with Zim."""
@@ -325,8 +320,20 @@ class WikiManager(SubController):
 
         return False
 
-    def open_element_page(self):
-        self.open_page_by_id(self._ui.propertiesView.activeView.elementId)
+    def open_project_wiki(self):
+        if self._mdl.prjFile is None:
+            return
+
+        self._ui.restore_status()
+        self._ui.propertiesView.apply_changes()
+        if not self.zim_is_installed():
+            self._ui.set_status(f'!{_("Zim installation not found")}.')
+            return
+
+        self.set_project_wiki()
+        self.check_home_dir()
+        if self.prjWiki is not None:
+            self.prjWiki.open()
 
     def remove_all_links(self):
         self._ui.restore_status()
@@ -394,6 +401,26 @@ class WikiManager(SubController):
         element.fields = fields
         return removed
 
+    def remove_page_link_after_asking(self):
+        element = self.get_element(
+            self._ui.propertiesView.activeView.elementId
+        )
+        self._ui.restore_status()
+        if self._ctrl.isLocked:
+            return
+
+        fields = element.fields
+        initialAbsPath = fields.get(ZIM_PAGE_ABS_TAG, None)
+        initialRelPath = fields.get(ZIM_PAGE_REL_TAG, None)
+        if initialAbsPath is None and initialRelPath is None:
+            return
+
+        if not self._ui.ask_yes_no(_('Remove wiki link?')):
+            return
+
+        if self.remove_page_links(element):
+            self._ui.set_status(f"#{_('Wiki link removed')}.")
+
     def remove_selected_page_links(self):
         self._ui.restore_status()
         if self._mdl.prjFile is None:
@@ -458,9 +485,9 @@ class WikiManager(SubController):
 
     def set_removal_status(self, removed):
         if removed:
-            self._ui.set_status(_('Wiki link(s) removed.'))
+            self._ui.set_status(f"{_('Wiki link(s) removed')}.")
         else:
-            self._ui.set_status(f"#{_('No Wiki link found.')}")
+            self._ui.set_status(f"#{_('No Wiki link found')}.")
 
     def set_notebook_links(self, prjWikiPath):
         self._ui.restore_status()
@@ -476,9 +503,9 @@ class WikiManager(SubController):
         self._mdl.novel.fields = fields
         message = None
         if initialAbsPath is None or initialRelPath is None:
-            message = f"#{_('Wiki link created')}"
+            message = f"#{_('Wiki link created')}."
         elif initialAbsPath != prjWikiPath  or initialRelPath != relPath:
-            message = f"#{_('Broken link fixed')}"
+            message = f"#{_('Broken link fixed')}."
         if message is not None:
             self._ui.set_status(message)
 
@@ -496,9 +523,9 @@ class WikiManager(SubController):
         element.fields = fields
         message = None
         if initialAbsPath is None or initialRelPath is None:
-            message = f"#{_('Wiki link created')}"
+            message = f"#{_('Wiki link created')}."
         elif initialAbsPath != wikiPagePath  or initialRelPath != relPath:
-            message = f"#{_('Broken link fixed')}"
+            message = f"#{_('Broken link fixed')}."
         if message is not None:
             self._ui.set_status(message)
 
@@ -522,7 +549,7 @@ class WikiManager(SubController):
             return
 
         text = (
-            f"{_('Project wiki not found')}\n\n"
+            f"{_('Project wiki not found')}.\n\n"
             f"{_('Open an existing wiki, or create a new one?')}"
         )
         answer = SimpleDialog(

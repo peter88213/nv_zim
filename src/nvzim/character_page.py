@@ -4,9 +4,8 @@ Copyright (c) 2025 Peter Triesberger
 For further information see https://github.com/peter88213/nv_zim
 License: GNU GPLv3 (https://www.gnu.org/licenses/gpl-3.0.en.html)
 """
-from nvlib.novx_globals import CR_FIELD_1_DEFAULT
-from nvlib.novx_globals import CR_FIELD_2_DEFAULT
 from nvzim.nvzim_globals import locale_date
+from nvzim.nvzim_locale import _
 from nvzim.world_element_page import WorldElementPage
 
 
@@ -16,8 +15,8 @@ class CharacterPage(WorldElementPage):
         self,
         filePath,
         element,
-        field1Name=CR_FIELD_1_DEFAULT,
-        field2Name=CR_FIELD_2_DEFAULT,
+        field1Name=f'{_("Field")} 1',
+        field2Name=f'{_("Field")} 2',
     ):
         super().__init__(filePath, element)
         self.field1Name = field1Name

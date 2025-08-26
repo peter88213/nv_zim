@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.6.0
+
+- Linking matching wiki pages is optional.
+- Right-clicking on a "Wiki page" button removes the link after confirmation.
+
+API: 5.34
+Based on novelibre 5.34.1
+
+
 ### Version 5.5.0
 
 - When creating a character page, use the custom field names. Closes #7.
