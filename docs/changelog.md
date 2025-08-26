@@ -5,6 +5,26 @@
 ## Changelog
 
 
+### Version 5.7.0
+
+- No longer assigning wiki pages to the plot lines.
+
+---
+
+**Note** 
+
+If you already have assigned wiki pages to plot lines, 
+you may want to add them to the regular links. 
+Then remove the plot line's wiki lins via the 
+**Tools > Zim Desktop Wiki > Remove wiki links** command.
+
+--- 
+
+API: 5.34
+Based on novelibre 5.34.1
+
+
+
 ### Version 5.6.1
 
 - Linking matching wiki pages is optional.

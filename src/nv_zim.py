@@ -170,7 +170,6 @@ class Plugin(PluginBase):
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""
         views = [
-            self._ui.propertiesView.plotlineView,
             self._ui.propertiesView.characterView,
             self._ui.propertiesView.locationView,
             self._ui.propertiesView.itemView,

@@ -8,10 +8,8 @@ from nvlib.novx_globals import CHARACTER_PREFIX
 from nvlib.novx_globals import CH_ROOT
 from nvlib.novx_globals import ITEM_PREFIX
 from nvlib.novx_globals import LOCATION_PREFIX
-from nvlib.novx_globals import PLOT_LINE_PREFIX
 from nvzim.book_page import BookPage
 from nvzim.character_page import CharacterPage
-from nvzim.plotline_page import PlotlinePage
 from nvzim.world_element_page import WorldElementPage
 
 
@@ -38,7 +36,4 @@ class WikiFactory:
 
         if elemId.startswith(ITEM_PREFIX):
             return WorldElementPage(filePath, element)
-
-        if elemId.startswith(PLOT_LINE_PREFIX):
-            return PlotlinePage(filePath, element)
 

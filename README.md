@@ -1,4 +1,4 @@
-[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.6.1.pyz)
+[![Download the latest release](docs/img/download-button.png)](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.7.0.pyz)
 [![Changelog](docs/img/changelog-button.png)](docs/changelog.md)
 [![News/Feedback](docs/img/news-button.png)](https://github.com/peter88213/novelibre/discussions)
 [![Online help](docs/img/help-button.png)](https://peter88213.github.io/nvhelp-en/nv_zim/)
@@ -20,7 +20,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 - Lets you connect an existing Zim notebook as a *project wiki* with the *novelibre* project.
 - Lets you create a new project wiki that is either blank, or populated with all
   characters, locations, and items of the *novelibre* project.
-- Adds **Wiki page** link buttons to the book/characters/locations/items/plot lines properties.
+- Adds **Wiki page** link buttons to the book/characters/locations/items properties.
   Clicking on a link button opens the corresponding *Zim* wiki page, if existing. 
   Otherwise, a new project wiki page can be created. 
 - Newly created wiki pages contain descriptions and other meta data. 
@@ -48,10 +48,10 @@ For describing, grouping, and organizing the people, places, and things in your 
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_zim_v5.6.1.pyz](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.6.1.pyz)
+Download the latest release [nv_zim_v5.7.0.pyz](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.7.0.pyz)
 
-- Launch *nv_zim_v5.6.1.pyz* by double-clicking (Windows/Linux desktop),
-- or execute `python nv_zim_v5.6.1.pyz` (Windows), resp. `python3 nv_zim_v5.6.1.pyz` (Linux) on the command line.
+- Launch *nv_zim_v5.7.0.pyz* by double-clicking (Windows/Linux desktop),
+- or execute `python nv_zim_v5.7.0.pyz` (Windows), resp. `python3 nv_zim_v5.7.0.pyz` (Linux) on the command line.
 
 #### Important
 
@@ -67,9 +67,9 @@ the zip file.
 
 ### Alternative: Zip file
 
-The package is also available in zip format: [nv_zim_v5.6.1.zip](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.6.1.zip)
+The package is also available in zip format: [nv_zim_v5.7.0.zip](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.7.0.zip)
 
-- Extract the *nv_zim_v5.6.1* folder from the downloaded zipfile "nv_zim_v5.6.1.zip".
+- Extract the *nv_zim_v5.7.0* folder from the downloaded zipfile "nv_zim_v5.7.0.zip".
 - Move into this new folder and launch *setup.py* by double-clicking (Windows/Linux desktop), 
 - or execute `python setup.py` (Windows), resp. `python3 setup.py` (Linux) on the command line.
 

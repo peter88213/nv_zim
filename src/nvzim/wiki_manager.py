@@ -93,7 +93,6 @@ class WikiManager(SubController):
             self._mdl.novel.characters,
             self._mdl.novel.locations,
             self._mdl.novel.items,
-            self._mdl.novel.plotLines,
         ]
         for source in sources:
             for elemId in source:
