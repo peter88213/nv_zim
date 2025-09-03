@@ -28,7 +28,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """Plugin class for the Zim connector."""
     VERSION = '@release'
-    API_VERSION = '5.34'
+    API_VERSION = '5.35'
     DESCRIPTION = 'Zim Desktop Wiki connection'
     URL = 'https://github.com/peter88213/nv_zim'
 
@@ -64,12 +64,10 @@ class Plugin(PluginBase):
         )
         self._icon = self._get_icon('zim.png')
 
-        try:
-            from idlelib.tooltip import Hovertip
-        except ModuleNotFoundError:
-            self._hovertip = None
+        if self._ctrl.get_preferences()['enable_hovertips']:
+            self._hovertipClass = self._mdl.nvService.new_hovertip
         else:
-            self._hovertip = Hovertip
+            self._hovertipClass = None
 
         # Add an entry to the Help menu.
         self._ui.helpMenu.add_command(
@@ -185,8 +183,8 @@ class Plugin(PluginBase):
             zimButton.pack(side='right')
             zimButton.bind("<Alt-Button-1>", self.remove_page_link)
 
-            if self._hovertip is not None:
-                self._hovertip(zimButton, zimButton['text'])
+            if self._hovertipClass is not None:
+                self._hovertipClass(zimButton, zimButton['text'])
 
     def _configure_toolbar(self):
 
@@ -207,11 +205,8 @@ class Plugin(PluginBase):
         self.zimButton.image = self._icon
 
         # Initialize tooltip.
-        if not self._ctrl.get_preferences()['enable_hovertips']:
-            return
-
-        if self._hovertip is not None:
-            self._hovertip(self.zimButton, self.zimButton['text'])
+        if self._hovertipClass is not None:
+            self._hovertipClass(self.zimButton, self.zimButton['text'])
 
     def _get_icon(self, fileName):
         # Return the icon for the main view.
