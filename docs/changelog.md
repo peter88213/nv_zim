@@ -17,16 +17,12 @@ Based on novelibre 5.35.1
 
 - No longer assigning wiki pages to the plot lines.
 
----
+> [!NOTE]
+> If you already have assigned wiki pages to plot lines, 
+> you may want to add the corresponding *.txt* files to the regular links. 
+> Then remove the plot line's wiki links via the 
+> **Tools > Zim Desktop Wiki > Remove wiki links** command.
 
-**Note** 
-
-If you already have assigned wiki pages to plot lines, 
-you may want to add the corresponding *.txt* files to the regular links. 
-Then remove the plot line's wiki links via the 
-**Tools > Zim Desktop Wiki > Remove wiki links** command.
-
---- 
 
 API: 5.34
 Based on novelibre 5.34.1
