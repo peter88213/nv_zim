@@ -5,9 +5,11 @@
 ## Changelog
 
 
-### Version 5.9.0
+### Version 5.9.1
 
 - Using the toolbar methods provided with novelibre 5.44.
+- Using the menu methods provided with novelibre 5.43.
+- Refactored Plugin._add_buttons()
 
 API: 5.44
 Based on novelibre 5.44.0

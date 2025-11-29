@@ -19,8 +19,8 @@ from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
-from nvzim.nvzim_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
+from nvzim.nvzim_locale import _
 from nvzim.wiki_manager import WikiManager
 import tkinter as tk
 
@@ -34,14 +34,6 @@ class Plugin(PluginBase):
 
     FEATURE = 'Zim Desktop Wiki'
     HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_zim'
-
-    def disable_menu(self):
-        """Disable UI widgets, e.g. when no project is open."""
-        self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='disabled')
-
-    def enable_menu(self):
-        """Enable UI widgets, e.g. when a project is opened."""
-        self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='normal')
 
     def install(self, model, view, controller):
         """Install the plugin.
@@ -62,75 +54,92 @@ class Plugin(PluginBase):
         )
         self._icon = self._get_icon('zim.png')
 
-        if self._ctrl.get_preferences()['enable_hovertips']:
-            self._hovertipClass = self._mdl.nvService.new_hovertip
-        else:
-            self._hovertipClass = None
+        #--- Configure the main menu.
+        self._disableOnLock = []
 
         # Add an entry to the Help menu.
+        label = _('Zim connection Online help')
         self._ui.helpMenu.add_command(
-            label=_('Zim connection Online help'),
+            label=label,
             image=self._icon,
             compound='left',
             command=self.open_help,
         )
 
         # Create a "Zim wiki" submenu.
-        self.zimMenu = tk.Menu(self._ui.toolsMenu, tearoff=0)
+        self.zimMenu = tk.Menu(tearoff=0)
+
+        label = _('Open project wiki')
         self.zimMenu.add_command(
-            label=_('Open project wiki'),
+            label=label,
             command=self.open_project_wiki,
         )
+
+        label = _('Create project wiki')
         self.zimMenu.add_separator()
         self.zimMenu.add_command(
-            label=_('Create project wiki'),
+            label=label,
             command=self.create_project_wiki,
         )
+        self._disableOnLock.append(label)
+
         self.zimMenu.add_separator()
 
         # Create a "Remove wiki links" submenu.
         self.removeLinksMenu = tk.Menu(self.zimMenu, tearoff=0)
+
+        label = _('Selected pages')
         self.removeLinksMenu.add_command(
-            label=_('Selected pages'),
+            label=label,
             command=self.remove_selected_page_links,
         )
+
+        label = _('All')
         self.removeLinksMenu.add_command(
-            label=_('All'),
+            label=label,
             command=self.remove_all_wiki_links,
         )
+
+        label = _('Remove wiki links')
         self.zimMenu.add_cascade(
-            label=_('Remove wiki links'),
+            label=label,
             menu=self.removeLinksMenu,
         )
+        self._disableOnLock.append(label)
 
+        # Add the "Zim wiki" submenu to the Tools menu.
+        label = _('Zim Desktop Wiki')
         self._ui.toolsMenu.add_cascade(
-            label=_('Zim Desktop Wiki'),
+            label=label,
             image=self._icon,
             compound='left',
             menu=self.zimMenu,
         )
+        self._ui.toolsMenu.disableOnClose.append(label)
 
-        # Register the link opener.
+        #--- Register the link opener.
         self._ctrl.linkProcessor.add_opener(self.open_link)
 
         self._add_buttons()
         self._ui.root.bind('<<RebuildPropertiesView>>', self._add_buttons)
 
         #--- Configure the toolbar.
-        self._configure_toolbar()
+        self._ui.toolbar.add_separator(),
+
+        # Put a button on the toolbar.
+        self._ui.toolbar.new_button(
+            text=self.FEATURE,
+            image=self._icon,
+            command=self.open_project_wiki,
+            disableOnLock=False,
+        ).pack(side='left')
 
     def create_project_wiki(self, event=None):
         self.wikiManager.create_project_wiki()
 
     def lock(self):
-        self.zimMenu.entryconfig(
-            _('Create project wiki'),
-            state='disabled',
-        )
-        self.zimMenu.entryconfig(
-            _('Remove wiki links'),
-            state='disabled',
-        )
+        for label in self._disableOnLock:
+            self.zimMenu.entryconfig(label, state='disabled')
 
     def on_close(self):
         self.wikiManager.on_close()
@@ -160,11 +169,13 @@ class Plugin(PluginBase):
         self.wikiManager.remove_selected_page_links()
 
     def unlock(self):
-        self.zimMenu.entryconfig(_('Create project wiki'), state='normal')
-        self.zimMenu.entryconfig(_('Remove wiki links'), state='normal')
+        for label in self._disableOnLock:
+            self.zimMenu.entryconfig(label, state='normal')
 
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""
+        enableHovertips = self._ctrl.get_preferences()['enable_hovertips']
+        Hovertip = self._mdl.nvService.new_hovertip
         views = [
             self._ui.propertiesView.characterView,
             self._ui.propertiesView.locationView,
@@ -181,22 +192,8 @@ class Plugin(PluginBase):
             zimButton.pack(side='right')
             zimButton.bind("<Alt-Button-1>", self.remove_page_link)
 
-            if self._hovertipClass is not None:
-                self._hovertipClass(zimButton, zimButton['text'])
-
-    def _configure_toolbar(self):
-
-        # Put a Separator on the toolbar.
-        self._ui.toolbar.add_separator(),
-
-        # Put a button on the toolbar.
-        self.zimButton = self._ui.toolbar.new_button(
-            text=self.FEATURE,
-            image=self._icon,
-            command=self.open_project_wiki,
-            disableOnLock=False,
-        )
-        self.zimButton.pack(side='left')
+            if enableHovertips:
+                Hovertip(zimButton, zimButton['text'])
 
     def _get_icon(self, fileName):
         # Return the icon for the main view.
