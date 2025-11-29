@@ -188,7 +188,6 @@ class Plugin(PluginBase):
                 text=_('Wiki page'),
                 image=self._icon,
                 command=self.open_element_page,
-
             )
             zimButton.pack(side='right')
             zimButton.bind("<Alt-Button-1>", self.remove_page_link)
