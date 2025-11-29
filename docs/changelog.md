@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.9.1
+### Version 5.9.2
 
 - Using the toolbar methods provided with novelibre 5.44.
 - Using the menu methods provided with novelibre 5.43.

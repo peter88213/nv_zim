@@ -182,8 +182,9 @@ class Plugin(PluginBase):
             self._ui.propertiesView.itemView,
             self._ui.propertiesView.projectView,
         ]
-        for __ in views:
+        for view in views:
             zimButton = ttk.Button(
+                view.linksWindow.titleBar,
                 text=_('Wiki page'),
                 image=self._icon,
                 command=self.open_element_page,
