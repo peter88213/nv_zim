@@ -28,7 +28,7 @@ import tkinter as tk
 class Plugin(PluginBase):
     """Plugin class for the Zim connector."""
     VERSION = '@release'
-    API_VERSION = '5.35'
+    API_VERSION = '5.44'
     DESCRIPTION = 'Zim Desktop Wiki connection'
     URL = 'https://github.com/peter88213/nv_zim'
 
@@ -38,12 +38,10 @@ class Plugin(PluginBase):
     def disable_menu(self):
         """Disable UI widgets, e.g. when no project is open."""
         self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='disabled')
-        self.zimButton.config(state='disabled')
 
     def enable_menu(self):
         """Enable UI widgets, e.g. when a project is opened."""
         self._ui.toolsMenu.entryconfig(_('Zim Desktop Wiki'), state='normal')
-        self.zimButton.config(state='normal')
 
     def install(self, model, view, controller):
         """Install the plugin.
@@ -173,12 +171,12 @@ class Plugin(PluginBase):
             self._ui.propertiesView.itemView,
             self._ui.propertiesView.projectView,
         ]
-        for view in views:
+        for __ in views:
             zimButton = ttk.Button(
-                view.linksWindow.titleBar,
                 text=_('Wiki page'),
                 image=self._icon,
                 command=self.open_element_page,
+
             )
             zimButton.pack(side='right')
             zimButton.bind("<Alt-Button-1>", self.remove_page_link)
@@ -189,24 +187,16 @@ class Plugin(PluginBase):
     def _configure_toolbar(self):
 
         # Put a Separator on the toolbar.
-        tk.Frame(
-            self._ui.toolbar.buttonBar,
-            bg='light gray', width=1,
-        ).pack(side='left', fill='y', padx=4)
+        self._ui.toolbar.add_separator(),
 
         # Put a button on the toolbar.
-        self.zimButton = ttk.Button(
-            self._ui.toolbar.buttonBar,
+        self.zimButton = self._ui.toolbar.new_button(
             text=self.FEATURE,
             image=self._icon,
             command=self.open_project_wiki,
+            disableOnLock=False,
         )
         self.zimButton.pack(side='left')
-        self.zimButton.image = self._icon
-
-        # Initialize tooltip.
-        if self._hovertipClass is not None:
-            self._hovertipClass(self.zimButton, self.zimButton['text'])
 
     def _get_icon(self, fileName):
         # Return the icon for the main view.
