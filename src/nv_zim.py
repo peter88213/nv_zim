@@ -15,12 +15,12 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
-from pathlib import Path
 from tkinter import ttk
 import webbrowser
 
-from nvlib.controller.plugin.plugin_base import PluginBase
 from nvzim.nvzim_locale import _
+from nvlib.controller.plugin.plugin_base import PluginBase
+from nvlib.gui.menus.nv_menu import NvMenu
 from nvzim.wiki_manager import WikiManager
 import tkinter as tk
 
@@ -55,7 +55,6 @@ class Plugin(PluginBase):
         self._icon = self._get_icon('zim.png')
 
         #--- Configure the main menu.
-        self._disableOnLock = []
 
         # Add an entry to the Help menu.
         label = _('Zim connection Online help')
@@ -67,7 +66,7 @@ class Plugin(PluginBase):
         )
 
         # Create a "Zim wiki" submenu.
-        self.zimMenu = tk.Menu(tearoff=0)
+        self.zimMenu = NvMenu()
 
         label = _('Open project wiki')
         self.zimMenu.add_command(
@@ -81,12 +80,12 @@ class Plugin(PluginBase):
             label=label,
             command=self.create_project_wiki,
         )
-        self._disableOnLock.append(label)
+        self.zimMenu.disableOnLock.append(label)
 
         self.zimMenu.add_separator()
 
         # Create a "Remove wiki links" submenu.
-        self.removeLinksMenu = tk.Menu(self.zimMenu, tearoff=0)
+        self.removeLinksMenu = tk.Menu(tearoff=0)
 
         label = _('Selected pages')
         self.removeLinksMenu.add_command(
@@ -105,7 +104,7 @@ class Plugin(PluginBase):
             label=label,
             menu=self.removeLinksMenu,
         )
-        self._disableOnLock.append(label)
+        self.zimMenu.disableOnLock.append(label)
 
         # Add the "Zim wiki" submenu to the Tools menu.
         label = _('Zim Desktop Wiki')
@@ -138,8 +137,7 @@ class Plugin(PluginBase):
         self.wikiManager.create_project_wiki()
 
     def lock(self):
-        for label in self._disableOnLock:
-            self.zimMenu.entryconfig(label, state='disabled')
+        self.zimMenu.lock()
 
     def on_close(self):
         self.wikiManager.on_close()
@@ -169,8 +167,7 @@ class Plugin(PluginBase):
         self.wikiManager.remove_selected_page_links()
 
     def unlock(self):
-        for label in self._disableOnLock:
-            self.zimMenu.entryconfig(label, state='normal')
+        self.zimMenu.unlock()
 
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""
@@ -195,16 +192,3 @@ class Plugin(PluginBase):
             if enableHovertips:
                 Hovertip(zimButton, zimButton['text'])
 
-    def _get_icon(self, fileName):
-        # Return the icon for the main view.
-        if self._ctrl.get_preferences().get('large_icons', False):
-            size = 24
-        else:
-            size = 16
-        try:
-            homeDir = str(Path.home()).replace('\\', '/')
-            iconPath = f'{homeDir}/.novx/icons/{size}'
-            icon = tk.PhotoImage(file=f'{iconPath}/{fileName}')
-        except:
-            icon = None
-        return icon
