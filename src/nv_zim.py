@@ -18,9 +18,10 @@ GNU General Public License for more details.
 from tkinter import ttk
 import webbrowser
 
-from nvzim.nvzim_locale import _
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvlib.gui.menus.nv_menu import NvMenu
+from nvzim.nvzim_locale import _
+from nvzim.platform.platform_settings import MOUSE
 from nvzim.wiki_manager import WikiManager
 import tkinter as tk
 
@@ -187,7 +188,7 @@ class Plugin(PluginBase):
                 command=self.open_element_page,
             )
             zimButton.pack(side='right')
-            zimButton.bind("<Alt-Button-1>", self.remove_page_link)
+            zimButton.bind(MOUSE.REMOVE_PAGE_LINK, self.remove_page_link)
 
             if enableHovertips:
                 Hovertip(zimButton, zimButton['text'])
