@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.9.4
+
+- Refactored, adding platform settings.
+
+API: 5.44
+Based on novelibre 5.53.4
+
+
 ### Version 5.9.3
 
 - Using the toolbar and menu methods provided with novelibre 5.44.
