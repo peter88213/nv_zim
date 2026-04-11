@@ -48,7 +48,7 @@ For describing, grouping, and organizing the people, places, and things in your 
 
 ### Default: Executable Python zip archive
 
-Download the latest release [nv_zim_v5.9.4.pyz](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.9.4.pyz)
+Download the latest release [nv_zim_v5.9.4.pyz](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.9.4.pyz) (27 KB)
 
 - Launch *nv_zim_v5.9.4.pyz* by double-clicking (Windows desktop),
 - or execute `python nv_zim_v5.9.4.pyz` (Windows), resp. `python3 nv_zim_v5.9.4.pyz` (Linux) on the command line.
@@ -66,7 +66,7 @@ Download the latest release [nv_zim_v5.9.4.pyz](https://github.com/peter88213/nv
 
 ### Alternative: Zip file
 
-The package is also available in zip format: [nv_zim_v5.9.4.zip](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.9.4.zip)
+The package is also available in zip format: [nv_zim_v5.9.4.zip](https://github.com/peter88213/nv_zim/raw/main/dist/nv_zim_v5.9.4.zip) (27 KB)
 
 - Extract the *nv_zim_v5.9.4* folder from the downloaded zipfile "nv_zim_v5.9.4.zip".
 - Move into this new folder and launch *setup.py* by double-clicking (Windows/Linux desktop), 
