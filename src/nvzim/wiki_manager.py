@@ -149,14 +149,10 @@ class WikiManager(SubController):
         if self._mdl.prjFile is None:
             return
 
-        prjWikiPath = self._mdl.novel.fields.get(
-            ZIM_NOTEBOOK_ABS_TAG,
-            None
-        )
-        if prjWikiPath is None:
+        prjWikiPath = self._mdl.novel.fields.get(ZIM_NOTEBOOK_ABS_TAG, '')
+        if not os.path.isfile(prjWikiPath):
             prjWikiPath = self._mdl.novel.fields.get(
-                ZIM_NOTEBOOK_REL_TAG,
-                None
+                ZIM_NOTEBOOK_REL_TAG, None
             )
             if prjWikiPath is None:
                 return
@@ -171,8 +167,8 @@ class WikiManager(SubController):
 
     def get_wiki_page_link(self, element):
         """Return the element's wiki page path, if any."""
-        wikiPagePath = element.fields.get(ZIM_PAGE_ABS_TAG, None)
-        if wikiPagePath is None:
+        wikiPagePath = element.fields.get(ZIM_PAGE_ABS_TAG, '')
+        if not os.path.isfile(wikiPagePath):
             wikiPagePath = element.fields.get(ZIM_PAGE_REL_TAG, None)
             if wikiPagePath is None:
                 return

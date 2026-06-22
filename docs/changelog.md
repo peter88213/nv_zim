@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.9.5
+
+- Fixed a bug where broken direct links aren't substituted with relative links.
+
+API: 5.44
+Based on novelibre 5.59.0
+
+
 ### Version 5.9.4
 
 - Refactored, adding platform settings.
