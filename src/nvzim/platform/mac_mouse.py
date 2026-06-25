@@ -9,4 +9,4 @@ from nvzim.platform.generic_mouse import GenericMouse
 
 class MacMouse(GenericMouse):
 
-    REMOVE_PAGE_LINK = '<Option-Button-1>'
+    REMOVE_PAGE_LINK = '<Shift-Button-1>'

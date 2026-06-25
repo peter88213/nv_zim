@@ -5,6 +5,15 @@
 ## Changelog
 
 
+### Version 5.10.0
+
+- Changed keyboard settings to avoid `Alt`-mouseclick, which may be reserved by Linux desktops:
+  - Deleting page links via `Shift`-mousecklick.
+
+API: 5.44
+Based on novelibre 5.60.0
+
+
 ### Version 5.9.5
 
 - Fixed a bug where broken direct links aren't substituted with relative links.
