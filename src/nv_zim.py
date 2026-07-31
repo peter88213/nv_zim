@@ -37,7 +37,7 @@ class Plugin(PluginBase):
     HELP_URL = f'{_("https://peter88213.github.io/nvhelp-en")}/nv_zim'
 
     def install(self, model, view, controller):
-        """Install the plugin.
+        """Install the plugin at runtime.
         
         Positional arguments:
             model -- reference to the novelibre main model instance.
