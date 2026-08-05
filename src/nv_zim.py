@@ -16,7 +16,6 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 """
 from tkinter import ttk
-import webbrowser
 
 from nvlib.controller.plugin.plugin_base import PluginBase
 from nvlib.gui.menus.nv_menu import NvMenu
@@ -57,20 +56,8 @@ class Plugin(PluginBase):
 
         #--- Configure the user interface.
 
-        def create_project_wiki(event=None):
-            self.wikiManager.create_project_wiki()
-
         def open_link(filePath):
             return self.wikiManager.open_page_file(filePath)
-
-        def open_project_wiki(event=None):
-            self.wikiManager.open_project_wiki()
-
-        def remove_all_wiki_links(event=None):
-            self.wikiManager.remove_all_links()
-
-        def remove_selected_page_links(event=None):
-            self.wikiManager.remove_selected_page_links()
 
         # Create a "Zim wiki" submenu.
         self.zimMenu = NvMenu()
@@ -78,14 +65,14 @@ class Plugin(PluginBase):
         label = _('Open project wiki')
         self.zimMenu.add_command(
             label=label,
-            command=open_project_wiki,
+            command=self.wikiManager.open_project_wiki,
         )
 
         label = _('Create project wiki')
         self.zimMenu.add_separator()
         self.zimMenu.add_command(
             label=label,
-            command=create_project_wiki,
+            command=self.wikiManager.create_project_wiki,
         )
         self.zimMenu.disableOnLock.append(label)
 
@@ -97,13 +84,13 @@ class Plugin(PluginBase):
         label = _('Selected pages')
         removeLinksMenu.add_command(
             label=label,
-            command=remove_selected_page_links,
+            command=self.wikiManager.remove_selected_page_links,
         )
 
         label = _('All')
         removeLinksMenu.add_command(
             label=label,
-            command=remove_all_wiki_links,
+            command=self.wikiManager.remove_all_links,
         )
 
         label = _('Remove wiki links')
@@ -138,7 +125,7 @@ class Plugin(PluginBase):
         self._ui.toolbar.new_button(
             text=self.FEATURE,
             image=self._icon,
-            command=open_project_wiki,
+            command=self.wikiManager.open_project_wiki,
             disableOnLock=False,
         ).pack(side='left')
 
@@ -153,9 +140,6 @@ class Plugin(PluginBase):
 
     def _add_buttons(self, event=None):
         """Add "Open wiki page" Buttons."""
-
-        def open_element_page(event=None):
-            self.wikiManager.open_element_page()
 
         def remove_page_link(event=None):
             self.wikiManager.remove_page_link_after_asking()
@@ -173,7 +157,7 @@ class Plugin(PluginBase):
                 view.linksWindow.titleBar,
                 text=_('Wiki page'),
                 image=self._icon,
-                command=open_element_page,
+                command=self.wikiManager.open_element_page,
             )
             zimButton.pack(side='right')
             zimButton.bind(MOUSE.REMOVE_PAGE_LINK, remove_page_link)

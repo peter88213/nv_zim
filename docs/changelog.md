@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.11.0
+### Version 5.11.1
 
 - Fixed a bug where a new project wiki cannot be written if the name contains a percent character.
 - Displaying an error message if the project wiki is deleted from outsides during the current session.
