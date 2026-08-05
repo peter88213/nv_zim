@@ -5,6 +5,17 @@
 ## Changelog
 
 
+### Version 5.11.0
+
+- Fixed a bug where a new project wiki cannot be written if the name contains a percent character.
+- Displaying an error message if the project wiki is deleted from outsides during the current session.
+- Using the novelibre 5.63+ help service.
+- Refactored the code.
+
+API: 5.63
+Based on novelibre 5.63.1
+
+
 ### Version 5.10.0
 
 - Changed keyboard settings to avoid `Alt`-mouseclick, which may be reserved by Linux desktops:

@@ -3,9 +3,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.10.0\n"
+"Project-Id-Version: 5.11.0\n"
 "POT-Creation-Date: 2025-09-04 13:00:53\n"
-"PO-Revision-Date: 2026-06-25 16:11:11\n"
+"PO-Revision-Date: 2026-08-05 11:55:45\n"
 "Last-Translator: Peter Triesberger\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -184,8 +184,8 @@ msgstr "Weltenbau"
 msgid "Zim Desktop Wiki"
 msgstr "Zim Desktop Wiki"
 
-msgid "Zim connection Online help"
-msgstr "Zim-Anbindung Online-Hilfe"
+msgid "Zim connection plugin help"
+msgstr "Zim-Anbindung-Plugin Hilfe"
 
 msgid "Zim installation not found"
 msgstr "Zim-Installation nicht gefunden"
@@ -198,6 +198,3 @@ msgstr "Zim-Notizbuch"
 
 msgid "Zim page"
 msgstr "Zim-Seite"
-
-msgid "https://peter88213.github.io/nvhelp-en"
-msgstr "https://peter88213.github.io/nvhelp-de"

@@ -328,7 +328,10 @@ class WikiManager(SubController):
         self.set_project_wiki()
         self.check_home_dir()
         if self.prjWiki is not None:
-            self.prjWiki.open()
+            try:
+                self.prjWiki.open()
+            except RuntimeError:
+                self._ui.set_status(f'!{_("Project wiki not found")}.')
 
     def remove_all_links(self):
         self._ui.restore_status()

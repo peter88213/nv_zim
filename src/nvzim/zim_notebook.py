@@ -56,7 +56,7 @@ class ZimNotebook:
 
     def open(self, initialPage=None):
         if not os.path.isfile(self.filePath):
-            return
+            raise RuntimeError
 
         wikiStart = [
             self.zimApp,
@@ -87,10 +87,20 @@ class ZimNotebook:
 
     def write(self):
         """Write the notebook, overwriting existing one."""
+
+        def get_sanitized(text):
+            # Remove percent characters
+            # because they aren't accepted by ConfigParser.
+            return text.replace('%', '')
+
         notebook = ConfigParser()
         notebook.add_section(self.NOTEBOOK)
         for tag in self.settings:
-            notebook.set(self.NOTEBOOK, tag, self.settings[tag])
+            notebook.set(
+                self.NOTEBOOK,
+                tag,
+                get_sanitized(self.settings[tag])
+            )
         with open(self.filePath, 'w', encoding='utf-8') as f:
             notebook.write(f)
         os.makedirs(self.homeDir, exist_ok=True)
