@@ -5,7 +5,7 @@
 ## Changelog
 
 
-### Version 5.11.1
+### Version 5.11.2
 
 - Fixed a bug where a new project wiki cannot be written if the name contains a percent character.
 - Displaying an error message if the project wiki is deleted from outsides during the current session.
@@ -13,7 +13,7 @@
 - Refactored the code.
 
 API: 5.63
-Based on novelibre 5.63.1
+Based on novelibre 5.63.2
 
 
 ### Version 5.10.0
