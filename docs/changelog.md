@@ -5,6 +5,14 @@
 ## Changelog
 
 
+### Version 5.11.3
+
+- The pop-up dialogs are now always-on-top and non-resizable.
+
+API: 5.63
+Based on novelibre 5.65.1
+
+
 ### Version 5.11.2
 
 - Fixed a bug where a new project wiki cannot be written if the name contains a percent character.
