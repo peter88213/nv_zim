@@ -499,9 +499,7 @@ class WikiManager(SubController):
         fields[ZIM_NOTEBOOK_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
             prjWikiPath
         )
-        initialRelPath = self._ctrl.linkProcessor.expand_path(
-            fields.get(ZIM_NOTEBOOK_REL_TAG, None)
-        )
+        initialRelPath = fields.get(ZIM_NOTEBOOK_REL_TAG, None)
         relPath = self._ctrl.linkProcessor.shorten_path(prjWikiPath)
         fields[ZIM_NOTEBOOK_REL_TAG] = relPath
 
@@ -530,9 +528,7 @@ class WikiManager(SubController):
         fields[ZIM_PAGE_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
             wikiPagePath
         )
-        initialRelPath = self._ctrl.linkProcessor.expand_path(
-            fields.get(ZIM_PAGE_REL_TAG, None)
-        )
+        initialRelPath = fields.get(ZIM_PAGE_REL_TAG, None)
         relPath = self._ctrl.linkProcessor.shorten_path(wikiPagePath)
         fields[ZIM_PAGE_REL_TAG] = relPath
 
