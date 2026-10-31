@@ -3,8 +3,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 5.11.3\n"
-"POT-Creation-Date: 2026-08-22 18:59:29\n"
+"Project-Id-Version: 5.12.0\n"
+"POT-Creation-Date: 2026-10-31 13:17:25\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -153,6 +153,9 @@ msgid "Too large"
 msgstr ""
 
 msgid "Too small"
+msgstr ""
+
+msgid "Undefined"
 msgstr ""
 
 msgid "Untitled"
