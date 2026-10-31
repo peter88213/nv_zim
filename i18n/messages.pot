@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 5.12.0\n"
-"POT-Creation-Date: 2026-10-31 13:17:25\n"
+"POT-Creation-Date: 2026-10-31 20:04:02\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -18,6 +18,9 @@ msgid "1st Edit"
 msgstr ""
 
 msgid "2nd Edit"
+msgstr ""
+
+msgid "Abbreviated the Home path"
 msgstr ""
 
 msgid "All"

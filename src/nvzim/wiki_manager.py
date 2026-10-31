@@ -493,21 +493,21 @@ class WikiManager(SubController):
             return
 
         fields = self._mdl.novel.fields
-        initialAbsPath = self._ctrl.linkProcessor.expand_path(
-            fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
-        )
-        fields[ZIM_NOTEBOOK_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
-            prjWikiPath
-        )
+        initialAbsPath = fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
+        absPath = self._ctrl.linkProcessor.abbreviate_path(prjWikiPath)
+        fields[ZIM_NOTEBOOK_ABS_TAG] = absPath
         initialRelPath = fields.get(ZIM_NOTEBOOK_REL_TAG, None)
         relPath = self._ctrl.linkProcessor.shorten_path(prjWikiPath)
         fields[ZIM_NOTEBOOK_REL_TAG] = relPath
-
         self._mdl.novel.fields = fields
+
+        # Display a message if the project was modified.
         message = None
         if initialAbsPath is None or initialRelPath is None:
             message = f"#{_('Wiki link created')}."
-        elif initialAbsPath != prjWikiPath  or initialRelPath != relPath:
+        elif initialAbsPath == prjWikiPath:
+            message = f"#{_('Abbreviated the Home path')}."
+        elif absPath != initialAbsPath  or relPath != initialRelPath:
             message = f"#{_('Broken link fixed')}."
         if message is not None:
             self._ui.set_status(message)
@@ -518,25 +518,21 @@ class WikiManager(SubController):
             return
 
         fields = element.fields
-        initialAbsPath = self._ctrl.linkProcessor.expand_path(
-            fields.get(ZIM_PAGE_ABS_TAG, None)
-        )
-        if initialAbsPath is not None:
-            initialAbsPath = self._ctrl.linkProcessor.expand_path(
-                initialAbsPath
-            )
-        fields[ZIM_PAGE_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
-            wikiPagePath
-        )
+        initialAbsPath = fields.get(ZIM_PAGE_ABS_TAG, None)
+        absPath = self._ctrl.linkProcessor.abbreviate_path(wikiPagePath)
+        fields[ZIM_PAGE_ABS_TAG] = absPath
         initialRelPath = fields.get(ZIM_PAGE_REL_TAG, None)
         relPath = self._ctrl.linkProcessor.shorten_path(wikiPagePath)
         fields[ZIM_PAGE_REL_TAG] = relPath
-
         element.fields = fields
+
+        # Display a message if the project was modified.
         message = None
         if initialAbsPath is None or initialRelPath is None:
             message = f"#{_('Wiki link created')}."
-        elif initialAbsPath != wikiPagePath  or initialRelPath != relPath:
+        elif initialAbsPath == wikiPagePath:
+            message = f"#{_('Abbreviated the Home path')}."
+        elif absPath != initialAbsPath  or relPath != initialRelPath:
             message = f"#{_('Broken link fixed')}."
         if message is not None:
             self._ui.set_status(message)
