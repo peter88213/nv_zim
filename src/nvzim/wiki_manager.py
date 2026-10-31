@@ -505,10 +505,8 @@ class WikiManager(SubController):
         message = None
         if initialAbsPath is None or initialRelPath is None:
             message = f"#{_('Wiki link created')}."
-        elif initialAbsPath == prjWikiPath:
-            message = f"#{_('Abbreviated the Home path')}."
         elif absPath != initialAbsPath  or relPath != initialRelPath:
-            message = f"#{_('Broken link fixed')}."
+            message = f"#{_('Link fixed')}."
         if message is not None:
             self._ui.set_status(message)
 
@@ -530,10 +528,8 @@ class WikiManager(SubController):
         message = None
         if initialAbsPath is None or initialRelPath is None:
             message = f"#{_('Wiki link created')}."
-        elif initialAbsPath == wikiPagePath:
-            message = f"#{_('Abbreviated the Home path')}."
         elif absPath != initialAbsPath  or relPath != initialRelPath:
-            message = f"#{_('Broken link fixed')}."
+            message = f"#{_('Link fixed')}."
         if message is not None:
             self._ui.set_status(message)
 

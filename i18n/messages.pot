@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 5.12.1\n"
-"POT-Creation-Date: 2026-10-31 20:26:46\n"
+"POT-Creation-Date: 2026-10-31 21:40:47\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: LANGUAGE\n"
@@ -20,9 +20,6 @@ msgstr ""
 msgid "2nd Edit"
 msgstr ""
 
-msgid "Abbreviated the Home path"
-msgstr ""
-
 msgid "All"
 msgstr ""
 
@@ -30,9 +27,6 @@ msgid "Back up the existing wiki and create a new one containing all pages?"
 msgstr ""
 
 msgid "Bio"
-msgstr ""
-
-msgid "Broken link fixed"
 msgstr ""
 
 msgid "Browse"
@@ -75,6 +69,9 @@ msgid "Illegal value"
 msgstr ""
 
 msgid "Items"
+msgstr ""
+
+msgid "Link fixed"
 msgstr ""
 
 msgid "Locations"

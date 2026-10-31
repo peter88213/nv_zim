@@ -19,9 +19,6 @@ msgstr "1. Überarbeitung"
 msgid "2nd Edit"
 msgstr "2. Überarbeitung"
 
-msgid "Abbreviated the Home path"
-msgstr "Den Home-Pfad abgekürzt"
-
 msgid "All"
 msgstr "Alle"
 
@@ -31,8 +28,8 @@ msgstr "Das existierende Wiki sichern und ein neues erzeugen, das alle Seiten en
 msgid "Bio"
 msgstr "Biographie"
 
-msgid "Broken link fixed"
-msgstr "Defekten Link korrigiert"
+msgid "Link fixed"
+msgstr "Link korrigiert"
 
 msgid "Browse"
 msgstr "Durchsuchen"
