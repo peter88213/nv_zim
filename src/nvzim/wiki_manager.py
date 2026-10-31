@@ -493,11 +493,18 @@ class WikiManager(SubController):
             return
 
         fields = self._mdl.novel.fields
-        initialAbsPath = fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
-        initialRelPath = fields.get(ZIM_NOTEBOOK_REL_TAG, None)
-        fields[ZIM_NOTEBOOK_ABS_TAG] = prjWikiPath
+        initialAbsPath = self._ctrl.linkProcessor.expand_path(
+            fields.get(ZIM_NOTEBOOK_ABS_TAG, None)
+        )
+        fields[ZIM_NOTEBOOK_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
+            prjWikiPath
+        )
+        initialRelPath = self._ctrl.linkProcessor.expand_path(
+            fields.get(ZIM_NOTEBOOK_REL_TAG, None)
+        )
         relPath = self._ctrl.linkProcessor.shorten_path(prjWikiPath)
         fields[ZIM_NOTEBOOK_REL_TAG] = relPath
+
         self._mdl.novel.fields = fields
         message = None
         if initialAbsPath is None or initialRelPath is None:
@@ -513,11 +520,22 @@ class WikiManager(SubController):
             return
 
         fields = element.fields
-        initialAbsPath = fields.get(ZIM_PAGE_ABS_TAG, None)
-        initialRelPath = fields.get(ZIM_PAGE_REL_TAG, None)
-        fields[ZIM_PAGE_ABS_TAG] = wikiPagePath
+        initialAbsPath = self._ctrl.linkProcessor.expand_path(
+            fields.get(ZIM_PAGE_ABS_TAG, None)
+        )
+        if initialAbsPath is not None:
+            initialAbsPath = self._ctrl.linkProcessor.expand_path(
+                initialAbsPath
+            )
+        fields[ZIM_PAGE_ABS_TAG] = self._ctrl.linkProcessor.compress_path(
+            wikiPagePath
+        )
+        initialRelPath = self._ctrl.linkProcessor.expand_path(
+            fields.get(ZIM_PAGE_REL_TAG, None)
+        )
         relPath = self._ctrl.linkProcessor.shorten_path(wikiPagePath)
         fields[ZIM_PAGE_REL_TAG] = relPath
+
         element.fields = fields
         message = None
         if initialAbsPath is None or initialRelPath is None:
