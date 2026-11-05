@@ -4,14 +4,14 @@
 
 ## Changelog
 
-### Version 5.12.2
+### Version 5.12.3
 
 Improved handling of links when using multiple operating systems
 
-- Storing compressed links (using the "~" shortcut for the home directory).
+- Storing abreviated links (using the "~" shortcut for the home directory).
 
 API: 5.67
-Based on novelibre 5.67.2
+Based on novelibre 5.67.3
 
 
 ### Version 5.11.3
