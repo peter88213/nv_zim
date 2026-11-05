@@ -147,36 +147,38 @@ class WikiManager(SubController):
     def get_project_wiki_link(self):
         """Return the project's wiki path, if any."""
         if self._mdl.prjFile is None:
-            return
+            return None
 
-        prjWikiPath = self._mdl.novel.fields.get(ZIM_NOTEBOOK_ABS_TAG, '')
+        prjWikiPath = self._ctrl.linkProcessor.complete_path(
+            self._mdl.novel.fields.get(ZIM_NOTEBOOK_ABS_TAG, '')
+        )
         if not os.path.isfile(prjWikiPath):
-            prjWikiPath = self._mdl.novel.fields.get(
-                ZIM_NOTEBOOK_REL_TAG, None
+            prjWikiPath = self._ctrl.linkProcessor.expand_path(
+                self._mdl.novel.fields.get(ZIM_NOTEBOOK_REL_TAG, None)
             )
             if prjWikiPath is None:
-                return
-
-            prjWikiPath = self._ctrl.linkProcessor.expand_path(prjWikiPath)
+                return None
 
         if not prjWikiPath.endswith(ZimNotebook.EXTENSION):
-            return
+            return None
 
         if os.path.isfile(prjWikiPath):
             return prjWikiPath
 
     def get_wiki_page_link(self, element):
         """Return the element's wiki page path, if any."""
-        wikiPagePath = element.fields.get(ZIM_PAGE_ABS_TAG, '')
+        wikiPagePath = self._ctrl.linkProcessor.complete_path(
+            element.fields.get(ZIM_PAGE_ABS_TAG, '')
+        )
         if not os.path.isfile(wikiPagePath):
-            wikiPagePath = element.fields.get(ZIM_PAGE_REL_TAG, None)
+            wikiPagePath = self._ctrl.linkProcessor.expand_path(
+                element.fields.get(ZIM_PAGE_REL_TAG, None)
+            )
             if wikiPagePath is None:
-                return
-
-            wikiPagePath = self._ctrl.linkProcessor.expand_path(wikiPagePath)
+                return None
 
         if not wikiPagePath.endswith(ZimPage.EXTENSION):
-            return
+            return None
 
         if os.path.isfile(wikiPagePath):
             return wikiPagePath
@@ -604,11 +606,11 @@ class WikiManager(SubController):
             _('Zim installation not found. Select now?'),
             title=self.windowTitle,
         ):
-            return
+            return None
 
         zimPath = filedialog.askopenfilename()
         if not zimPath:
-            return
+            return None
 
         self.zimApp = zimPath
         self.launchers[ZimNotebook.EXTENSION] = self.zimApp
